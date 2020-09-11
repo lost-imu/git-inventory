@@ -238,10 +238,10 @@
             this.dtglist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtglist.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dtglist.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dtglist.Location = new System.Drawing.Point(0, -37);
+            this.dtglist.Location = new System.Drawing.Point(0, -1);
             this.dtglist.Name = "dtglist";
             this.dtglist.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dtglist.Size = new System.Drawing.Size(733, 348);
+            this.dtglist.Size = new System.Drawing.Size(873, 360);
             this.dtglist.TabIndex = 0;
             this.dtglist.Click += new System.EventHandler(this.Dtglist_Click);
             // 
@@ -251,9 +251,10 @@
             this.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Panel2.Controls.Add(this.btnadd);
             this.Panel2.Controls.Add(this.dtglist);
-            this.Panel2.Location = new System.Drawing.Point(6, 265);
+            this.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Panel2.Location = new System.Drawing.Point(0, 229);
             this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(735, 313);
+            this.Panel2.Size = new System.Drawing.Size(875, 361);
             this.Panel2.TabIndex = 32;
             // 
             // btnadd

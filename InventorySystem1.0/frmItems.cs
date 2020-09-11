@@ -23,7 +23,7 @@ namespace InventorySystem1._0
 
         readonly SQLConfig config = new SQLConfig();
         readonly usableFunction funct = new  usableFunction();
-        string sql;
+        string sql, itemID;
         int maxcolumn;
         int inc = 0;
         int maxrow;
@@ -272,7 +272,7 @@ namespace InventorySystem1._0
                 ", ISNEW = '" + isNew + "'" +
                 ", EXPIRYDATE = '" + ExpiryDate() + "'" +
                 ", PROJECTEXPIRY = '" + ProjectExpiry() + "'" +
-                "WHERE ITEMID= '" + itemIDTxtBox.Text + "'";
+                "WHERE ITEMID= '" + itemID + "'";
             //sql = "UPDATE tblitems SET `NAME`='" + itemNameTextBox.Text + "', `DESCRIPTION`='" + descriptionTextBox.Text + "', `TYPE`='" + typeCombo.Text + "', `PRICE`='" + projectTextBox.Text + "'" +
             //",`UNIT`='" + unitComo.Text + "' WHERE ITEMID='" + itemIDTxtBox.Text + "'";
             string reportFunction = "Update Item Btn";
@@ -389,6 +389,7 @@ namespace InventorySystem1._0
                 config.SingleResult(sql);
                 if (config.dt.Rows.Count > 0)
                 {
+                    itemID = config.dt.Rows[0].Field<string>(0);
                     itemIDTxtBox.Text = config.dt.Rows[0].Field<string>(0);
                     itemNameTextBox.Text = config.dt.Rows[0].Field<string>(1);
                     descriptionTextBox.Text = config.dt.Rows[0].Field<string>(2);
