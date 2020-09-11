@@ -259,7 +259,7 @@
             // 
             // btnadd
             // 
-            this.btnadd.Location = new System.Drawing.Point(344, 55);
+            this.btnadd.Location = new System.Drawing.Point(227, 55);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(142, 25);
             this.btnadd.TabIndex = 2;
