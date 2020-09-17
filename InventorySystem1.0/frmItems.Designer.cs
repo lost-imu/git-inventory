@@ -375,6 +375,7 @@
             this.qtyUpDown.Location = new System.Drawing.Point(478, 46);
             this.qtyUpDown.Name = "qtyUpDown";
             this.qtyUpDown.Size = new System.Drawing.Size(66, 20);
+            this.qtyUpDown.Maximum = 1000000;
             this.qtyUpDown.TabIndex = 5;
             // 
             // dateTimePicker3

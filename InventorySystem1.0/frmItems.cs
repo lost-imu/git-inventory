@@ -27,7 +27,7 @@ namespace InventorySystem1._0
         int maxcolumn;
         int inc = 0;
         int maxrow;
-        bool isNew = true;
+        int isNew = 1;
 
         private void Select_navigation(string sql)
         {
@@ -497,7 +497,7 @@ namespace InventorySystem1._0
             //isNotNewRadio.Checked = false;
             //isNewRadio.Checked = true;
             if (isNewRadio.Checked)
-                isNew = true;
+                isNew = 1;
         }
 
         private void IsNotNewRadio_CheckedChanged(object sender, EventArgs e)
@@ -505,7 +505,7 @@ namespace InventorySystem1._0
             //isNewRadio.Checked = false;
             //isNotNewRadio.Checked = true;
             if (isNotNewRadio.Checked)
-                isNew = false;
+                isNew = 0;
         }
 
         private void ExpiryDateCheckBx_CheckedChanged(object sender, EventArgs e)
