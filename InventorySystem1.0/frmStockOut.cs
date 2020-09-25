@@ -292,6 +292,7 @@ namespace InventorySystem1._0
                 config.Execute_Query("UPDATE tblautonumber SET END= END + INCREMENT WHERE ID = 5");
 
                 // '------------------------------------------------------------
+                PrintLastBtn(sender, e);
                 MessageBox.Show("تم");
                 //MessageBox.Show("Item(s) has been saved in the database.");
                 // '------------------------------------------------------------clearing
@@ -367,6 +368,7 @@ namespace InventorySystem1._0
             config.Execute_Query("UPDATE tblautonumber SET END= END + INCREMENT WHERE ID = 5");
 
             // '------------------------------------------------------------
+            PrintLastBtn(sender, e);
             MessageBox.Show("تم");
             //MessageBox.Show("Item(s) has been saved in the database.");
             // '------------------------------------------------------------clearing
@@ -393,6 +395,7 @@ namespace InventorySystem1._0
             {
                 recieverState = "Employee";
                 BtnCus_save_emp(sender, e);
+
             }
             else
             {
@@ -661,8 +664,14 @@ namespace InventorySystem1._0
         }
         private void PrintLastBtn_Click(object sender, EventArgs e)
         {
-            DataGridView newDGRV;//= DataGridView();
-            newDGRV= CloneDataGrid(dtCus_addedlist);
+            printer.PrintDataGridView(newDGRV);
+        }
+        DGVPrinter printer;
+        DataGridView newDGRV;//= DataGridView();
+        private void PrintLastBtn(object sender, EventArgs e)
+        {
+            
+            newDGRV = CloneDataGrid(dtCus_addedlist);
             newDGRV.RightToLeft = RightToLeft.Yes;
             string[] row = new string[] { "__________", "__________", "________", "__________", "________", "________", "__________", "__________", "__________", "__________" };
             newDGRV.Rows.Add(row);
@@ -720,7 +729,7 @@ namespace InventorySystem1._0
             newDGRV.Columns[3].Visible = false;
 
 
-            DGVPrinter printer = new DGVPrinter
+            printer = new DGVPrinter
             {
                 Title = "فاتورة إستلام من المستودع",
 

@@ -112,6 +112,7 @@ namespace InventorySystem1._0
                 projectExpiry = projectExpiryPicker.Value.Date.ToString("yyyyMMdd");
             return projectExpiry;
         }
+
         private void Btnsave_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
@@ -476,11 +477,12 @@ namespace InventorySystem1._0
         private void Txtsearch_TextChanged(object sender, EventArgs e)
         {
             sql = "SELECT * FROM tblitems WHERE"+
+                " DELETED = 0 AND ("+ 
                 " ITEMID LIKE '%" + txtsearch.Text +
                 "%' OR NAME LIKE '%" + txtsearch.Text +
                 "%' OR DESCRIPTION LIKE '%" + txtsearch.Text +
                 "%' OR PROJECT LIKE '%" + txtsearch.Text +
-                "%'";
+                "%')";
             config.Load_DTG(sql, dtglist);
 
 
