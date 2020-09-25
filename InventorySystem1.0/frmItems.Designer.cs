@@ -259,7 +259,7 @@
             // 
             // btnadd
             // 
-            this.btnadd.Location = new System.Drawing.Point(344, 55);
+            this.btnadd.Location = new System.Drawing.Point(227, 55);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(142, 25);
             this.btnadd.TabIndex = 2;
@@ -375,6 +375,7 @@
             this.qtyUpDown.Location = new System.Drawing.Point(478, 46);
             this.qtyUpDown.Name = "qtyUpDown";
             this.qtyUpDown.Size = new System.Drawing.Size(66, 20);
+            this.qtyUpDown.Maximum = 1000000;
             this.qtyUpDown.TabIndex = 5;
             // 
             // dateTimePicker3

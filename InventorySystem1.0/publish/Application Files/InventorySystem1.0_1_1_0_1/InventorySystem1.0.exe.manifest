@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="InventorySystem1.0.exe" version="1.1.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="InventorySystem1.0.exe" version="1.1.0.1" publicKeyToken="732ccfb6a6e45628" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
     <assemblyIdentity name="InventorySystem1.0" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -126,14 +126,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InventorySystem1.0.exe" size="2360744">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InventorySystem1.0.exe" size="2360232">
       <assemblyIdentity name="InventorySystem1.0" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bMox8lAnaZ8ukbzHVeYSHViW22+Jc8ZYU/NpzuK2jpw=</dsig:DigestValue>
+        <dsig:DigestValue>8iA2syH4ndnmJE4erP5xfJg0dWpvW+tEBcuu6zjKDXE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -215,4 +215,4 @@
       <dsig:DigestValue>l4PdiZd2OOgWlZ47mla02nkuScc9l4CgNOjVFsJb6bg=</dsig:DigestValue>
     </hash>
   </file>
-</asmv1:assembly>
+<publisherIdentity name="CN=SHARED\User" issuerKeyHash="e931053758a8f80b2b50096679faef622a14a20f" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>gQ9+J/GqJuDHYrHTnbdG/Yn3L4AmYbA0v57pYTeZeSw=</DigestValue></Reference></SignedInfo><SignatureValue>BfGaH+5M0b7LujXyy5O9s++RUQSqlzBt6G+E1sTKcIPrmuUCBB3inGK0EHhqJ3uQjIhWX+FUw2VKDB6QTglRyhO2LPeNWSWDda/ubrIadBkHHYhMjN4xbxqSzkaDGesFrIkGGwvVz3eKetQDwsS6/u0iKH1gFsVpsCU7sDv0tGU=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>m3RbbUCBG/eQvCGumpM1yY9CWOiEDOSESGzbK62AsWlbyyY8iSsLXDPEPSzsk6JQCrox5vEFjsTg3f/zz/E+qYvAxNBEcSklHJpjncDHCG33L/YTvi8hmHn6FLnmrZOaaMaDC3Tn5Ll+nFtEM9MVa+QNCY/+3/EcQSBNQlaGSO0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="2c79993761e99ebf34b06126802ff789fd46b79dd3b162c7e026aaf1277e0f81" Description="" Url=""><as:assemblyIdentity name="InventorySystem1.0.exe" version="1.1.0.1" publicKeyToken="732ccfb6a6e45628" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=SHARED\User</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>ivf5aiVR0yT4e4jprvFrxlPE9qlrdb6wmkO6lSGgf7k=</DigestValue></Reference></SignedInfo><SignatureValue>fL5xDp8RXbVhUnriWwNhIGvUar7HiTSQnMhMoJiaQEwb5wcNy3gB5tuELgWZNHKxKtTNQYSoUOq/NVnZNCGXHSlKcAbUyiUw5KItaUaOIw5cvik4A4AsW+xVEzxGBJtny3S24nsG0A1D/3pY2k2Z1F0f30mrl/9BO5xXOU61aYY=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>m3RbbUCBG/eQvCGumpM1yY9CWOiEDOSESGzbK62AsWlbyyY8iSsLXDPEPSzsk6JQCrox5vEFjsTg3f/zz/E+qYvAxNBEcSklHJpjncDHCG33L/YTvi8hmHn6FLnmrZOaaMaDC3Tn5Ll+nFtEM9MVa+QNCY/+3/EcQSBNQlaGSO0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBxTCCAS6gAwIBAgIQHQ5NC4O1O5ZPdBfuhoCm9TANBgkqhkiG9w0BAQsFADAhMR8wHQYDVQQDHhYAUwBIAEEAUgBFAEQAXABVAHMAZQByMB4XDTIwMDcyMDA1Mzk0OFoXDTIxMDcyMDExMzk0OFowITEfMB0GA1UEAx4WAFMASABBAFIARQBEAFwAVQBzAGUAcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAm3RbbUCBG/eQvCGumpM1yY9CWOiEDOSESGzbK62AsWlbyyY8iSsLXDPEPSzsk6JQCrox5vEFjsTg3f/zz/E+qYvAxNBEcSklHJpjncDHCG33L/YTvi8hmHn6FLnmrZOaaMaDC3Tn5Ll+nFtEM9MVa+QNCY/+3/EcQSBNQlaGSO0CAwEAATANBgkqhkiG9w0BAQsFAAOBgQB7EFSeyXnKinEDh393rKlMnlN7RcQbzC/vqBJT7lhpjrjxsqyrASEDomIJ4/dS312FIPiF0wNHyOcoBLNLjcf9TC++qocUzXAOcSyQGA4lwf3nJVAnr37hbW7ePRx+mlP+FmjIfvA3TUwUvh5nCZpG3Hh3bgjfObfr4FW3uZ5bFw==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
