@@ -184,7 +184,9 @@ namespace InventorySystem1._0
                     if (command.ExecuteNonQuery() > 0)
                         while (!isReported)
                         {
-                            isReported = MyCon.ReportIt("Add Quantity To Existing Item", "QTY", s, null, null, null, Convert.ToInt32(qtyUpDown.Value), null, null, -1, null, null);
+                            isReported = MyCon.ReportIt("Add Quantity To Existing Item", "QTY", s, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, -1, ExpiryDate(), ProjectExpiry());
+//                          MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
+
                             MessageBox.Show(" تم تعديل الكمية الى " + "\n" + s);
                         }
                     else
