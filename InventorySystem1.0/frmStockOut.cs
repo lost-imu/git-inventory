@@ -81,6 +81,12 @@ namespace InventorySystem1._0
             if (dtCus_addedlist.RowCount == 0)
             {
                 string projectExpiry, expiryDate;
+                string isNew = "جديد";
+                if (dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "false" ||
+                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "0" ||
+                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "مستعمل")
+                    isNew = "مستعمل";
+
                 if (dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString() == "0000-00-00")
                     expiryDate = null;
                 else
@@ -105,7 +111,8 @@ namespace InventorySystem1._0
                     //dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells[5].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells[6].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
+                    isNew,
+                    //dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
                     //dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString(),
                     //Convert.ToDateTime(dtgCus_itemlist.CurrentRow.Cells[9].Value).Date.ToString("yyyy-MM-dd"),
                     expiryDate,
@@ -662,15 +669,43 @@ namespace InventorySystem1._0
 
             return cloneDataGridView;
         }
+        private void printerEmpty()
+        {
+            printer = new DGVPrinter
+            {
+                Title = "فاتورة إستلام من المستودع",
+
+                SubTitle = "التاريخ: " + DateTime.Now.ToString("dd-MM-yyyy HH:mm"),
+
+                SubTitleFormatFlags = StringFormatFlags.LineLimit |
+
+                                          StringFormatFlags.NoClip,
+
+
+                PageNumbers = true,
+
+                ShowTotalPageNumber = true,
+
+                PageNumberInHeader = false,
+
+                PorportionalColumns = false,
+
+                HeaderCellAlignment = StringAlignment.Near,
+
+                Footer = "الجمعية اللبنانية للدراسات والتدريب",
+
+                FooterSpacing = 15,
+
+                PrinterName = default
+            };
+        }
         private void PrintLastBtn_Click(object sender, EventArgs e)
         {
+            printerEmpty();
             printer.PrintDataGridView(newDGRV);
         }
-        DGVPrinter printer;
-        DataGridView newDGRV;//= DataGridView();
-        private void PrintLastBtn(object sender, EventArgs e)
+        private void fillNewDGRV()
         {
-            
             newDGRV = CloneDataGrid(dtCus_addedlist);
             newDGRV.RightToLeft = RightToLeft.Yes;
             string[] row = new string[] { "__________", "__________", "________", "__________", "________", "________", "__________", "__________", "__________", "__________" };
@@ -716,19 +751,27 @@ namespace InventorySystem1._0
                 };
 
             newDGRV.Rows.Add(row);
-            int last = newDGRV.Rows.Count-1;
+            int last = newDGRV.Rows.Count - 1;
 
             newDGRV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-      
+
             newDGRV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            
+
             newDGRV.Rows[last].Height = 30;
             newDGRV.Columns[9].Visible = false;
             newDGRV.Columns[8].Visible = false;
             newDGRV.Columns[6].Visible = false;
             newDGRV.Columns[3].Visible = false;
 
-
+        }
+        DGVPrinter printer;
+        DataGridView newDGRV;//= DataGridView();
+        private void PrintLastBtn(object sender, EventArgs e)
+        {
+            fillNewDGRV();
+            
+            printerEmpty();
+            /*
             printer = new DGVPrinter
             {
                 Title = "فاتورة إستلام من المستودع",
@@ -756,6 +799,7 @@ namespace InventorySystem1._0
 
                 PrinterName = default
             };
+            */
 
            // PrintOptions.FitToPage = true;
 
