@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
-
+using System;
+using System.Windows.Forms;
 
 namespace InventorySystem1._0
 {
@@ -7,20 +8,20 @@ namespace InventorySystem1._0
     {
         //private static string con = "server='192.192.255.232'; user id='abs';password='root';database='db_inventory';sslMode=none;allowuservariables=True;Convert Zero Datetime=True;";
 
-        private static readonly string con = "server=localhost;user id=root;database=db_inventory;sslMode=none;allowuservariables=True;Convert Zero Datetime=True;";
+        private static readonly string ConString = "server=localhost;user id=root;database=db_inventory;sslMode=none;allowuservariables=True;Convert Zero Datetime=True;";
         public MyCon()
         {
         }
         public static string GetConString()
         {
-            return con;
+            return ConString;
         }
-        
+
         ///////////////////////////////////////////////
         ///global report functions
         ///
         public static bool ReportIt(string FUNCTION, string CHANGED_VALUES, string ITEM_ID, string ITEM_NAME, string DESCRIPTION, string TYPE, double QTY, string UNIT, string PROJECT, int IS_NEW, string EXPIRY_DATE, string PROJECT_EXPIRY)
-           {
+        {
             string RECIEVER_NUMBER, RECIEVER_STATE, RECIEVER_NAME;
 
 
@@ -40,7 +41,7 @@ namespace InventorySystem1._0
 
 
             string reportSQL = "INSERT INTO `tblreport` (`USER_ID`, `FUNCTION`, `CHANGED_VALUES`, `ITEM_ID`, `ITEM_NAME`, `DESCRIPTION`, `TYPE`, `QTY`, `UNIT`, `PROJECT`, `IS_NEW`, `EXPIRY_DATE`, `PROJECT_EXPIRY`, RECIEVER_NUMBER , RECIEVER_STATE, RECIEVER_NAME) VALUES (@USER_ID, @FUNCTION, @CHANGED_VALUES, @ITEM_ID, @ITEM_NAME, @DESCRIPTION, @TYPE, @QTY, @UNIT, @PROJECT, @IS_NEW, @EXPIRY_DATE, @PROJECT_EXPIRY, @RECIEVER_NUMBER , @RECIEVER_STATE, @RECIEVER_NAME);";
- 
+
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
             MySqlCommand cmd;
 
@@ -62,9 +63,9 @@ namespace InventorySystem1._0
             cmd.Parameters.Add(new MySqlParameter("RECIEVER_NUMBER", RECIEVER_NUMBER));
             cmd.Parameters.Add(new MySqlParameter("RECIEVER_STATE", RECIEVER_STATE));
             cmd.Parameters.Add(new MySqlParameter("RECIEVER_NAME", RECIEVER_NAME));
-             
-            if (QTY==-1)
-            cmd.Parameters.Add(new MySqlParameter("null", QTY));
+
+            if (QTY == -1)
+                cmd.Parameters.Add(new MySqlParameter("null", QTY));
             else
                 cmd.Parameters.Add(new MySqlParameter("QTY", QTY));
 
@@ -85,11 +86,46 @@ namespace InventorySystem1._0
             return ReportIt(FUNCTION, CHANGED_VALUES, ITEM_ID, ITEM_NAME, DESCRIPTION, TYPE, QTY, UNIT, PROJECT, IS_NEW, EXPIRY_DATE, PROJECT_EXPIRY);
         }
 
+        public static string ReturnSingleResult(string sql, string value)
+        {
+            MySqlConnection con = new MySqlConnection(GetConString());
+            MySqlCommand command;
+            try
+            {
+                con.Close();
+                con.Open();
+                command = new MySqlCommand(sql, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                if (reader.HasRows)
+                {
+                    return reader.GetString(value);
+                }
+
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+            ///////////////////////////////////////////////////////
 
 
+            //Btnnew_Click(sender, e);
 
-        //////////////////////////////////////////////////
-
-
+        }
     }
+
+
+    //////////////////////////////////////////////////
+
+
 }

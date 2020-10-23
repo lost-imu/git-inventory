@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -177,6 +179,15 @@ namespace InventorySystem1._0
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                versionTSLabel.Text = string.Format("v{0}",
+                    ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
+            }
+            else
+                MessageBox.Show("not");
+            //versionTSLabel.Text = Application.publi;
+            //"version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             Disabled_menu();
             Ts_Login_Click(sender, e);
 

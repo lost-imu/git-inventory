@@ -50,7 +50,6 @@ namespace InventorySystem1._0
 
         private void FrmStockOut_Load(object sender, EventArgs e)
         {
-           
             this.WindowState = FormWindowState.Maximized;
             sql = "SELECT SUPLIERCUSTOMERID FROM tblperson WHERE TYPE = 'CUSTOMER'";
             config.Autocomplete(sql, txt_cusid);
@@ -59,11 +58,17 @@ namespace InventorySystem1._0
             config.Load_DTG(sql, dtgCus_itemlist);
             funct.ResponsiveDtg(dtgCus_itemlist);
             scannerTxtBox.Focus();
+            FillEmpNameCombo();
 
 
 
         }
-          
+          private void FillEmpNameCombo()
+        {
+            sql = "SELECT concat(`FIRSTNAME`,' ',`LASTNAME`) FROM `tblperson` "+
+                "WHERE `TYPE`='CUSTOMER' ORDER BY `concat(``FIRSTNAME``,' ',``LASTNAME``)` ASC ";
+            config.Fiil_CBO(sql, empNameComboBox);
+        }
         private void Txtsearch_TextChanged(object sender, EventArgs e)
         {
             sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة', `TYPE` as 'الوحدة', `PROJECT` as 'المشروع', `ISNEW` as 'جديد', `EXPIRYDATE` as 'انتهاء الصلاحية', `PROJECTEXPIRY` as 'انتهاء المشروع' , `NOTE` as 'ملاحظات' FROM `tblitems` WHERE  `NAME` like '%" + txtsearch.Text + "%' or `DESCRIPTION` like '%" + txtsearch.Text + "%' or `ITEMID` like '%" + txtsearch.Text + "%'";
@@ -809,7 +814,12 @@ namespace InventorySystem1._0
 
         }
 
-       
+        private void empNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sql = "SELECT `SUPLIERCUSTOMERID` FROM `tblperson` WHERE concat(`FIRSTNAME`, ' ', `LASTNAME`) ='" + empNameComboBox.SelectedValue.ToString() + "'";
+            txt_cusid.Text = MyCon.ReturnSingleResult(sql, "SUPLIERCUSTOMERID");
+            
+        }
 
         private void ScannerTxtBox_KeyDown(object sender, KeyEventArgs e)
         {

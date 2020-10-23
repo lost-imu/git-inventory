@@ -65,6 +65,7 @@
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.printLastBtn = new System.Windows.Forms.Button();
             this.returnBtn = new System.Windows.Forms.Button();
+            this.empNameComboBox = new System.Windows.Forms.ComboBox();
             this.Panel1.SuspendLayout();
             this.Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtCus_addedlist)).BeginInit();
@@ -100,6 +101,7 @@
             // 
             this.Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel1.Controls.Add(this.empNameComboBox);
             this.Panel1.Controls.Add(this.isEmployeeCombo);
             this.Panel1.Controls.Add(this.employeeOrPhoneNumberLabel);
             this.Panel1.Controls.Add(this.txt_cusid);
@@ -469,6 +471,15 @@
             this.returnBtn.UseVisualStyleBackColor = false;
             this.returnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
+            // empNameComboBox
+            // 
+            this.empNameComboBox.FormattingEnabled = true;
+            this.empNameComboBox.Location = new System.Drawing.Point(670, 53);
+            this.empNameComboBox.Name = "empNameComboBox";
+            this.empNameComboBox.Size = new System.Drawing.Size(121, 21);
+            this.empNameComboBox.TabIndex = 10;
+            this.empNameComboBox.SelectedIndexChanged += new System.EventHandler(this.empNameComboBox_SelectedIndexChanged);
+            // 
             // frmStockOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,5 +552,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EXPIRYDATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTES;
+        private System.Windows.Forms.ComboBox empNameComboBox;
     }
 }
