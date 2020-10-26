@@ -1,6 +1,8 @@
 ﻿using InventorySystem1._0.Includes;
 using MySql.Data.MySqlClient;
 using System;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 
 namespace InventorySystem1._0
@@ -88,16 +90,38 @@ namespace InventorySystem1._0
             Debug.WriteLine(receivedMsg);*/
             ///////////////////////////////////////////////////////////////////////////////////
         }
+        static string Hash(string input)
+        {
+            using (SHA1Managed sha1 = new SHA1Managed())
+            {
+                var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(input));
+                var sb = new StringBuilder(hash.Length * 2);
 
+                foreach (byte b in hash)
+                {
+                    // can be "x2" if you want lowercase
+                    sb.Append(b.ToString("X2"));
+                }
+
+                return sb.ToString();
+            }
+        }
         private void Button1_Click(object sender, EventArgs e)
         {
+           
+
             try
             {
                 MySqlConnection con = new MySqlConnection(MyCon.GetConString());
-                string cmd = "SELECT * FROM user WHERE user_name = '" + txtusername.Text + "' and deleted=0 and pass = sha1('" + txtpass.Text + "')";
-
+                string cmd = "SELECT * FROM user WHERE deleted=0 and user_name=@user_name and pass=@password ";
                 MySqlCommand command = new MySqlCommand(cmd, con);
+                string pass = Hash(txtpass.Text);
+                command.Parameters.Add(new MySqlParameter("user_name", txtusername.Text));
+                command.Parameters.Add(new MySqlParameter("password", pass));
+                //MySqlCommand command = new MySqlCommand(cmd, con);
                 con.Open();
+                /////////////////////////
+
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
