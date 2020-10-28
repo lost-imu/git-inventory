@@ -191,3 +191,4 @@ C:\Users\abbas\OneDrive\Documents\Visual Studio 2019\inventory\git-inventory\Inv
 C:\Users\abbas\OneDrive\Documents\Visual Studio 2019\inventory\git-inventory\InventorySystem1.0\obj\Debug\InventorySystem1.0.csproj.CopyComplete
 C:\Users\abbas\OneDrive\Documents\Visual Studio 2019\inventory\git-inventory\InventorySystem1.0\obj\Debug\InventorySystem1.0.exe
 C:\Users\abbas\OneDrive\Documents\Visual Studio 2019\inventory\git-inventory\InventorySystem1.0\obj\Debug\InventorySystem1.0.pdb
+C:\Users\abbas\OneDrive\Documents\Visual Studio 2019\inventory\git-inventory\InventorySystem1.0\obj\Debug\InventorySystem1.0.csprojAssemblyReference.cache

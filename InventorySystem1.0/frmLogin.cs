@@ -108,8 +108,18 @@ namespace InventorySystem1._0
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-           
-
+            /*
+            try
+            {
+                MySqlConnection con = new MySqlConnection(MyCon.GetConString());
+                con.Open();
+                MessageBox.Show("sucseed");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return;*/
             try
             {
                 MySqlConnection con = new MySqlConnection(MyCon.GetConString());

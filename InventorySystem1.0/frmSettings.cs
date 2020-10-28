@@ -14,7 +14,6 @@ namespace InventorySystem1._0
 {
     public partial class frmSettings : Form
     {
-        readonly string conString = "server=localhost;user id=root;password='';persistsecurityinfo=True;database=db_inventory;";
 
         public frmSettings()
         {
@@ -27,14 +26,15 @@ namespace InventorySystem1._0
 
         private void BtnTypesave_Click(object sender, EventArgs e)
         {
+           
             if (string.IsNullOrWhiteSpace(txtCategory.Text))
             {
                 MessageBox.Show("املأ الإسم أولا");
                 return;
             }
-
+            
             string checkSql = "SELECT * FROM tblsettings WHERE DESCRIPTION ='" + txtCategory.Text + "'";
-            MySqlConnection con = new MySqlConnection(conString);
+            MySqlConnection con = new MySqlConnection(MyCon.GetConString());
 
             MySqlCommand command = new MySqlCommand(checkSql, con);
             con.Open();
@@ -204,7 +204,7 @@ namespace InventorySystem1._0
                 }
             }
             string checkSql = "SELECT * FROM tblperson WHERE SUPLIERCUSTOMERID  ='" + personIDTxtBox.Text + "'";
-            MySqlConnection con = new MySqlConnection(conString);
+            MySqlConnection con = new MySqlConnection(MyCon.GetConString());
 
             MySqlCommand command = new MySqlCommand(checkSql, con);
             con.Open();
