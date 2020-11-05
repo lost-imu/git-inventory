@@ -31,6 +31,7 @@ namespace InventorySystem1._0
 
         private void Txt_cusid_TextChanged(object sender, EventArgs e)
         {
+            
             if (isEmployeeCombo.SelectedIndex==0)
             {
                 sql = "SELECT * FROM `tblperson` WHERE `SUPLIERCUSTOMERID`='" + txt_cusid.Text + "'";
@@ -62,7 +63,7 @@ namespace InventorySystem1._0
             config.Load_DTG(sql, dtgCus_itemlist);
             funct.ResponsiveDtg(dtgCus_itemlist);
             scannerTxtBox.Focus();
-            FillEmpNameCombo();
+            
 
 
 
@@ -93,7 +94,8 @@ namespace InventorySystem1._0
                 string isNew = "جديد";
                 if (dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "false" ||
                     dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "0" ||
-                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "مستعمل")
+                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "مستعمل" ||
+                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "old") 
                     isNew = "مستعمل";
 
                 if (dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString() == "0000-00-00")
@@ -168,7 +170,12 @@ namespace InventorySystem1._0
                     {
                         projectExpiry = null;
                     }
-
+                    string isNew = "جديد";
+                    if (dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "false" ||
+                        dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "0" ||
+                        dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "مستعمل" ||
+                        dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "old")
+                        isNew = "مستعمل";
 
 
                     qty = 1;
@@ -181,7 +188,8 @@ namespace InventorySystem1._0
                     //dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells[5].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells[6].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
+                    isNew,
+                     //dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
                     expiryDate,
                     projectExpiry,
                     dtgCus_itemlist.CurrentRow.Cells[10].Value.ToString(),
@@ -823,6 +831,16 @@ namespace InventorySystem1._0
             string sql = "SELECT `SUPLIERCUSTOMERID` FROM `tblperson` WHERE concat(`FIRSTNAME`, ' ', `LASTNAME`) ='" + empNameComboBox.SelectedValue.ToString() + "'";
             txt_cusid.Text = MyCon.ReturnSingleResult(sql, "SUPLIERCUSTOMERID");
             
+        }
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void load_names_btn_Click(object sender, EventArgs e)
+        {
+            FillEmpNameCombo();
         }
 
         private void ScannerTxtBox_KeyDown(object sender, KeyEventArgs e)

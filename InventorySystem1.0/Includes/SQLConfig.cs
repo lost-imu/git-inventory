@@ -171,7 +171,7 @@ namespace InventorySystem1._0.Includes
             try
             {
 
-             
+                con.Close();
                 con.Open();
                 cmd = new MySqlCommand();
                 da = new MySqlDataAdapter();

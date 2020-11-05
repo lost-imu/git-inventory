@@ -50,10 +50,9 @@
             // 
             this.lbldate.AutoSize = true;
             this.lbldate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldate.Location = new System.Drawing.Point(103, 220);
-            this.lbldate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbldate.Location = new System.Drawing.Point(77, 179);
             this.lbldate.Name = "lbldate";
-            this.lbldate.Size = new System.Drawing.Size(87, 29);
+            this.lbldate.Size = new System.Drawing.Size(69, 24);
             this.lbldate.TabIndex = 32;
             this.lbldate.Text = "Time :";
             // 
@@ -61,10 +60,9 @@
             // 
             this.lbltime.AutoSize = true;
             this.lbltime.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltime.Location = new System.Drawing.Point(103, 185);
-            this.lbltime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbltime.Location = new System.Drawing.Point(77, 150);
             this.lbltime.Name = "lbltime";
-            this.lbltime.Size = new System.Drawing.Size(87, 29);
+            this.lbltime.Size = new System.Drawing.Size(69, 24);
             this.lbltime.TabIndex = 31;
             this.lbltime.Text = "Time :";
             // 
@@ -72,10 +70,9 @@
             // 
             this.Label4.AutoSize = true;
             this.Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label4.Location = new System.Drawing.Point(20, 220);
-            this.Label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label4.Location = new System.Drawing.Point(15, 179);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(81, 29);
+            this.Label4.Size = new System.Drawing.Size(64, 24);
             this.Label4.TabIndex = 29;
             this.Label4.Text = "Date :";
             // 
@@ -83,20 +80,18 @@
             // 
             this.Label3.AutoSize = true;
             this.Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label3.Location = new System.Drawing.Point(20, 185);
-            this.Label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label3.Location = new System.Drawing.Point(15, 150);
             this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(87, 29);
+            this.Label3.Size = new System.Drawing.Size(69, 24);
             this.Label3.TabIndex = 30;
             this.Label3.Text = "Time :";
             // 
             // closeBtn
             // 
             this.closeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeBtn.Location = new System.Drawing.Point(236, 135);
-            this.closeBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.closeBtn.Location = new System.Drawing.Point(177, 110);
             this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(100, 33);
+            this.closeBtn.Size = new System.Drawing.Size(75, 27);
             this.closeBtn.TabIndex = 28;
             this.closeBtn.Text = "إغلاق";
             this.closeBtn.UseVisualStyleBackColor = true;
@@ -105,10 +100,9 @@
             // Button2
             // 
             this.Button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button2.Location = new System.Drawing.Point(128, 135);
-            this.Button2.Margin = new System.Windows.Forms.Padding(4);
+            this.Button2.Location = new System.Drawing.Point(96, 110);
             this.Button2.Name = "Button2";
-            this.Button2.Size = new System.Drawing.Size(100, 33);
+            this.Button2.Size = new System.Drawing.Size(75, 27);
             this.Button2.TabIndex = 27;
             this.Button2.Text = "&مسح الكل";
             this.Button2.UseVisualStyleBackColor = true;
@@ -118,10 +112,9 @@
             // 
             this.Label2.AutoSize = true;
             this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label2.Location = new System.Drawing.Point(16, 75);
-            this.Label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label2.Location = new System.Drawing.Point(12, 61);
             this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(103, 20);
+            this.Label2.Size = new System.Drawing.Size(84, 16);
             this.Label2.TabIndex = 23;
             this.Label2.Text = "Password :";
             // 
@@ -129,20 +122,18 @@
             // 
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.Location = new System.Drawing.Point(16, 11);
-            this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Label1.Location = new System.Drawing.Point(12, 9);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(132, 20);
+            this.Label1.Size = new System.Drawing.Size(107, 16);
             this.Label1.TabIndex = 24;
             this.Label1.Text = "User Number :";
             // 
             // txtpass
             // 
             this.txtpass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtpass.Location = new System.Drawing.Point(20, 98);
-            this.txtpass.Margin = new System.Windows.Forms.Padding(4);
+            this.txtpass.Location = new System.Drawing.Point(15, 80);
             this.txtpass.Name = "txtpass";
-            this.txtpass.Size = new System.Drawing.Size(315, 26);
+            this.txtpass.Size = new System.Drawing.Size(237, 22);
             this.txtpass.TabIndex = 25;
             this.txtpass.UseSystemPasswordChar = true;
             // 
@@ -150,20 +141,19 @@
             // 
             this.txtusername.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.txtusername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtusername.Location = new System.Drawing.Point(20, 34);
-            this.txtusername.Margin = new System.Windows.Forms.Padding(4);
+            this.txtusername.Location = new System.Drawing.Point(15, 28);
             this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(315, 26);
+            this.txtusername.Size = new System.Drawing.Size(237, 22);
             this.txtusername.TabIndex = 22;
+            this.txtusername.Text = "2056";
             this.txtusername.UseWaitCursor = true;
             // 
             // Button1
             // 
             this.Button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button1.Location = new System.Drawing.Point(25, 135);
-            this.Button1.Margin = new System.Windows.Forms.Padding(4);
+            this.Button1.Location = new System.Drawing.Point(19, 110);
             this.Button1.Name = "Button1";
-            this.Button1.Size = new System.Drawing.Size(100, 33);
+            this.Button1.Size = new System.Drawing.Size(75, 27);
             this.Button1.TabIndex = 26;
             this.Button1.Text = "&تسجيل دخول";
             this.Button1.UseVisualStyleBackColor = true;
@@ -172,10 +162,9 @@
             // PictureBox1
             // 
             this.PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox1.Image")));
-            this.PictureBox1.Location = new System.Drawing.Point(344, 4);
-            this.PictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.PictureBox1.Location = new System.Drawing.Point(258, 3);
             this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(263, 245);
+            this.PictureBox1.Size = new System.Drawing.Size(197, 199);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBox1.TabIndex = 33;
             this.PictureBox1.TabStop = false;
@@ -187,9 +176,9 @@
             // frmLogin
             // 
             this.AcceptButton = this.Button1;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 266);
+            this.ClientSize = new System.Drawing.Size(466, 216);
             this.Controls.Add(this.lbldate);
             this.Controls.Add(this.lbltime);
             this.Controls.Add(this.Label4);
@@ -203,7 +192,6 @@
             this.Controls.Add(this.Button1);
             this.Controls.Add(this.PictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
