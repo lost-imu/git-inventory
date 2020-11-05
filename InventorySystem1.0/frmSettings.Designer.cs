@@ -90,7 +90,7 @@
             this.txtunit.Location = new System.Drawing.Point(6, 31);
             this.txtunit.Name = "txtunit";
             this.txtunit.Size = new System.Drawing.Size(229, 20);
-            this.txtunit.TabIndex = 2;
+            this.txtunit.TabIndex = 5;
             // 
             // btnusave
             // 
@@ -146,7 +146,7 @@
             this.txtCategory.Location = new System.Drawing.Point(6, 28);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(240, 20);
-            this.txtCategory.TabIndex = 2;
+            this.txtCategory.TabIndex = 4;
             // 
             // Label1
             // 
@@ -360,7 +360,7 @@
             this.personLastNameTxtBox.Location = new System.Drawing.Point(6, 93);
             this.personLastNameTxtBox.Name = "personLastNameTxtBox";
             this.personLastNameTxtBox.Size = new System.Drawing.Size(229, 20);
-            this.personLastNameTxtBox.TabIndex = 2;
+            this.personLastNameTxtBox.TabIndex = 3;
             this.personLastNameTxtBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // loadPersonBtn
@@ -406,7 +406,7 @@
             this.personIDTxtBox.Location = new System.Drawing.Point(6, 34);
             this.personIDTxtBox.Name = "personIDTxtBox";
             this.personIDTxtBox.Size = new System.Drawing.Size(229, 20);
-            this.personIDTxtBox.TabIndex = 2;
+            this.personIDTxtBox.TabIndex = 1;
             this.personIDTxtBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // addPersonBtn

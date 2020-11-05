@@ -163,7 +163,7 @@
             this.functionComboBox.Name = "functionComboBox";
             this.functionComboBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.functionComboBox.Size = new System.Drawing.Size(173, 21);
-            this.functionComboBox.TabIndex = 24;
+            this.functionComboBox.TabIndex = 2;
             // 
             // label8
             // 
@@ -238,7 +238,7 @@
             this.userNameCombo.Name = "userNameCombo";
             this.userNameCombo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.userNameCombo.Size = new System.Drawing.Size(173, 21);
-            this.userNameCombo.TabIndex = 37;
+            this.userNameCombo.TabIndex = 1;
             // 
             // label10
             // 
@@ -273,7 +273,7 @@
             this.itemIDCombo.Name = "itemIDCombo";
             this.itemIDCombo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.itemIDCombo.Size = new System.Drawing.Size(173, 21);
-            this.itemIDCombo.TabIndex = 24;
+            this.itemIDCombo.TabIndex = 3;
             // 
             // label2
             // 
@@ -298,7 +298,7 @@
             this.projectCombo.Name = "projectCombo";
             this.projectCombo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.projectCombo.Size = new System.Drawing.Size(173, 21);
-            this.projectCombo.TabIndex = 24;
+            this.projectCombo.TabIndex = 4;
             // 
             // label3
             // 
