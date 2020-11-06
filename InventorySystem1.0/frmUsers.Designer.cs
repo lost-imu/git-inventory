@@ -48,6 +48,7 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn_New = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.Panel1.SuspendLayout();
             this.GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_listUser)).BeginInit();
@@ -57,6 +58,7 @@
             // 
             this.Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel1.Controls.Add(this.button2);
             this.Panel1.Controls.Add(this.txt_name);
             this.Panel1.Controls.Add(this.lbl_id);
             this.Panel1.Controls.Add(this.cbo_type);
@@ -98,7 +100,9 @@
             this.cbo_type.FormattingEnabled = true;
             this.cbo_type.Items.AddRange(new object[] {
             "Administrator",
-            "Staff"});
+            "Staff",
+            "Reporter",
+            "Viewer"});
             this.cbo_type.Location = new System.Drawing.Point(243, 116);
             this.cbo_type.Name = "cbo_type";
             this.cbo_type.Size = new System.Drawing.Size(280, 24);
@@ -278,7 +282,17 @@
             this.btn_New.UseVisualStyleBackColor = false;
             this.btn_New.Click += new System.EventHandler(this.Btn_New_Click);
             // 
-            // frmUsers
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(527, 116);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(24, 24);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "?";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // FrmUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -291,7 +305,7 @@
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_New);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "frmUsers";
+            this.Name = "FrmUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage Users";
             this.Load += new System.EventHandler(this.FrmUsers_Load);
@@ -323,5 +337,6 @@
         internal System.Windows.Forms.Button btn_update;
         internal System.Windows.Forms.Button btn_delete;
         internal System.Windows.Forms.Button btn_New;
+        private System.Windows.Forms.Button button2;
     }
 }

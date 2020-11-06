@@ -124,5 +124,18 @@ namespace InventorySystem1._0
                 btn_delete.Enabled = true;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string s1, s2;
+            s1 = "info";
+            s2 = "Adsministrator: Full access\n" +
+                "Staff: Access on Stock In, Stock Out, view and report data (Read and Write)\n" +
+                "Reporter: Read data in stock and report (no write)\n" +
+                "Viewer: Only can read data in stock";
+            MessageBox.Show(s2,s1,
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
+           
+        }
     }
 }
