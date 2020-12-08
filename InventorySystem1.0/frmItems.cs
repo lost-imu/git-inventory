@@ -98,7 +98,7 @@ namespace InventorySystem1._0
         }
         private string ExpiryDate()
         {
-            string expiryDate = null;
+            string expiryDate = "10000101";
             
 
             if (!expiryDateCheckBx.Checked)
@@ -107,7 +107,7 @@ namespace InventorySystem1._0
         }
         private string ProjectExpiry()
         {
-            string projectExpiry = null;
+            string projectExpiry = "10000101";
             if (!projectExpiryCheckBx.Checked)
                 projectExpiry = projectExpiryPicker.Value.Date.ToString("yyyyMMdd");
             return projectExpiry;
