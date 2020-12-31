@@ -60,6 +60,8 @@
             this.expiryDatePicker = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.branchTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtglist)).BeginInit();
             this.Panel2.SuspendLayout();
             this.pnl_stockmaster.SuspendLayout();
@@ -307,7 +309,9 @@
             this.pnl_stockmaster.Controls.Add(this.label11);
             this.pnl_stockmaster.Controls.Add(this.itemNameTextBox);
             this.pnl_stockmaster.Controls.Add(this.label10);
+            this.pnl_stockmaster.Controls.Add(this.label5);
             this.pnl_stockmaster.Controls.Add(this.Label4);
+            this.pnl_stockmaster.Controls.Add(this.branchTextBox);
             this.pnl_stockmaster.Controls.Add(this.Label3);
             this.pnl_stockmaster.Controls.Add(this.projectTextBox);
             this.pnl_stockmaster.Controls.Add(this.Label2);
@@ -373,9 +377,13 @@
             // qtyUpDown
             // 
             this.qtyUpDown.Location = new System.Drawing.Point(478, 46);
+            this.qtyUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.qtyUpDown.Name = "qtyUpDown";
             this.qtyUpDown.Size = new System.Drawing.Size(66, 20);
-            this.qtyUpDown.Maximum = 1000000;
             this.qtyUpDown.TabIndex = 5;
             // 
             // dateTimePicker3
@@ -422,6 +430,24 @@
             this.label10.Size = new System.Drawing.Size(93, 16);
             this.label10.TabIndex = 1;
             this.label10.Text = "انتهاء الصلاحية";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(550, 113);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 16);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "الفرع";
+            // 
+            // branchTextBox
+            // 
+            this.branchTextBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.branchTextBox.Location = new System.Drawing.Point(408, 110);
+            this.branchTextBox.Name = "branchTextBox";
+            this.branchTextBox.Size = new System.Drawing.Size(136, 22);
+            this.branchTextBox.TabIndex = 7;
             // 
             // frmItems
             // 
@@ -484,5 +510,7 @@
         private System.Windows.Forms.RadioButton isNotNewRadio;
         private System.Windows.Forms.CheckBox expiryDateCheckBx;
         private System.Windows.Forms.CheckBox projectExpiryCheckBx;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.TextBox branchTextBox;
     }
 }
