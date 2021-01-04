@@ -14,10 +14,10 @@ namespace InventorySystem1._0
         //private static readonly string ConString = "server=160.153.131.197;user id=eeb;database=lost_wissam;port=3306;password=aPxK5cVibm~?;sslMode=none;allowuservariables=True;Convert Zero Datetime=True;Character Set=utf8;";
 
         // lost_inventory
-        private static readonly string ConString = "server=160.153.131.197;user id=eeb;database=lost_inventory;port=3306;password=aPxK5cVibm~?;sslMode=none;allowuservariables=True;Convert Zero Datetime=True;Character Set=utf8;";
+        //private static readonly string ConString = "server=160.153.131.197;user id=eeb;database=lost_inventory;port=3306;password=aPxK5cVibm~?;sslMode=none;allowuservariables=True;Convert Zero Datetime=True;Character Set=utf8;";
 
         // localhost
-        //private static readonly string ConString = "server=localhost;user id=root;database=db_inventory;sslMode=none;allowuservariables=True;Convert Zero Datetime=True;Character Set=utf8;";
+        private static readonly string ConString = "server=localhost;user id=root;database=db_inventory;sslMode=none;allowuservariables=True;Convert Zero Datetime=True;Character Set=utf8;";
 
         public MyCon()
         {
