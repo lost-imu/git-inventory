@@ -60,6 +60,8 @@
             this.transToTime = new System.Windows.Forms.DateTimePicker();
             this.expiryFromTime = new System.Windows.Forms.DateTimePicker();
             this.expiryToTime = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.branchCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.reportDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,6 +77,9 @@
             // 
             // reportDataGridView
             // 
+            this.reportDataGridView.AllowUserToAddRows = false;
+            this.reportDataGridView.AllowUserToDeleteRows = false;
+            this.reportDataGridView.AllowUserToOrderColumns = true;
             this.reportDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.reportDataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.reportDataGridView.Location = new System.Drawing.Point(0, 195);
@@ -111,7 +116,7 @@
             this.projectExpiryToDate.CustomFormat = "dd/MM/yyyy";
             this.projectExpiryToDate.Enabled = false;
             this.projectExpiryToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.projectExpiryToDate.Location = new System.Drawing.Point(277, 73);
+            this.projectExpiryToDate.Location = new System.Drawing.Point(297, 97);
             this.projectExpiryToDate.Margin = new System.Windows.Forms.Padding(2);
             this.projectExpiryToDate.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
             this.projectExpiryToDate.Name = "projectExpiryToDate";
@@ -126,7 +131,7 @@
             this.projectExpiryFromDate.CustomFormat = "dd/MM/yyyy";
             this.projectExpiryFromDate.Enabled = false;
             this.projectExpiryFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.projectExpiryFromDate.Location = new System.Drawing.Point(277, 48);
+            this.projectExpiryFromDate.Location = new System.Drawing.Point(297, 72);
             this.projectExpiryFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.projectExpiryFromDate.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
             this.projectExpiryFromDate.Name = "projectExpiryFromDate";
@@ -141,7 +146,7 @@
             this.projectExpiryCheckBox.AutoSize = true;
             this.projectExpiryCheckBox.Checked = true;
             this.projectExpiryCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.projectExpiryCheckBox.Location = new System.Drawing.Point(368, 24);
+            this.projectExpiryCheckBox.Location = new System.Drawing.Point(388, 48);
             this.projectExpiryCheckBox.Name = "projectExpiryCheckBox";
             this.projectExpiryCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.projectExpiryCheckBox.Size = new System.Drawing.Size(83, 17);
@@ -303,7 +308,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(454, 52);
+            this.label3.Location = new System.Drawing.Point(474, 76);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 13);
@@ -313,7 +318,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(454, 77);
+            this.label4.Location = new System.Drawing.Point(474, 101);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 13);
@@ -325,7 +330,7 @@
             this.transFromDate.CustomFormat = "dd/MM/yyyy";
             this.transFromDate.Enabled = false;
             this.transFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.transFromDate.Location = new System.Drawing.Point(278, 122);
+            this.transFromDate.Location = new System.Drawing.Point(298, 146);
             this.transFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.transFromDate.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
             this.transFromDate.Name = "transFromDate";
@@ -340,7 +345,7 @@
             this.transToDate.CustomFormat = "dd/MM/yyyy";
             this.transToDate.Enabled = false;
             this.transToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.transToDate.Location = new System.Drawing.Point(278, 146);
+            this.transToDate.Location = new System.Drawing.Point(298, 170);
             this.transToDate.Margin = new System.Windows.Forms.Padding(2);
             this.transToDate.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
             this.transToDate.Name = "transToDate";
@@ -353,7 +358,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(454, 126);
+            this.label5.Location = new System.Drawing.Point(474, 150);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 13);
@@ -363,7 +368,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(454, 150);
+            this.label6.Location = new System.Drawing.Point(474, 174);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(12, 13);
@@ -375,7 +380,7 @@
             this.tranDateCheckBox.AutoSize = true;
             this.tranDateCheckBox.Checked = true;
             this.tranDateCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tranDateCheckBox.Location = new System.Drawing.Point(405, 100);
+            this.tranDateCheckBox.Location = new System.Drawing.Point(425, 124);
             this.tranDateCheckBox.Name = "tranDateCheckBox";
             this.tranDateCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tranDateCheckBox.Size = new System.Drawing.Size(46, 17);
@@ -388,7 +393,7 @@
             // 
             this.projectExpiryToTime.Enabled = false;
             this.projectExpiryToTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.projectExpiryToTime.Location = new System.Drawing.Point(382, 73);
+            this.projectExpiryToTime.Location = new System.Drawing.Point(402, 97);
             this.projectExpiryToTime.Margin = new System.Windows.Forms.Padding(2);
             this.projectExpiryToTime.Name = "projectExpiryToTime";
             this.projectExpiryToTime.ShowUpDown = true;
@@ -401,7 +406,7 @@
             // 
             this.projectExpiryFromTime.Enabled = false;
             this.projectExpiryFromTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.projectExpiryFromTime.Location = new System.Drawing.Point(382, 49);
+            this.projectExpiryFromTime.Location = new System.Drawing.Point(402, 73);
             this.projectExpiryFromTime.Margin = new System.Windows.Forms.Padding(2);
             this.projectExpiryFromTime.Name = "projectExpiryFromTime";
             this.projectExpiryFromTime.ShowUpDown = true;
@@ -414,7 +419,7 @@
             // 
             this.transFromTime.Enabled = false;
             this.transFromTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.transFromTime.Location = new System.Drawing.Point(381, 122);
+            this.transFromTime.Location = new System.Drawing.Point(401, 146);
             this.transFromTime.Margin = new System.Windows.Forms.Padding(2);
             this.transFromTime.Name = "transFromTime";
             this.transFromTime.ShowUpDown = true;
@@ -426,7 +431,7 @@
             // 
             this.transToTime.Enabled = false;
             this.transToTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.transToTime.Location = new System.Drawing.Point(381, 146);
+            this.transToTime.Location = new System.Drawing.Point(401, 170);
             this.transToTime.Margin = new System.Windows.Forms.Padding(2);
             this.transToTime.Name = "transToTime";
             this.transToTime.ShowUpDown = true;
@@ -460,11 +465,37 @@
             this.expiryToTime.Value = new System.DateTime(2020, 2, 17, 23, 59, 0, 0);
             this.expiryToTime.ValueChanged += new System.EventHandler(this.checkinToTime_ValueChanged);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(474, 22);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(31, 13);
+            this.label7.TabIndex = 40;
+            this.label7.Text = "الفرع";
+            // 
+            // branchCombo
+            // 
+            this.branchCombo.FormattingEnabled = true;
+            this.branchCombo.Items.AddRange(new object[] {
+            "ALL",
+            "driver1",
+            "driver2",
+            "driver3"});
+            this.branchCombo.Location = new System.Drawing.Point(297, 19);
+            this.branchCombo.Margin = new System.Windows.Forms.Padding(2);
+            this.branchCombo.Name = "branchCombo";
+            this.branchCombo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.branchCombo.Size = new System.Drawing.Size(173, 21);
+            this.branchCombo.TabIndex = 53;
+            // 
             // frmReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 557);
+            this.Controls.Add(this.branchCombo);
             this.Controls.Add(this.transToTime);
             this.Controls.Add(this.transFromTime);
             this.Controls.Add(this.expiryToTime);
@@ -481,6 +512,7 @@
             this.Controls.Add(this.projectExpiryCheckBox);
             this.Controls.Add(this.projectCombo);
             this.Controls.Add(this.itemIDCombo);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.functionComboBox);
             this.Controls.Add(this.label1);
@@ -540,5 +572,7 @@
         private System.Windows.Forms.DateTimePicker transToTime;
         private System.Windows.Forms.DateTimePicker expiryFromTime;
         private System.Windows.Forms.DateTimePicker expiryToTime;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox branchCombo;
     }
 }

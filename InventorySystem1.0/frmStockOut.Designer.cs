@@ -31,6 +31,7 @@
             this.Button2 = new System.Windows.Forms.Button();
             this.btnviewStockout = new System.Windows.Forms.Button();
             this.Panel1 = new System.Windows.Forms.Panel();
+            this.load_names_btn = new System.Windows.Forms.Button();
             this.empNameComboBox = new System.Windows.Forms.ComboBox();
             this.isEmployeeCombo = new System.Windows.Forms.ComboBox();
             this.employeeOrPhoneNumberLabel = new System.Windows.Forms.Label();
@@ -48,9 +49,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.scannerTxtBox = new System.Windows.Forms.TextBox();
             this.dtCus_addedlist = new System.Windows.Forms.DataGridView();
+            this.Panel2 = new System.Windows.Forms.Panel();
+            this.Label7 = new System.Windows.Forms.Label();
+            this.Label6 = new System.Windows.Forms.Label();
+            this.dtgCus_itemlist = new System.Windows.Forms.DataGridView();
+            this.txtsearch = new System.Windows.Forms.TextBox();
+            this.printLastBtn = new System.Windows.Forms.Button();
+            this.returnBtn = new System.Windows.Forms.Button();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TYPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UNIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,14 +68,6 @@
             this.EXPIRYDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOTES = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Panel2 = new System.Windows.Forms.Panel();
-            this.Label7 = new System.Windows.Forms.Label();
-            this.Label6 = new System.Windows.Forms.Label();
-            this.dtgCus_itemlist = new System.Windows.Forms.DataGridView();
-            this.txtsearch = new System.Windows.Forms.TextBox();
-            this.printLastBtn = new System.Windows.Forms.Button();
-            this.returnBtn = new System.Windows.Forms.Button();
-            this.load_names_btn = new System.Windows.Forms.Button();
             this.Panel1.SuspendLayout();
             this.Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtCus_addedlist)).BeginInit();
@@ -117,6 +118,16 @@
             this.Panel1.Size = new System.Drawing.Size(853, 88);
             this.Panel1.TabIndex = 27;
             this.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
+            // 
+            // load_names_btn
+            // 
+            this.load_names_btn.Location = new System.Drawing.Point(798, 53);
+            this.load_names_btn.Name = "load_names_btn";
+            this.load_names_btn.Size = new System.Drawing.Size(46, 23);
+            this.load_names_btn.TabIndex = 11;
+            this.load_names_btn.Text = "Load";
+            this.load_names_btn.UseVisualStyleBackColor = true;
+            this.load_names_btn.Click += new System.EventHandler(this.load_names_btn_Click);
             // 
             // empNameComboBox
             // 
@@ -296,6 +307,7 @@
             this.Column1,
             this.Column2,
             this.Column3,
+            this.branch,
             this.TYPE,
             this.Column5,
             this.UNIT,
@@ -310,92 +322,6 @@
             this.dtCus_addedlist.RowHeadersVisible = false;
             this.dtCus_addedlist.Size = new System.Drawing.Size(849, 254);
             this.dtCus_addedlist.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column1.HeaderText = "رقم الصنف";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 75;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column2.HeaderText = "اسم الصنف";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 79;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.HeaderText = "الشرح";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 62;
-            // 
-            // TYPE
-            // 
-            this.TYPE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.TYPE.HeaderText = "النوع";
-            this.TYPE.Name = "TYPE";
-            this.TYPE.ReadOnly = true;
-            this.TYPE.Width = 54;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column5.HeaderText = "الكمية";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 61;
-            // 
-            // UNIT
-            // 
-            this.UNIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.UNIT.HeaderText = "الوحدة";
-            this.UNIT.Name = "UNIT";
-            this.UNIT.ReadOnly = true;
-            this.UNIT.Width = 61;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column4.HeaderText = "مشروع";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 67;
-            // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column6.HeaderText = "جديد\\ مستعمل";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 96;
-            // 
-            // EXPIRYDATE
-            // 
-            this.EXPIRYDATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.EXPIRYDATE.HeaderText = "إنتهاء الصلاحية";
-            this.EXPIRYDATE.Name = "EXPIRYDATE";
-            this.EXPIRYDATE.ReadOnly = true;
-            this.EXPIRYDATE.Width = 90;
-            // 
-            // Column7
-            // 
-            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column7.HeaderText = "تاريخ انتهاء المشروع";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 114;
-            // 
-            // NOTES
-            // 
-            this.NOTES.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.NOTES.HeaderText = "ملاحظات";
-            this.NOTES.Name = "NOTES";
-            this.NOTES.Width = 73;
             // 
             // Panel2
             // 
@@ -483,15 +409,97 @@
             this.returnBtn.UseVisualStyleBackColor = false;
             this.returnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
-            // load_names_btn
+            // Column1
             // 
-            this.load_names_btn.Location = new System.Drawing.Point(798, 53);
-            this.load_names_btn.Name = "load_names_btn";
-            this.load_names_btn.Size = new System.Drawing.Size(46, 23);
-            this.load_names_btn.TabIndex = 11;
-            this.load_names_btn.Text = "Load";
-            this.load_names_btn.UseVisualStyleBackColor = true;
-            this.load_names_btn.Click += new System.EventHandler(this.load_names_btn_Click);
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.HeaderText = "رقم الصنف";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 81;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column2.HeaderText = "اسم الصنف";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 86;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column3.HeaderText = "الشرح";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 62;
+            // 
+            // branch
+            // 
+            this.branch.HeaderText = "الفرع";
+            this.branch.Name = "branch";
+            this.branch.Width = 56;
+            // 
+            // TYPE
+            // 
+            this.TYPE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TYPE.HeaderText = "النوع";
+            this.TYPE.Name = "TYPE";
+            this.TYPE.ReadOnly = true;
+            this.TYPE.Width = 54;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Column5.HeaderText = "الكمية";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 61;
+            // 
+            // UNIT
+            // 
+            this.UNIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.UNIT.HeaderText = "الوحدة";
+            this.UNIT.Name = "UNIT";
+            this.UNIT.ReadOnly = true;
+            this.UNIT.Width = 61;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "مشروع";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 67;
+            // 
+            // Column6
+            // 
+            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Column6.HeaderText = "جديد\\ مستعمل";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 96;
+            // 
+            // EXPIRYDATE
+            // 
+            this.EXPIRYDATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.EXPIRYDATE.HeaderText = "إنتهاء الصلاحية";
+            this.EXPIRYDATE.Name = "EXPIRYDATE";
+            this.EXPIRYDATE.ReadOnly = true;
+            this.EXPIRYDATE.Width = 90;
+            // 
+            // Column7
+            // 
+            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Column7.HeaderText = "تاريخ انتهاء المشروع";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 114;
+            // 
+            // NOTES
+            // 
+            this.NOTES.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.NOTES.HeaderText = "ملاحظات";
+            this.NOTES.Name = "NOTES";
+            this.NOTES.Width = 73;
             // 
             // frmStockOut
             // 
@@ -554,9 +562,12 @@
         internal System.Windows.Forms.TextBox scannerTxtBox;
         private System.Windows.Forms.ComboBox isEmployeeCombo;
         internal System.Windows.Forms.Button returnBtn;
+        private System.Windows.Forms.ComboBox empNameComboBox;
+        private System.Windows.Forms.Button load_names_btn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn branch;
         private System.Windows.Forms.DataGridViewTextBoxColumn TYPE;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn UNIT;
@@ -565,7 +576,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EXPIRYDATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTES;
-        private System.Windows.Forms.ComboBox empNameComboBox;
-        private System.Windows.Forms.Button load_names_btn;
     }
 }

@@ -59,7 +59,20 @@ namespace InventorySystem1._0
 
             inc = 0;
           
-            sql = "SELECT * FROM tblitems where `DELETED`=0";
+            //sql = "SELECT * FROM tblitems where `DELETED`=0";
+            sql = "select ITEMID as 'ID'," +
+                " NAME as 'Name'," +
+                " DESCRIPTION as 'Description'," +
+                " BRANCH as 'Branch'," +
+                " TYPE as 'Type'," +
+                " QTY," +
+                " UNIT as 'Unit'," +
+                " PROJECT as 'Project'," +
+                " ISNEW as 'New'," +
+                " EXPIRYDATE as 'Expiry Date'," +
+                " PROJECTEXPIRY as 'Project Expiry'," +
+                " NOTE as 'Notes'" +
+                " from tblitems where `DELETED`=0";
             config.Load_DTG(sql, dtglist);  
 
             maxcolumn = dtglist.Columns.Count - 1;
@@ -140,6 +153,7 @@ namespace InventorySystem1._0
                " AND TYPE = @TYPE" +
                " AND UNIT = @UNIT " +
                " AND UPPER(PROJECT) =  UPPER(@PROJECT)" +
+               " AND BRANCH = @BRANCH" +
                " AND ISNEW = @ISNEW"; // + 
                //" AND EXPIRYDATE = @EXPIRYDATE" +
                //" AND PROJECTEXPIRY = @PROJECTEXPIRY;";
@@ -159,6 +173,8 @@ namespace InventorySystem1._0
                 command.Parameters.Add(new MySqlParameter("UNIT", Convert.ToString(unitCombo.SelectedValue)));
                 command.Parameters.Add(new MySqlParameter("PROJECT", projectTextBox.Text));
                 command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked));
+                command.Parameters.Add(new MySqlParameter("BRANCH", branchTextBox.Text));
+
                 //command.Parameters.Add(new MySqlParameter("EXPIRYDATE", expiryDate));
                 //command.Parameters.Add(new MySqlParameter("PROJECTEXPIRY", projectExpiry));
                 MySqlDataReader reader = command.ExecuteReader();
@@ -172,9 +188,7 @@ namespace InventorySystem1._0
 
                 {
                     bool isReported = false;
-                    //MessageBox.Show("date1='" + Convert.ToString(reader.GetOrdinal("EXPIRYDATE")+"'"));
-                    //MessageBox.Show("date2='" + Convert.ToString(reader.GetOrdinal("PROJECTEXPIRY")+"'"));
-
+                   
                     string s = reader.GetString("ITEMID");
                     //MessageBox.Show(reader.HasRows + "\n" + s);
                     sql = "UPDATE tblitems SET qty =qty + '" + qtyUpDown.Value + "' WHERE ITEMID = '" + s + "'";
@@ -184,7 +198,7 @@ namespace InventorySystem1._0
                     if (command.ExecuteNonQuery() > 0)
                         while (!isReported)
                         {
-                            isReported = MyCon.ReportIt("Add Quantity To Existing Item", "QTY", s, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, -1, ExpiryDate(), ProjectExpiry());
+                            isReported = MyCon.ReportIt("Add Quantity To Existing Item", "QTY", s, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, -1, ExpiryDate(), ProjectExpiry(), branchTextBox.Text);
 //                          MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
 
                             MessageBox.Show(" تم تعديل الكمية الى " + "\n" + s);
@@ -200,8 +214,8 @@ namespace InventorySystem1._0
                     //    "date2: '" + projectExpiry+"'";
                     //MessageBox.Show(testi);
                     reader.Close();
-                    sql = "insert into tblitems  (ITEMID,NAME, DESCRIPTION, TYPE, QTY, UNIT,PROJECT, ISNEW, EXPIRYDATE, PROJECTEXPIRY)" + //, RECIEVER_NUMBER, RECIEVER_STATE, RECIEVER_NAME)" +
-                     "VALUES (@ITEMID, @NAME, @DESCRIPTION, @TYPE, @QTY, @UNIT, @PROJECT, @ISNEW, @EXPIRYDATE, @PROJECTEXPIRY)"; //, @RECIEVER_NUMBER, @RECIEVER_STATE, @RECIEVER_NAME)";
+                    sql = "insert into tblitems  (ITEMID,NAME, DESCRIPTION, TYPE, QTY, UNIT,PROJECT, ISNEW, EXPIRYDATE, PROJECTEXPIRY, BRANCH)" + //, RECIEVER_NUMBER, RECIEVER_STATE, RECIEVER_NAME)" +
+                     "VALUES (@ITEMID, @NAME, @DESCRIPTION, @TYPE, @QTY, @UNIT, @PROJECT, @ISNEW, @EXPIRYDATE, @PROJECTEXPIRY, @BRANCH)"; //, @RECIEVER_NUMBER, @RECIEVER_STATE, @RECIEVER_NAME)";
 
                     command = new MySqlCommand(sql, con);
                     command.Parameters.Add(new MySqlParameter("ITEMID", itemIDTxtBox.Text));
@@ -214,6 +228,7 @@ namespace InventorySystem1._0
                     command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked));
                     command.Parameters.Add(new MySqlParameter("EXPIRYDATE", ExpiryDate()));
                     command.Parameters.Add(new MySqlParameter("PROJECTEXPIRY", ProjectExpiry()));
+                    command.Parameters.Add(new MySqlParameter("BRANCH", branchTextBox.Text));
 
                     //command.Parameters.Add(new MySqlParameter("RECIEVER_NUMBER", frmLogin.user_id));
                     //command.Parameters.Add(new MySqlParameter("RECIEVER_STATE", "Employee"));
@@ -221,7 +236,7 @@ namespace InventorySystem1._0
 
                     if (command.ExecuteNonQuery() > 0)
                     {
-                        MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
+                        MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry(), branchTextBox.Text);
                         MessageBox.Show("تمت الاضافة بنجاح");
                     }
                     else
@@ -275,6 +290,9 @@ namespace InventorySystem1._0
                 ", ISNEW = '" + isNew + "'" +
                 ", EXPIRYDATE = '" + ExpiryDate() + "'" +
                 ", PROJECTEXPIRY = '" + ProjectExpiry() + "'" +
+                ", BRANCH = '" + branchTextBox.Text + "'" +
+
+                
                 "WHERE ITEMID= '" + itemID + "'";
             //sql = "UPDATE tblitems SET `NAME`='" + itemNameTextBox.Text + "', `DESCRIPTION`='" + descriptionTextBox.Text + "', `TYPE`='" + typeCombo.Text + "', `PRICE`='" + projectTextBox.Text + "'" +
             //",`UNIT`='" + unitComo.Text + "' WHERE ITEMID='" + itemIDTxtBox.Text + "'";
@@ -300,7 +318,7 @@ namespace InventorySystem1._0
 
                 if (result > 0)
                 {
-                    MyCon.ReportIt(reportFunaction, "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
+                    MyCon.ReportIt(reportFunaction, "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry(), branchTextBox.Text);
 
                     MessageBox.Show(msg_true);
 
@@ -399,6 +417,7 @@ namespace InventorySystem1._0
                     typeCombo.SelectedIndex = typeCombo.FindString(config.dt.Rows[0].Field<string>(3));
                     unitCombo.SelectedIndex = unitCombo.FindString(config.dt.Rows[0].Field<string>(5));
                     projectTextBox.Text = config.dt.Rows[0].Field<string>(6).ToString();
+                    branchTextBox.Text = config.dt.Rows[0].Field<string>("BRANCH");
 
                     try
                     {
@@ -478,8 +497,20 @@ namespace InventorySystem1._0
 
         private void Txtsearch_TextChanged(object sender, EventArgs e)
         {
-            sql = "SELECT * FROM tblitems WHERE"+
-                " DELETED = 0 AND ("+ 
+         sql =  "select ITEMID as 'ID'," +
+                " NAME as 'Name'," +
+                " DESCRIPTION as 'Description'," +
+                " BRANCH as 'Branch'," +
+                " TYPE as 'Type'," +
+                " QTY," +
+                " UNIT as 'Unit'," +
+                " PROJECT as 'Project'," +
+                " ISNEW as 'New'," +
+                " EXPIRYDATE as 'Expiry Date'," +
+                " PROJECTEXPIRY as 'Project Expiry'," +
+                " NOTE as 'Notes'" +
+                " FROM tblitems" +
+                " WHERE DELETED = 0 AND (" + 
                 " ITEMID LIKE '%" + txtsearch.Text +
                 "%' OR NAME LIKE '%" + txtsearch.Text +
                 "%' OR DESCRIPTION LIKE '%" + txtsearch.Text +

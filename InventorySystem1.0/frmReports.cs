@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DGVPrinterHelper;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,7 +42,9 @@ namespace InventorySystem1._0
             functionComboAutoComplete();
             itemIDComboAutoComplete();
             projectComboAutoComplete();
-            userNameCombo.SelectedIndex = functionComboBox.SelectedIndex = itemIDCombo.SelectedIndex = projectCombo.SelectedIndex = 0;
+            branchAutoComplete();
+
+            userNameCombo.SelectedIndex = functionComboBox.SelectedIndex = itemIDCombo.SelectedIndex = projectCombo.SelectedIndex = branchCombo.SelectedIndex = 0;
           /*  getDriverList(); //available drivers
             employeeComboBoxAutoComplete();
             driverComboBoxAutoComplete();
@@ -213,6 +216,46 @@ namespace InventorySystem1._0
                 MessageBox.Show("Can not open connection ! " + ex);
             }
         }
+        private void branchAutoComplete()
+        {
+            branchCombo.Items.Clear();
+            branchCombo.Items.Add("الكل");
+            branchCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            branchCombo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection combData = new AutoCompleteStringCollection();
+            getDataForbranchCombo(combData);
+            branchCombo.AutoCompleteCustomSource = combData;
+        }
+        private void getDataForbranchCombo(AutoCompleteStringCollection dataCollection)
+        {
+            MySqlConnection connection;
+            MySqlCommand command;
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            DataSet ds = new DataSet();
+            string sql = "SELECT DISTINCT `BRANCH` FROM `tblreport` ORDER BY `tblreport`.`BRANCH` ASC";
+            connection = new MySqlConnection(conString);
+            try
+            {
+
+                connection.Open();
+                command = new MySqlCommand(sql, connection);
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                adapter.Dispose();
+                command.Dispose();
+                connection.Close();
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    dataCollection.Add(row[0].ToString());
+                    branchCombo.Items.Add(row[0].ToString());
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can not open connection ! " + ex);
+            }
+        }
         private void printBtn_Click(object sender, EventArgs e)
         {
 
@@ -312,10 +355,73 @@ namespace InventorySystem1._0
 
         private void printBtn_Click_1(object sender, EventArgs e)
         {
+            if (reportDataGridView.Rows.Count < 1)
+                MessageBox.Show("Nothing to PRINT!");
+            else
+            PrintLastBtn(sender, e);
+
+
+
+        }
+        DGVPrinter printer = new DGVPrinter();
+        private void PrintLastBtn(object sender, EventArgs e)
+        {
+
+            printerEmpty();
+        
+
+            printer.PrintDataGridView(reportDataGridView);
+            //dtCus_addedlist =  dtCus_addedlist.Rows.Add({ "a","b"};
+
+
+        }
+        /// ////////////////////////////////////////////////
+        /// 
+        private void printerEmpty()
+        {
+            printer = new DGVPrinter
+            {
+                Title = "Report",
+
+                SubTitle = "التاريخ: " + DateTime.Now.ToString("dd-MM-yyyy HH:mm"),
+
+                SubTitleFormatFlags = StringFormatFlags.LineLimit |
+
+                                          StringFormatFlags.NoClip,
+
+
+                PageNumbers = true,
+
+                ShowTotalPageNumber = true,
+
+                PageNumberInHeader = false,
+
+                PorportionalColumns = false,
+
+                HeaderCellAlignment = StringAlignment.Near,
+
+                Footer = "الجمعية اللبنانية للدراسات والتدريب",
+
+                FooterSpacing = 15,
+
+                PrinterName = default
+
+                
+            };
+
+
 
         }
 
-        private void expiryDateCheckBox_CheckedChanged(object sender, EventArgs e)
+
+
+
+
+
+
+            // ///////////////////////////////////////////////
+
+            private void expiryDateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (expiryDateCheckBox.Checked)
             {
@@ -341,34 +447,36 @@ namespace InventorySystem1._0
         {
 
             string s1 = "SELECT " +
-                " `user`.`name` AS 'User Name', "+
+                // " `user`.`name` AS 'User Name', "+
                 " `tblreport`.`FUNCTION` AS 'Function', " +
-                " `tblreport`.`CHANGED_VALUES` AS 'Values Changed', " +
+                // " `tblreport`.`CHANGED_VALUES` AS 'Values Changed', " +
                 " `tblreport`.`ITEM_ID` AS 'Item ID', " +
                 " `tblreport`.`ITEM_NAME` AS 'Item Name', " +
                 " `tblreport`.`DESCRIPTION`AS 'Description', " +
-                " `tblreport`.`TYPE` AS 'Type', " +
+                " `tblreport`.`BRANCH` AS 'Branch', " +
+                // " `tblreport`.`TYPE` AS 'Type', " +
                 " `tblreport`.`QTY` AS 'QTY', " +
-                " `tblreport`.`UNIT` AS 'Unit', " +
-                " `tblreport`.`PROJECT` 'Project', " +
-                " if (`tblreport`.`IS_NEW`= 0,'False', 'True') AS 'Is New', " +
-                " `tblreport`.`EXPIRY_DATE` AS 'Expiry Date', " +
-                " `PROJECT_EXPIRY` AS 'Project Expiry', " +
-                " `tblreport`.`DATE_STAMP` AS 'Transaction Time', " +
-                " `tblreport`.`RECIEVER_NUMBER` AS 'Reciever Number', " +
-                " `tblreport`.`RECIEVER_STATE` AS 'Employee State', " +
-                " `tblreport`.`RECIEVER_NAME` AS 'Reciever Name' " +
+                
+                //" `tblreport`.`UNIT` AS 'Unit', " +
+                //" `tblreport`.`PROJECT` 'Project', " +
+                // " if (`tblreport`.`IS_NEW`= 0,'False', 'True') AS 'Is New', " +
+                // " `tblreport`.`EXPIRY_DATE` AS 'Expiry Date', " +
+                // " `PROJECT_EXPIRY` AS 'Project Expiry', " +
+                " `tblreport`.`DATE_STAMP` AS 'Transaction Time' " +
+                // " `tblreport`.`RECIEVER_NUMBER` AS 'Reciever Number', " +
+                //" `tblreport`.`RECIEVER_STATE` AS 'Employee State', " +
+                //" `tblreport`.`RECIEVER_NAME` AS 'Reciever Name' " +
                 " FROM `tblreport`,`user` " +
                 " WHERE `user`.`user_id`=`tblreport`.`USER_ID`";
 
-            string s2 = sqlFunction() + sqlItemID() + sqlProject() + sqlUserName() + getExpiryDateString() + getProjectExpiryString()+ getTransDateString();
+            string s2 = sqlFunction() + sqlItemID() + sqlProject() + sqlUserName() + getExpiryDateString() + getProjectExpiryString()+ getTransDateString() + GetBranch();
 
             //string s3 = " AND driver.driverID=reservation.driverID AND employee.empID=reservation.requesterID AND car.carID=reservation.carID ";
             //textBox1.Text = s1 + s2 + s3;
             //try
-           // {
+            // {
 
-                MySqlConnection con = new MySqlConnection(conString);
+            MySqlConnection con = new MySqlConnection(conString);
 
 
 
@@ -492,6 +600,13 @@ namespace InventorySystem1._0
 
             return s;
 
+        }
+        private string GetBranch()
+        {
+            if (branchCombo.SelectedIndex == 0)
+                return null;
+            else
+                return " AND `BRANCH` = '" + branchCombo.SelectedItem.ToString() + "'";
         }
 
 

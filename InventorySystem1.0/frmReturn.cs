@@ -90,7 +90,7 @@ namespace InventorySystem1._0
             {
                 foreach (DataGridViewRow row in dtCus_addedlist.Rows)
                 {
-                    total = double.Parse(row.Cells[4].Value.ToString()) * double.Parse(row.Cells[3].Value.ToString());
+                    total = double.Parse(row.Cells[5].Value.ToString()) * double.Parse(row.Cells[3].Value.ToString());
                     row.Cells[5].Value = total;
                 }
             }
@@ -123,13 +123,13 @@ namespace InventorySystem1._0
                 {
                     if (dtCus_addedlist.Rows[i].Cells[0].Value.ToString() == row.Field<string>(0))
                     {
-                        if (int.Parse(dtCus_addedlist.Rows[i].Cells[4].Value.ToString()) > row.Field<int>(1))
+                        if (int.Parse(dtCus_addedlist.Rows[i].Cells[5].Value.ToString()) > row.Field<int>(1))
                         {
                             MessageBox.Show("The returned quantity of the item ( " + dtCus_addedlist.Rows[i].Cells[1].Value.ToString() + " ) is greater than the available quantity of it.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
                     }
-                    if (dtCus_addedlist.Rows[i].Cells[4].Value.ToString() == "")
+                    if (dtCus_addedlist.Rows[i].Cells[5].Value.ToString() == "")
                     {
                         MessageBox.Show("Set your purpose.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
@@ -140,15 +140,15 @@ namespace InventorySystem1._0
             foreach (DataGridViewRow r in dtCus_addedlist.Rows)
             {
                 sql = "INSERT INTO `tblstock_return` (  `STOCKRETURNNUMBER`, `ITEMID`, `RETURNDATE`, `QTY`, `TOTALPRICE`, `OWNER_CUS_ID`)" +
-                        " VALUES ('" + tranid + "','" + r.Cells[0].Value + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + r.Cells[4].Value +
+                        " VALUES ('" + tranid + "','" + r.Cells[0].Value + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + r.Cells[5].Value +
                         "','" + r.Cells[5].Value + "','" + custormerid + "')";
                 config.Execute_Query(sql);
 
                 //     '-----------------------------------------------update item
-                sql = "UPDATE `tblitems`  SET `QTY`=`QTY` + '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                sql = "UPDATE `tblitems`  SET `QTY`=`QTY` + '" + r.Cells[5].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
                 config.Execute_Query(sql);
 
-                sql = "UPDATE `tblstock_in_out` SET  `QTY`=`QTY`-'" + r.Cells[4].Value + "', `TOTALPRICE`=`TOTALPRICE`-'" + r.Cells[5].Value + "'  WHERE `STOCKOUTID` ='" + r.Cells[6].Value + "'";
+                sql = "UPDATE `tblstock_in_out` SET  `QTY`=`QTY`-'" + r.Cells[5].Value + "', `TOTALPRICE`=`TOTALPRICE`-'" + r.Cells[5].Value + "'  WHERE `STOCKOUTID` ='" + r.Cells[6].Value + "'";
                 config.Execute_Query(sql);
             }
 
