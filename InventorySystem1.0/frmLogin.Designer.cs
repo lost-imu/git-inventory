@@ -145,7 +145,7 @@
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(237, 22);
             this.txtusername.TabIndex = 22;
-            this.txtusername.Text = "2056";
+            this.txtusername.Text = "1234";
             this.txtusername.UseWaitCursor = true;
             // 
             // Button1

@@ -58,7 +58,19 @@ namespace InventorySystem1._0
            // sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', case when `EXPIRYDATE` IS NULL then '' ELSE `EXPIRYDATE` END as 'Expiry Date', `PROJECTEXPIRY` as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
 
             //sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'Expiry Date', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
-            sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `BRANCH` as 'الفرع' , `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة', `UNIT` as 'الوحدة', `PROJECT` as 'المشروع', case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', `NOTE` as 'ملاحظات' FROM `tblitems`";
+            sql = "SELECT `ITEMID` as 'رقم الصنف'," +
+                " `NAME` as 'الاسم'," +
+                " `DESCRIPTION` as 'الشرح'," +
+                " `BRANCH` as 'الفرع' ," +
+                " `TYPE` as 'النوع'," +
+                " `QTY` as 'الكمية المتوفرة'," +
+                " `UNIT` as 'الوحدة'," +
+                " `PROJECT` as 'المشروع'," +
+                " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل'," +
+                " CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
+                " CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
+                " `NOTE` as 'ملاحظات'" +
+                " FROM `tblitems`";
 
 
             config.Load_DTG(sql, dtgCus_itemlist);
@@ -77,7 +89,31 @@ namespace InventorySystem1._0
         }
         private void Txtsearch_TextChanged(object sender, EventArgs e)
         {
-            sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة', `UNIT` as 'الوحدة', `PROJECT` as 'المشروع', case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', `NOTE` as 'ملاحظات' FROM `tblitems` WHERE  `NAME` like '%" + txtsearch.Text + "%' or `DESCRIPTION` like '%" + txtsearch.Text + "%' or `ITEMID` like '%" + txtsearch.Text + "%'";
+            sql = "SELECT `ITEMID` as 'رقم الصنف'," +
+                " `NAME` as 'الاسم'," +
+                " `DESCRIPTION` as 'الشرح'," +
+                " `BRANCH` as 'الفرع' ," +
+                " `TYPE` as 'النوع'," +
+                " `QTY` as 'الكمية المتوفرة'," +
+                " `UNIT` as 'الوحدة'," +
+                " `PROJECT` as 'المشروع'," +
+                " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل'," +
+                " CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
+                " CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
+                " `NOTE` as 'ملاحظات'" +
+                " FROM `tblitems`" +
+                " WHERE  `NAME` like '%" + txtsearch.Text + "%' or `DESCRIPTION` like '%" + txtsearch.Text + "%' or `ITEMID` like '%" + txtsearch.Text + "%'";
+
+           string sql2 = "SELECT `ITEMID` as 'رقم الصنف'," +
+                " `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح'," +
+                " `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة'," +
+                " `UNIT` as 'الوحدة'," +
+                " `PROJECT` as 'المشروع'," +
+                " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل'," +
+                " CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
+                " CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
+                " `NOTE` as 'ملاحظات' FROM `tblitems`" +
+                " WHERE  `NAME` like '%" + txtsearch.Text + "%' or `DESCRIPTION` like '%" + txtsearch.Text + "%' or `ITEMID` like '%" + txtsearch.Text + "%'";
             //sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة', `UNIT` as 'الوحدة', `PROJECT` as 'المشروع', case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', `NOTE` as 'ملاحظات' FROM `tblitems`";
 
             //sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `PRICE` as 'السعر', `QTY` as 'الكمية المتوفرة' FROM `tblitems` WHERE  `NAME` like '%" + txtsearch.Text + "%' or `DESCRIPTION` like '%" + txtsearch.Text + "%' or `ITEMID` like '%" + txtsearch.Text + "%'";
@@ -427,23 +463,23 @@ namespace InventorySystem1._0
             string stockoutID = r.Cells[0].Value.ToString();
             string itemName = r.Cells[1].Value.ToString();
             string description = r.Cells[2].Value.ToString();
-            string type = r.Cells[3].Value.ToString();
-            string branch = r.Cells[4].Value.ToString();
+            string type = r.Cells[4].Value.ToString();
+            string branch = r.Cells[3].Value.ToString();
             double qty = Convert.ToDouble(r.Cells[5].Value);
-            string unit = r.Cells[5].Value.ToString();
-            string project = r.Cells[6].Value.ToString();
-            string isNew = Convert.ToString(r.Cells[7].Value);
+            string unit = r.Cells[6].Value.ToString();
+            string project = r.Cells[7].Value.ToString();
+            string isNew = Convert.ToString(r.Cells[8].Value);
             string ExpiryDate, projectExpiry;
-            if (r.Cells[8].Value is null)
+            if (r.Cells[9].Value is null || r.Cells[9].Value is "N/A")
                 ExpiryDate = null;
             else
-                ExpiryDate = r.Cells[8].Value.ToString();
+                ExpiryDate = r.Cells[9].Value.ToString();
 
-            if (r.Cells[9].Value is null)
+            if (r.Cells[10].Value is null || r.Cells[10].Value is "N/A")
                 projectExpiry = null;
             else
-                projectExpiry = r.Cells[9].Value.ToString();
-            _ = r.Cells[10].Value.ToString();
+                projectExpiry = r.Cells[10].Value.ToString();
+            _ = r.Cells[9].Value.ToString();
 
             if (isNew == "مستعمل" || isNew == "False" || isNew == "false" || isNew == "0")
                 isNew = "0";
@@ -465,7 +501,9 @@ namespace InventorySystem1._0
                 {
                     bool b;
 
-                    b = MyCon.ReportIt(tsansType + isEmployeeCombo.SelectedItem, "ALL", stockoutID, itemName, description, type, qty, unit, project, Convert.ToInt32(isNew), ExpiryDate, projectExpiry, branch);
+                    b = MyCon.ReportIt(tsansType + isEmployeeCombo.SelectedItem,
+                        "ALL", stockoutID, itemName, description, type, qty, unit,
+                        project, Convert.ToInt32(isNew), ExpiryDate, projectExpiry, branch);
 
                 }
             }
@@ -566,7 +604,7 @@ namespace InventorySystem1._0
                 "','" + r.Cells[5].Value + "','" + txt_cusid.Text + "','StockOut')";
                 Execute_Query(sql,r);
                 */
-                sql = "UPDATE `tblitems`  SET `QTY`= QTY + '" + r.Cells[5].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                sql = "UPDATE `tblitems`  SET `QTY`= QTY - '" + r.Cells[5].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
                 Execute_Query(sql, r, "Return");
             }
 
@@ -619,7 +657,7 @@ namespace InventorySystem1._0
                 foreach (DataGridViewRow r in dtCus_addedlist.Rows)
                 {
                     
-                    sql = "UPDATE `tblitems`  SET `QTY`= QTY + '" + r.Cells[5].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                    sql = "UPDATE `tblitems`  SET `QTY`= QTY - '" + r.Cells[5].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
                     Execute_Query(sql, r,"Return");
                 }
                 config.Execute_Query("UPDATE tblautonumber SET END= END + INCREMENT WHERE ID = 5");
