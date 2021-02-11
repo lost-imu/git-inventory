@@ -210,24 +210,7 @@ namespace InventorySystem1._0
 
 
             }
-            //dtCus_addedlist.ReadOnly = true;
-            //dtCus_addedlist.Columns[4].ReadOnly = false;
-
-            /*
-            foreach (DataGridViewColumn dc in dtCus_addedlist.Columns)
-            {
-                if (dc.Index.Equals(4))
-                {
-                    dc.ReadOnly = false;
-                }
-                else
-                {
-                    dc.ReadOnly = true;
-                }
-            }*/
-            //dtCus_addedlist.AutoResizeColumns = "AllCells";
-            //dtCus_addedlist.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
+           
 
         }
 
@@ -373,35 +356,16 @@ namespace InventorySystem1._0
 
             foreach (DataGridViewRow r in dtCus_addedlist.Rows)
             {
-                /*
-                sql = "INSERT INTO `tblstock_in_out` ( `TRANSACTIONNUMBER`, `ITEMID`, `TRANSACTIONDATE`, `QTY`, `TOTALPRICE`, `SUPLIERCUSTOMERID`,REMARKS)" +
-                " VALUES ('" + stockoutID + "','" + r.Cells[0].Value + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + r.Cells[4].Value +
-                "','" + r.Cells[5].Value + "','" + txt_cusid.Text + "','StockOut')";
-                Execute_Query(sql,r);
-                */
                 sql = "UPDATE `tblitems`  SET `QTY`= QTY - '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
                 Execute_Query(sql, r, "Stock Out");
             }
 
-
-
-
-            // sql = "INSERT INTO  `tbltransaction` (`TRANSACTIONNUMBER`,  `TRANSACTIONDATE`,  `TYPE`, `SUPLIERCUSTOMERID`)" +
-            //        " VALUES ('" + stockoutID + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','StockOut','" + txt_cusid.Text + "')";
-            // config.Execute_Query(sql);
-
-            // '-----------------------------------------------update autonumber
             config.Execute_Query("UPDATE tblautonumber SET END= END + INCREMENT WHERE ID = 5");
-
-            // '------------------------------------------------------------
             PrintLastBtn(sender, e);
-            MessageBox.Show("تم");
-            //MessageBox.Show("Item(s) has been saved in the database.");
-            // '------------------------------------------------------------clearing
             funct.clearTxt(Panel1);
             dtCus_addedlist.Rows.Clear();
-
             FrmStockOut_Load(sender, e);
+            MessageBox.Show("تم");
         }
 
         private void BtnCus_save_Click(object sender, EventArgs e)
