@@ -58,7 +58,18 @@ namespace InventorySystem1._0
            // sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', case when `EXPIRYDATE` IS NULL then '' ELSE `EXPIRYDATE` END as 'Expiry Date', `PROJECTEXPIRY` as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
 
             //sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'Expiry Date', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
-            sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة', `UNIT` as 'الوحدة', `PROJECT` as 'المشروع', case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', `NOTE` as 'ملاحظات' FROM `tblitems`";
+            sql = "SELECT `ITEMID` as 'رقم الصنف'," +
+                " `NAME` as 'الاسم'," +
+                " `DESCRIPTION` as 'الشرح'," +
+                " `TYPE` as 'النوع'," +
+                " `QTY` as 'الكمية المتوفرة', " +
+                "`UNIT` as 'الوحدة'," +
+                " `PROJECT` as 'المشروع'," +
+                " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', " +
+                "CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
+                " CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
+                " `NOTE` as 'ملاحظات'" +
+                " FROM `tblitems`";
 
 
             config.Load_DTG(sql, dtgCus_itemlist);
