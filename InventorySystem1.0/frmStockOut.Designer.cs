@@ -31,6 +31,7 @@
             this.Button2 = new System.Windows.Forms.Button();
             this.btnviewStockout = new System.Windows.Forms.Button();
             this.Panel1 = new System.Windows.Forms.Panel();
+            this.load_names_btn = new System.Windows.Forms.Button();
             this.empNameComboBox = new System.Windows.Forms.ComboBox();
             this.isEmployeeCombo = new System.Windows.Forms.ComboBox();
             this.employeeOrPhoneNumberLabel = new System.Windows.Forms.Label();
@@ -66,7 +67,6 @@
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.printLastBtn = new System.Windows.Forms.Button();
             this.returnBtn = new System.Windows.Forms.Button();
-            this.load_names_btn = new System.Windows.Forms.Button();
             this.Panel1.SuspendLayout();
             this.Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtCus_addedlist)).BeginInit();
@@ -117,6 +117,16 @@
             this.Panel1.Size = new System.Drawing.Size(853, 88);
             this.Panel1.TabIndex = 27;
             this.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
+            // 
+            // load_names_btn
+            // 
+            this.load_names_btn.Location = new System.Drawing.Point(798, 53);
+            this.load_names_btn.Name = "load_names_btn";
+            this.load_names_btn.Size = new System.Drawing.Size(46, 23);
+            this.load_names_btn.TabIndex = 11;
+            this.load_names_btn.Text = "Load";
+            this.load_names_btn.UseVisualStyleBackColor = true;
+            this.load_names_btn.Click += new System.EventHandler(this.load_names_btn_Click);
             // 
             // empNameComboBox
             // 
@@ -458,6 +468,7 @@
             this.txtsearch.Size = new System.Drawing.Size(220, 20);
             this.txtsearch.TabIndex = 4;
             this.txtsearch.TextChanged += new System.EventHandler(this.Txtsearch_TextChanged);
+            this.txtsearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtsearch_KeyDown);
             // 
             // printLastBtn
             // 
@@ -482,16 +493,6 @@
             this.returnBtn.Text = "إرجاع الصنف";
             this.returnBtn.UseVisualStyleBackColor = false;
             this.returnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
-            // 
-            // load_names_btn
-            // 
-            this.load_names_btn.Location = new System.Drawing.Point(798, 53);
-            this.load_names_btn.Name = "load_names_btn";
-            this.load_names_btn.Size = new System.Drawing.Size(46, 23);
-            this.load_names_btn.TabIndex = 11;
-            this.load_names_btn.Text = "Load";
-            this.load_names_btn.UseVisualStyleBackColor = true;
-            this.load_names_btn.Click += new System.EventHandler(this.load_names_btn_Click);
             // 
             // frmStockOut
             // 
