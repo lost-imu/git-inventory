@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CrystalDecisions.Shared.Json;
 using CrystalDecisions.Windows.Forms;
+using DGVPrinterHelper;
 using InventorySystem1._0.Includes;
 using MySql.Data.MySqlClient;
 
@@ -551,6 +552,123 @@ namespace InventorySystem1._0
                 expiryDatePicker.Enabled = true;
         }
 
+        private void printBtn_Click(object sender, EventArgs e)
+        {
+            if (dtglist.Rows.Count < 1)
+                MessageBox.Show("Nothing to PRINT!");
+            else
+                PrintLastBtn(sender, e);
+        }
+        DGVPrinter printer = new DGVPrinter();
+        private void PrintLastBtn(object sender, EventArgs e)
+        {
+
+            printerEmpty();
+            fillNewDGRV();
+
+            printer.PrintDataGridView(newDGRV);
+            //dtCus_addedlist =  dtCus_addedlist.Rows.Add({ "a","b"};
+
+
+        }
+        ///////////////////////////////////////////////////
+        ///
+        /// 
+        DataGridView newDGRV;
+        private void fillNewDGRV()
+        {
+            newDGRV = frmStockOut.CloneDataGrid(dtglist);
+            newDGRV.RightToLeft = RightToLeft.Yes;
+            /*
+            string[] row = new string[] { "__________", "__________", "________", "__________", "________", "________", "__________", "__________", "__________", "__________" };
+            newDGRV.Rows.Add(row);
+            //newDGRV.Columns[0].Width *= 2; 
+            row = new string[] {
+                     "اسم المستلم" //0
+                    ,"رقم المستلم"   //1
+                    ,"الإمضاء"   //2
+                    ,null   //3
+                    ,null   //4
+                    ,"أمين المستودع"   //5
+                    ,null   //6
+                    ,"رقم أمين المستودع"   //7
+                    ,null   //8
+                    ,null   //9
+                    ,"الإمضاء"   //10
+                   
+                };
+
+
+
+            newDGRV.Rows.Add(row);
+            
+
+           
+
+            newDGRV.Rows.Add(row);
+            */
+            int last = newDGRV.Rows.Count - 1;
+
+            newDGRV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            newDGRV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            newDGRV.Rows[last].Height = 30;
+            newDGRV.Columns[10].Visible = false;
+            newDGRV.Columns[9].Visible = false;
+            newDGRV.Columns[8].Visible = false;
+            newDGRV.Columns[6].Visible = false;
+            newDGRV.Columns[4].Visible = false;
+            //newDGRV.Columns[6].Visible = false;
+
+        }
+
+
+        /// 
+        /// ////////////////////////////////////////////////
+        private void printerEmpty()
+        {
+            printer = new DGVPrinter
+            {
+                Title = "Stock",
+
+                SubTitle = "التاريخ: " + DateTime.Now.ToString("dd-MM-yyyy HH:mm"),
+
+                SubTitleFormatFlags = StringFormatFlags.LineLimit |
+
+                                          StringFormatFlags.NoClip,
+
+
+                PageNumbers = true,
+
+                ShowTotalPageNumber = true,
+
+                PageNumberInHeader = false,
+
+                PorportionalColumns = true,
+
+                HeaderCellAlignment = StringAlignment.Near,
+
+                Footer = "الجمعية اللبنانية للدراسات والتدريب",
+
+                FooterSpacing = 15,
+
+                PrinterName = default
+
+
+            };
+
+
+
+        }
+
+
+
+
+
+
+
+        // ///////////////////////////////////////////////
         private void ProjectExpiryCheckBx_CheckedChanged(object sender, EventArgs e)
         {
             if (projectExpiryCheckBx.Checked)

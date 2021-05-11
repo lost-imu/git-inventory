@@ -684,7 +684,7 @@ namespace InventorySystem1._0
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
-        public DataGridView CloneDataGrid(DataGridView mainDataGridView)
+        public static DataGridView CloneDataGrid(DataGridView mainDataGridView)
         {
             DataGridView cloneDataGridView = new DataGridView();
 

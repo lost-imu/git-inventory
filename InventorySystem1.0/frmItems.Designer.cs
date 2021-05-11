@@ -62,6 +62,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.branchTextBox = new System.Windows.Forms.TextBox();
+            this.printBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtglist)).BeginInit();
             this.Panel2.SuspendLayout();
             this.pnl_stockmaster.SuspendLayout();
@@ -83,7 +84,7 @@
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(712, 202);
+            this.Label6.Location = new System.Drawing.Point(819, 202);
             this.Label6.Name = "Label6";
             this.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.Label6.Size = new System.Drawing.Size(31, 13);
@@ -92,7 +93,7 @@
             // 
             // txtsearch
             // 
-            this.txtsearch.Location = new System.Drawing.Point(452, 199);
+            this.txtsearch.Location = new System.Drawing.Point(586, 199);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(227, 20);
             this.txtsearch.TabIndex = 29;
@@ -449,11 +450,22 @@
             this.branchTextBox.Size = new System.Drawing.Size(136, 22);
             this.branchTextBox.TabIndex = 7;
             // 
+            // printBtn
+            // 
+            this.printBtn.Location = new System.Drawing.Point(452, 193);
+            this.printBtn.Name = "printBtn";
+            this.printBtn.Size = new System.Drawing.Size(92, 30);
+            this.printBtn.TabIndex = 51;
+            this.printBtn.Text = "طباعة";
+            this.printBtn.UseVisualStyleBackColor = true;
+            this.printBtn.Click += new System.EventHandler(this.printBtn_Click);
+            // 
             // frmItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(875, 590);
+            this.Controls.Add(this.printBtn);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.Label6);
             this.Controls.Add(this.txtsearch);
@@ -512,5 +524,6 @@
         private System.Windows.Forms.CheckBox projectExpiryCheckBx;
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.TextBox branchTextBox;
+        private System.Windows.Forms.Button printBtn;
     }
 }
