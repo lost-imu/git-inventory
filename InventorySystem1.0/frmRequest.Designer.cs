@@ -30,6 +30,17 @@ namespace InventorySystem1._0
         private void InitializeComponent()
         {
             this.dtCus_addedlist = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TYPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UNIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EXPIRYDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NOTES = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Label8 = new System.Windows.Forms.Label();
             this.Panel2 = new System.Windows.Forms.Panel();
             this.load_items_numericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -61,17 +72,6 @@ namespace InventorySystem1._0
             this.printLastBtn = new System.Windows.Forms.Button();
             this.btnCus_save = new System.Windows.Forms.Button();
             this.Panel3 = new System.Windows.Forms.Panel();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TYPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UNIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EXPIRYDATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NOTES = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtCus_addedlist)).BeginInit();
             this.Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.load_items_numericUpDown)).BeginInit();
@@ -107,6 +107,91 @@ namespace InventorySystem1._0
             this.dtCus_addedlist.RowHeadersVisible = false;
             this.dtCus_addedlist.Size = new System.Drawing.Size(1217, 254);
             this.dtCus_addedlist.TabIndex = 30;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.HeaderText = "رقم الصنف";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 75;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column2.HeaderText = "اسم الصنف";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 79;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column3.HeaderText = "الشرح";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 62;
+            // 
+            // TYPE
+            // 
+            this.TYPE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TYPE.HeaderText = "النوع";
+            this.TYPE.Name = "TYPE";
+            this.TYPE.ReadOnly = true;
+            this.TYPE.Width = 54;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Column5.HeaderText = "الكمية";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 61;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "الحجز";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 382;
+            // 
+            // UNIT
+            // 
+            this.UNIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.UNIT.HeaderText = "الوحدة";
+            this.UNIT.Name = "UNIT";
+            this.UNIT.ReadOnly = true;
+            this.UNIT.Width = 61;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "مشروع";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 67;
+            // 
+            // Column6
+            // 
+            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Column6.HeaderText = "جديد\\ مستعمل";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 96;
+            // 
+            // EXPIRYDATE
+            // 
+            this.EXPIRYDATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.EXPIRYDATE.HeaderText = "إنتهاء الصلاحية";
+            this.EXPIRYDATE.Name = "EXPIRYDATE";
+            this.EXPIRYDATE.ReadOnly = true;
+            this.EXPIRYDATE.Width = 90;
+            // 
+            // NOTES
+            // 
+            this.NOTES.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.NOTES.HeaderText = "ملاحظات";
+            this.NOTES.Name = "NOTES";
+            this.NOTES.Width = 73;
             // 
             // Label8
             // 
@@ -217,6 +302,7 @@ namespace InventorySystem1._0
             // returnBtn
             // 
             this.returnBtn.BackColor = System.Drawing.Color.Transparent;
+            this.returnBtn.Enabled = false;
             this.returnBtn.ForeColor = System.Drawing.Color.Black;
             this.returnBtn.Location = new System.Drawing.Point(484, 593);
             this.returnBtn.Name = "returnBtn";
@@ -224,6 +310,7 @@ namespace InventorySystem1._0
             this.returnBtn.TabIndex = 35;
             this.returnBtn.Text = "إرجاع الصنف";
             this.returnBtn.UseVisualStyleBackColor = false;
+            this.returnBtn.Visible = false;
             this.returnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // scannerTxtBox
@@ -455,91 +542,6 @@ namespace InventorySystem1._0
             this.Panel3.Name = "Panel3";
             this.Panel3.Size = new System.Drawing.Size(1222, 288);
             this.Panel3.TabIndex = 32;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column1.HeaderText = "رقم الصنف";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 81;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column2.HeaderText = "اسم الصنف";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 86;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.HeaderText = "الشرح";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 62;
-            // 
-            // TYPE
-            // 
-            this.TYPE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.TYPE.HeaderText = "النوع";
-            this.TYPE.Name = "TYPE";
-            this.TYPE.ReadOnly = true;
-            this.TYPE.Width = 54;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column5.HeaderText = "الكمية";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 61;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "الحجز";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 382;
-            // 
-            // UNIT
-            // 
-            this.UNIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.UNIT.HeaderText = "الوحدة";
-            this.UNIT.Name = "UNIT";
-            this.UNIT.ReadOnly = true;
-            this.UNIT.Width = 61;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column4.HeaderText = "مشروع";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 67;
-            // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Column6.HeaderText = "جديد\\ مستعمل";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 96;
-            // 
-            // EXPIRYDATE
-            // 
-            this.EXPIRYDATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.EXPIRYDATE.HeaderText = "إنتهاء الصلاحية";
-            this.EXPIRYDATE.Name = "EXPIRYDATE";
-            this.EXPIRYDATE.ReadOnly = true;
-            this.EXPIRYDATE.Width = 90;
-            // 
-            // NOTES
-            // 
-            this.NOTES.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.NOTES.HeaderText = "ملاحظات";
-            this.NOTES.Name = "NOTES";
-            this.NOTES.Width = 73;
             // 
             // frmRequest
             // 
