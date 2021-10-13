@@ -56,6 +56,9 @@ namespace InventorySystem1._0
 
             else if (prev == 1)
             {
+                //request
+                ts_Request.Enabled = false;
+                ts_Request.Visible = false;
                 //stock in
                 ts_stocks.Enabled = true;
                 ts_stocks.Visible = true;
@@ -76,6 +79,9 @@ namespace InventorySystem1._0
 
             else if (prev == 2)
             {
+                //request
+                ts_Request.Enabled = true;
+                ts_Request.Visible = true;
                 //stock in
                 ts_stocks.Enabled = true;
                 ts_stocks.Visible = true;
@@ -218,6 +224,13 @@ namespace InventorySystem1._0
             ts_settings.Checked = false;
             ts_Login.Checked = false;
             t.Checked = true;
+        }
+
+        private void ts_Request_Click(object sender, EventArgs e)
+        {
+            CheckBtn(ts_Request);
+            CloseForm();
+            ShowFrm(new frmRequest());
         }
     }
 }

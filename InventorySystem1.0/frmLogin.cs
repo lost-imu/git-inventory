@@ -123,7 +123,7 @@ namespace InventorySystem1._0
             try
             {
                 MySqlConnection con = new MySqlConnection(MyCon.GetConString());
-                string cmd = "SELECT * FROM user WHERE deleted=0 and user_name=@user_name and pass=@password ";
+                string cmd = "SELECT * FROM user WHERE deleted=0 and user_name=@user_name and pass=@password";
                 MySqlCommand command = new MySqlCommand(cmd, con);
                 string pass = Hash(txtpass.Text);
                 command.Parameters.Add(new MySqlParameter("user_name", txtusername.Text));

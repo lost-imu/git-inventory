@@ -25,7 +25,7 @@ namespace InventorySystem1._0
         readonly usableFunction funct = new  usableFunction();
         string sql, itemID;
         int maxcolumn;
-        int inc = 0;
+        //int inc = 0;
         int maxrow;
         int isNew = 1;
 
@@ -57,7 +57,7 @@ namespace InventorySystem1._0
         private void Btnnew_Click(object sender, EventArgs e)
         {
 
-            inc = 0;
+            //inc = 0;
           
             sql = "SELECT * FROM tblitems where `DELETED`=0";
             config.Load_DTG(sql, dtglist);  
@@ -184,7 +184,7 @@ namespace InventorySystem1._0
                     if (command.ExecuteNonQuery() > 0)
                         while (!isReported)
                         {
-                            isReported = MyCon.ReportIt("Add Quantity To Existing Item", "QTY", s, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, -1, ExpiryDate(), ProjectExpiry());
+                            isReported = MyCon.ReportIt("Add Quantity To Existing Item", "QTY", s, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, -1, ExpiryDate());//, ProjectExpiry());
 //                          MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
 
                             MessageBox.Show(" تم تعديل الكمية الى " + "\n" + s);
@@ -221,7 +221,7 @@ namespace InventorySystem1._0
 
                     if (command.ExecuteNonQuery() > 0)
                     {
-                        MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
+                        MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate());//, ProjectExpiry());
                         MessageBox.Show("تمت الاضافة بنجاح");
                     }
                     else
@@ -300,7 +300,7 @@ namespace InventorySystem1._0
 
                 if (result > 0)
                 {
-                    MyCon.ReportIt(reportFunaction, "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
+                    MyCon.ReportIt(reportFunaction, "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate());//, ProjectExpiry());
 
                     MessageBox.Show(msg_true);
 

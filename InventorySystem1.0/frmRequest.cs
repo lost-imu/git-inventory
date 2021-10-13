@@ -1,5 +1,17 @@
-﻿using System;
+﻿/**
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+**/
+using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
@@ -12,11 +24,14 @@ using TextBox = System.Windows.Forms.TextBox;
 
 namespace InventorySystem1._0
 {
-
-    public partial class frmStockOut : Form
+    public partial class frmRequest : Form
     {
-        
-        public frmStockOut(string cus_id)
+        public frmRequest()
+        {
+            InitializeComponent();
+        }
+
+        public frmRequest(string cus_id)
         {
             InitializeComponent();
 
@@ -31,8 +46,8 @@ namespace InventorySystem1._0
 
         private void Txt_cusid_TextChanged(object sender, EventArgs e)
         {
-            
-            if (isEmployeeCombo.SelectedIndex==0)
+
+            if (isEmployeeCombo.SelectedIndex == 0)
             {
                 sql = "SELECT * FROM `tblperson` WHERE `SUPLIERCUSTOMERID`='" + txt_cusid.Text + "'";
                 config.SingleResult(sql);
@@ -52,59 +67,63 @@ namespace InventorySystem1._0
         private void FrmStockOut_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            /**
             sql = "SELECT SUPLIERCUSTOMERID FROM tblperson WHERE TYPE = 'CUSTOMER'";
             config.Autocomplete(sql, txt_cusid);
 
-           
-
-            config.Load_DTG(sql, dtgCus_itemlist);
-            funct.ResponsiveDtg(dtgCus_itemlist);
-            **/
-            scannerTxtBox.Focus();
-            
-        }
-        private void load_items_btn_Click(object sender, EventArgs e)
-        {
             // sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', case when `EXPIRYDATE` IS NULL then '' ELSE `EXPIRYDATE` END as 'Expiry Date', `PROJECTEXPIRY` as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
-            int limit = (int)load_items_numericUpDown.Value;
+
             //sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'Expiry Date', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
             sql = "SELECT `ITEMID` as 'رقم الصنف'," +
                 " `NAME` as 'الاسم'," +
                 " `DESCRIPTION` as 'الشرح'," +
                 " `TYPE` as 'النوع'," +
                 " `QTY` as 'الكمية المتوفرة', " +
+                 " `HOLD` as 'الكمية المحجوزة'," +
                 "`UNIT` as 'الوحدة'," +
                 " `PROJECT` as 'المشروع'," +
                 " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', " +
                 "CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
-                " CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
+                //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
                 " `NOTE` as 'ملاحظات'" +
-                " FROM `tblitems`" +
-                " ORDER BY `الكمية المتوفرة` DESC" +
-                " limit "+limit+";";
+                " FROM `tblitems`";
+
+
             config.Load_DTG(sql, dtgCus_itemlist);
             funct.ResponsiveDtg(dtgCus_itemlist);
+            scannerTxtBox.Focus();
+
+
+
+
         }
         private void FillEmpNameCombo()
         {
-            sql = "SELECT concat(`FIRSTNAME`,' ',`LASTNAME`) FROM `tblperson` "+
+            sql = "SELECT concat(`FIRSTNAME`,' ',`LASTNAME`) FROM `tblperson` " +
                 "WHERE `TYPE`='CUSTOMER' ORDER BY `concat(``FIRSTNAME``,' ',``LASTNAME``)` ASC ";
             config.Fiil_CBO(sql, empNameComboBox);
         }
-        private void Txtsearch_TextChanged(object sender, EventArgs e)
+        private void Txtsearch_TextChanged(object sender, KeyEventArgs e)
         {
+
+
+            if (e.KeyCode != Keys.Return)
+                //.ToString().ToLower() != "return")
+                return;
+            if (string.IsNullOrWhiteSpace(txtsearch.Text) || string.IsNullOrEmpty(txtsearch.Text))
+                return;
+
             if (string.IsNullOrWhiteSpace(scannerTxtBox.Text))
                 sql = "SELECT `ITEMID` as 'رقم الصنف'," +
                     " `NAME` as 'الاسم'," +
                     " `DESCRIPTION` as 'الشرح', " +
                     "`TYPE` as 'النوع'," +
                     " `QTY` as 'الكمية المتوفرة'," +
+                    " `HOLD` as 'الكمية المحجوزة'," +
                     " `UNIT` as 'الوحدة'," +
                     " `PROJECT` as 'المشروع'," +
                     " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل'," +
                     " CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
-                    " CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', " +
+                    //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', " +
                     "`NOTE` as 'ملاحظات'" +
                     " FROM `tblitems` WHERE QTY>=0 AND(" +
                     " `NAME` like '%" + txtsearch.Text + "%' " +
@@ -118,11 +137,12 @@ namespace InventorySystem1._0
                 " `DESCRIPTION` as 'الشرح', " +
                 "`TYPE` as 'النوع'," +
                 " `QTY` as 'الكمية المتوفرة'," +
+                " `HOLD` as 'الكمية المحجوزة'," +
                 " `UNIT` as 'الوحدة'," +
                 " `PROJECT` as 'المشروع'," +
                 " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل'," +
                 " CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
-                " CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', " +
+                //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', " +
                 "`NOTE` as 'ملاحظات'" +
                 " FROM `tblitems` WHERE QTY>=0 AND" +
                 " `ITEMID` = '" + txtsearch.Text + "'" +
@@ -144,19 +164,18 @@ namespace InventorySystem1._0
             {
                 string projectExpiry, expiryDate;
                 string isNew = "جديد";
-                if (dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "false" ||
-                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "0" ||
-                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "مستعمل" ||
-                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "old") 
+                if (dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString().ToLower() is "false" ||
+                    dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString() is "0" ||
+                    dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString() is "مستعمل" ||
+                    dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString().ToLower() is "old")
                     isNew = "مستعمل";
-
-                if (dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString() == "0000-00-00")
+                if (dtgCus_itemlist.CurrentRow.Cells["انتهاء الصلاحية"].Value.ToString() == "0000-00-00")
                     expiryDate = null;
                 else
-                    expiryDate = dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString();
+                    expiryDate = dtgCus_itemlist.CurrentRow.Cells["انتهاء الصلاحية"].Value.ToString();
                 try
                 {
-                    projectExpiry = DateTime.Parse(dtgCus_itemlist.CurrentRow.Cells[9].Value.ToString()).Date.ToString("yyyy-MM-dd");
+                    projectExpiry = DateTime.Parse(dtgCus_itemlist.CurrentRow.Cells["انتهاء المشروع"].Value.ToString()).Date.ToString("yyyy-MM-dd");
                 }
                 catch
                 {
@@ -171,17 +190,17 @@ namespace InventorySystem1._0
                     dtgCus_itemlist.CurrentRow.Cells[2].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells[3].Value.ToString(),
                     qty.ToString(),
-                    //dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells[5].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells[6].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
                     isNew,
                     //dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
                     //dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString(),
                     //Convert.ToDateTime(dtgCus_itemlist.CurrentRow.Cells[9].Value).Date.ToString("yyyy-MM-dd"),
                     expiryDate,
-                    projectExpiry,
+                    //projectExpiry,
                     dtgCus_itemlist.CurrentRow.Cells[10].Value.ToString(),
-                    // qty.ToString(),
+                    // qty.ToString()
                     // tot.ToString()
                 };
 
@@ -191,10 +210,10 @@ namespace InventorySystem1._0
             }
             else
             {
-                foreach(DataGridViewRow r in dtCus_addedlist.Rows)
+                foreach (DataGridViewRow r in dtCus_addedlist.Rows)
                 {
-                    
-                    if(dtgCus_itemlist.CurrentRow.Cells[0].Value == r.Cells[0].Value)
+
+                    if (dtgCus_itemlist.CurrentRow.Cells[0].Value == r.Cells[0].Value)
                     {
                         //r.Cells[4].Value = Convert.ToString(Convert.ToInt32(r.Cells[4].Value) +1);
                         //MessageBox.Show(dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString());
@@ -218,7 +237,7 @@ namespace InventorySystem1._0
                     {
                         projectExpiry = DateTime.Parse(dtgCus_itemlist.CurrentRow.Cells[9].Value.ToString()).Date.ToString("yyyy-MM-dd");
                     }
-                    catch 
+                    catch
                     {
                         projectExpiry = null;
                     }
@@ -260,7 +279,7 @@ namespace InventorySystem1._0
 
 
             }
-           
+
 
         }
 
@@ -279,24 +298,230 @@ namespace InventorySystem1._0
                 }
             }
         }
-        private void BtnCus_save_emp(object sender, EventArgs e)
+        private void BtnCus_save_not_emp(object sender, EventArgs e)
         {
+            {
+                //MessageBox.Show("index: " + isEmployeeCombo.SelectedIndex + "\nitem: " + isEmployeeCombo.SelectedItem + "\nvalue: " + isEmployeeCombo.SelectedValue);
 
-        }
+                _ = config.dt.Rows[0].Field<string>(0);
 
-        private void BtnCus_save_Click(object sender, EventArgs e)
-        {
-            
-            foreach (Control c in Panel1.Controls)
-                if (c is TextBox)
-                    if (string.IsNullOrEmpty(c.Text))
+                foreach (Control t in Panel1.Controls)
+                    if (t is System.Windows.Forms.TextBox)
                     {
-                        MessageBox.Show("إملأ معلومات المستلم");
+
+                        if (string.IsNullOrEmpty(t.Text) || string.IsNullOrWhiteSpace(t.Text))
+                        {
+                            MessageBox.Show("تأكد أنك أدخلت كل المعلومات المطلوبة", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            //MessageBox.Show("There are empty fields left that must be fill up!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                    }
+                if (dtCus_addedlist.RowCount == 0)
+                {
+                    MessageBox.Show("لم تضف أي صنف", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //MessageBox.Show("Cart is empty!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                sql = "SELECT ITEMID,`QTY` FROM `tblitems`";
+                config.SingleResult(sql);
+
+                foreach (DataRow row in config.dt.Rows)
+                {
+                    for (int i = 0; i < dtCus_addedlist.Rows.Count; i++)
+                    {
+                        if (dtCus_addedlist.Rows[i].Cells[0].Value.ToString() == row.Field<string>(0))
+                        {
+                            if (double.Parse(dtCus_addedlist.Rows[i].Cells[4].Value.ToString()) > row.Field<double>(1))
+                            {
+                                MessageBox.Show("غير متوفرة  ( " + dtCus_addedlist.Rows[i].Cells[1].Value.ToString() + " ) الكمية المطلوبة من  ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                return;
+                            }
+                        }
+                        if (dtCus_addedlist.Rows[i].Cells[4].Value.ToString() == "")
+                        {
+                            MessageBox.Show("Set your purpose.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                    }
+                }
+
+                foreach (DataGridViewRow r in dtCus_addedlist.Rows)
+                {
+                    /*
+                    sql = "INSERT INTO `tblstock_in_out` ( `TRANSACTIONNUMBER`, `ITEMID`, `TRANSACTIONDATE`, `QTY`, `TOTALPRICE`, `SUPLIERCUSTOMERID`,REMARKS)" +
+                    " VALUES ('" + stockoutID + "','" + r.Cells[0].Value + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + r.Cells[4].Value +
+                    "','" + r.Cells[5].Value + "','" + txt_cusid.Text + "','StockOut')";
+                    Execute_Query(sql,r);
+                    */
+                    sql = "UPDATE `tblitems`  SET `QTY`= QTY - '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                    Execute_Query(sql, r, "Stock Out");
+                }
+
+
+
+
+                // sql = "INSERT INTO  `tbltransaction` (`TRANSACTIONNUMBER`,  `TRANSACTIONDATE`,  `TYPE`, `SUPLIERCUSTOMERID`)" +
+                //        " VALUES ('" + stockoutID + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','StockOut','" + txt_cusid.Text + "')";
+                // config.Execute_Query(sql);
+
+                // '-----------------------------------------------update autonumber
+                config.Execute_Query("UPDATE tblautonumber SET END= END + INCREMENT WHERE ID = 5");
+
+                // '------------------------------------------------------------
+                PrintLastBtn(sender, e);
+                MessageBox.Show("تم");
+                //MessageBox.Show("Item(s) has been saved in the database.");
+                // '------------------------------------------------------------clearing
+                funct.clearTxt(Panel1);
+                dtCus_addedlist.Rows.Clear();
+
+                FrmStockOut_Load(sender, e);
+            }
+        }
+        private void BtnCus_save_emp(object sender, EventArgs e)
+        {//////////////////////////////
+            int count = 1;
+            string[,] items = new string[100, 2];
+
+            if (string.IsNullOrEmpty(frmLogin.username))
+            {
+                MessageBox.Show("You Are Not LoggedIn", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show("There are empty fields left that must be fill up!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (txt_cusid.Text == "")
+            {
+                MessageBox.Show("تأكد أنك أدخلت كل المعلومات المطلوبة", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show("There are empty fields left that must be fill up!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (dtCus_addedlist.RowCount == 0)
+            {
+                MessageBox.Show("لم تضف أي صنف", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show("Cart is empty!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            //////////////////////////////////////////
+            if (string.IsNullOrWhiteSpace(projecttxtbox.Text))
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you don't want to enter project name?!", "لم تختر إسم المشروع", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            //////////////////////////////////////
+
+            sql = "SELECT `ITEMID`,`QTY`,`HOLD` FROM `tblitems`";
+            config.SingleResult(sql);
+            MySqlConnection conn = new MySqlConnection(MyCon.GetConString());
+            conn.Open();
+
+            foreach (DataRow row in config.dt.Rows)
+            {
+                for (int i = 0; i < dtCus_addedlist.Rows.Count; i++)
+                {
+                    if (dtCus_addedlist.Rows[i].Cells[0].Value.ToString() == row.Field<string>(0))
+                    {
+                        double a = double.Parse(dtCus_addedlist.Rows[i].Cells[4].Value.ToString());
+                        double b = double.Parse(dtCus_addedlist.Rows[i].Cells[5].Value.ToString());
+                        double c = row.Field<double>(1);
+                        if (!(a + b <= c))
+                        {
+                            MessageBox.Show("غير متوفرة  ( " + dtCus_addedlist.Rows[i].Cells[1].Value.ToString() + " ) الكمية المطلوبة من  ", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                    }
+                    if (dtCus_addedlist.Rows[i].Cells[4].Value.ToString() == "")
+                    {
+                        MessageBox.Show("Set your purpose.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-            recieverID = txt_cusid.Text;
-            recieverName = txtCus_fname.Text + " " + txtCus_lname.Text;
+                }
+            }
+            //////////////////////////////////////////////
+            ///
+            int newmax = 0;
+            string sql2 = "SELECT MAX(id) as max FROM `lost_new_inventory`.`tblrequest`;";
+            MySqlCommand cmd = new MySqlCommand(sql2, conn);
+            //cmd.Parameters.Add("@Name", SqlDbType.VarChar);
+            //cmd.Parameters["@name"].Value = newName;
+            try
+            {
+                newmax = 1 + (int)(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            if (newmax == 0)
+            {
+                MessageBox.Show("Somthing went wrong\nERROR_CODE 8594");
+                return;
+            }
+            //////////////////////////////////////////////////
+            ///
+            openRequest(newmax);
+            foreach (DataGridViewRow r in dtCus_addedlist.Rows)
+            {
+                sql = "UPDATE `tblitems`  SET `HOLD`= `HOLD` + '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
 
+                items[count, 0] = r.Cells[0].Value.ToString();
+                items[count, 1] = r.Cells[4].Value.ToString();
+                count++;
+                Execute_Query(sql, r, newmax.ToString());
+                //sql = ""
+            }
+
+            //PrintLastBtn(sender, e);
+
+            dtCus_addedlist.Rows.Clear();
+            items[0, 0] = count.ToString();
+
+            funct.clearTxt(Panel1);
+            FrmStockOut_Load(sender, e);
+
+            MessageBox.Show("تم");
+        }
+
+        private void openRequest(int id)
+        {
+            //////////////
+            //for (int i = 1; i <= Convert.ToInt32(items[0, 0]); i++) {
+            sql = "INSERT INTO `tblrequest` (`id`,`project`,`req_by`, `picked_by`, `state`) VALUES (@id,@project,@req_by, @picked_by,'1');";
+            MySqlConnection conn = new MySqlConnection(MyCon.GetConString());
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.Add(new MySqlParameter("@id", id));
+            cmd.Parameters.Add(new MySqlParameter("@project", projecttxtbox.Text));
+            cmd.Parameters.Add(new MySqlParameter("@req_by", frmLogin.username));
+            cmd.Parameters.Add(new MySqlParameter("@picked_by", txt_cusid.Text));
+            conn.Open();
+            if (!(cmd.ExecuteNonQuery() > 0))
+            {
+                MessageBox.Show("request not sent\nEROOR_CODE 7429");
+            }
+            conn.Close();
+
+        }
+        private void BtnCus_save_Click(object sender, EventArgs e)
+        {
+
+            foreach (Control c in Panel1.Controls)
+
+                recieverID = txt_cusid.Text;
+            recieverName = txtCus_fname.Text + " " + txtCus_lname.Text;
+            
             if (isEmployeeCombo.SelectedIndex == 0)
             {
                 recieverState = "Employee";
@@ -306,59 +531,51 @@ namespace InventorySystem1._0
             else
             {
                 recieverState = "Not Employee";
-                //BtnCus_save_not_emp(sender, e);
+                BtnCus_save_not_emp(sender, e);
             }
         }
 
 
-        private void Execute_Query(string sql, DataGridViewRow r, string tsansType)
+        private void Execute_Query(string sql, DataGridViewRow r, string reqid)
         {
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
-           
+            con.Open();
             MySqlCommand cmd = new MySqlCommand();
-            string stockoutID = r.Cells[0].Value.ToString();
-            string itemName = r.Cells[1].Value.ToString();
-            string description = r.Cells[2].Value.ToString();
-            string type = r.Cells[3].Value.ToString();
-            double qty = Convert.ToDouble(r.Cells[4].Value);
-            string unit = r.Cells[5].Value.ToString();
-            string project = r.Cells[6].Value.ToString();
-            string isNew = Convert.ToString(r.Cells[7].Value);
-            string ExpiryDate, projectExpiry;
-            if (r.Cells[8].Value is null)
-                ExpiryDate = null;
-            else
-                ExpiryDate = r.Cells[8].Value.ToString();
+            string item_id = r.Cells[0].Value.ToString(),
+                req_id = reqid,
+                qty = r.Cells[4].Value.ToString();
 
-            if (r.Cells[9].Value is null)
-                projectExpiry = null;
-            else
-                projectExpiry = r.Cells[9].Value.ToString();
-            _ = r.Cells[10].Value.ToString();
-
-            if (isNew == "مستعمل" || isNew == "False" || isNew == "false" || isNew == "0")
-                isNew = "0";
-            else if (isNew == "جديد" || isNew == "True" || isNew == "true" || isNew == "1")
-                isNew = "1";
             try
             {
                 int result;
                 cmd.Connection = con;
                 cmd.CommandText = sql;
-                con.Open();
                 cmd = new MySqlCommand
                 {
                     Connection = con,
                     CommandText = sql
                 };
                 result = cmd.ExecuteNonQuery();
+
                 if (result > 0)
                 {
-                    bool b;
+                    string reportSQL = "INSERT INTO `tblstockout` (`req_id`, `item_id`, `qty`) VALUES (@req_id , @item_id, @qty);";
+                    
+                    cmd = new MySqlCommand
+                    {
+                        Connection = con,
+                        CommandText = reportSQL
+                    };
 
-                    b = MyCon.ReportIt(tsansType + isEmployeeCombo.SelectedItem, "ALL", stockoutID, itemName, description, type, qty, unit, project, Convert.ToInt32(isNew), ExpiryDate);//, projectExpiry);
+                    cmd.Parameters.Add(new MySqlParameter("@req_id", req_id));
+                    cmd.Parameters.Add(new MySqlParameter("@item_id", item_id));
+                    cmd.Parameters.Add(new MySqlParameter("@qty", qty));
+                    if (cmd.ExecuteNonQuery() > 0)
+                    return;
 
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -386,11 +603,11 @@ namespace InventorySystem1._0
 
         private void BtnviewStockout_Click(object sender, EventArgs e)
         {
-            frmListStockout frm=new frmListStockout();
-            frm.Show(); 
+            frmListStockout frm = new frmListStockout();
+            frm.Show();
         }
 
-       
+
 
         private void ReturnBtn_Click(object sender, EventArgs e)
         {
@@ -506,12 +723,12 @@ namespace InventorySystem1._0
                     //MessageBox.Show("Cart is empty!", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-                
+
                 foreach (DataGridViewRow r in dtCus_addedlist.Rows)
                 {
-                    
+
                     sql = "UPDATE `tblitems`  SET `QTY`= QTY + '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
-                    Execute_Query(sql, r,"Return");
+                    Execute_Query(sql, r, "Return");
                 }
                 config.Execute_Query("UPDATE tblautonumber SET END= END + INCREMENT WHERE ID = 5");
 
@@ -528,9 +745,9 @@ namespace InventorySystem1._0
 
         private void Txt_cusid_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
-                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-            
+
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
         }
 
         private void TxtCus_fname_KeyPress(object sender, KeyPressEventArgs e)
@@ -668,7 +885,7 @@ namespace InventorySystem1._0
         private void PrintLastBtn(object sender, EventArgs e)
         {
             fillNewDGRV();
-            
+
             printerEmpty();
             /*
             printer = new DGVPrinter
@@ -681,7 +898,7 @@ namespace InventorySystem1._0
 
                                           StringFormatFlags.NoClip,
 
-                
+
                 PageNumbers = true,
 
                 ShowTotalPageNumber = true,
@@ -700,7 +917,7 @@ namespace InventorySystem1._0
             };
             */
 
-           // PrintOptions.FitToPage = true;
+            // PrintOptions.FitToPage = true;
 
             printer.PrintDataGridView(newDGRV);
             //dtCus_addedlist =  dtCus_addedlist.Rows.Add({ "a","b"};
@@ -712,7 +929,7 @@ namespace InventorySystem1._0
         {
             string sql = "SELECT `SUPLIERCUSTOMERID` FROM `tblperson` WHERE concat(`FIRSTNAME`, ' ', `LASTNAME`) ='" + empNameComboBox.SelectedValue.ToString() + "'";
             txt_cusid.Text = MyCon.ReturnSingleResult(sql, "SUPLIERCUSTOMERID");
-            
+
         }
 
         private void Panel1_Paint(object sender, PaintEventArgs e)
@@ -723,72 +940,115 @@ namespace InventorySystem1._0
         private void load_names_btn_Click(object sender, EventArgs e)
         {
             FillEmpNameCombo();
+            config.Autocomplete(sql, txt_cusid);
         }
-
-        private void txtsearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            scannerTxtBox.Clear();
-        }
+    
+            private void txtsearch_KeyDown(object sender, KeyEventArgs e)
+            {
+                scannerTxtBox.Clear();
+            }
 
        
+            private void printLastBtn_Click(object sender, EventArgs e)
+            {
+                printerEmpty();
+                printer.PrintDataGridView(newDGRV);
+            }
 
-        private void ScannerTxtBox_KeyDown(object sender, KeyEventArgs e)
+        private void frmRequest_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             
-            if (e.KeyCode != Keys.Return)
-                //.ToString().ToLower() != "return")
-                return;
-            if (string.IsNullOrWhiteSpace(scannerTxtBox.Text) || string.IsNullOrEmpty(scannerTxtBox.Text))
-                return;
-
-            txtsearch.Text = scannerTxtBox.Text;
-            if (dtgCus_itemlist.Rows.Count==0)
-            {
-                MessageBox.Show("هذا الصنف غير موجود");
-                return;
-            }
-            try
-            {
-
-
-                string s = scannerTxtBox.Text;
-               // if (dtCus_addedlist.Rows.Count!=0)
-                //    dtCus_addedlist.FirstDisplayedScrollingRowIndex = 0;
-
-                foreach (DataGridViewRow r in dtCus_addedlist.Rows)
-                {
-                    if(String.Equals(dtgCus_itemlist.CurrentRow.Cells[0].Value, r.Cells[0].Value))
-                    //if (Convert.ToInt32(dtgCus_itemlist.CurrentRow.Cells[0].Value) == Convert.ToInt32(r.Cells[0].Value))
-                    {
-                        r.Cells[4].Value = Convert.ToString(Convert.ToInt32(r.Cells[4].Value) + 1);
-                        return;
-                    }
-                }
-                DtgCus_itemlist_DoubleClick(sender, e);
-                //MessageBox.Show("هذا العنصر غير موجود في القائمة");
-
-            }
-            catch (Exception) { }
-           // finally { txtsearch.Text = scannerTxtBox.Text = null; }
-
-            
+            scannerTxtBox.Focus();
         }
 
-        private void IsEmployeeCombo_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void load_items_btn_Click(object sender, EventArgs e)
         {
-            if (isEmployeeCombo.SelectedIndex==0)
+            int limit = (int)load_items_numericUpDown.Value;
+            
+
+            // sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', case when `EXPIRYDATE` IS NULL then '' ELSE `EXPIRYDATE` END as 'Expiry Date', `PROJECTEXPIRY` as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
+
+            //sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'Expiry Date', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
+            sql = "SELECT `ITEMID` as 'رقم الصنف'," +
+                " `NAME` as 'الاسم'," +
+                " `DESCRIPTION` as 'الشرح'," +
+                " `TYPE` as 'النوع'," +
+                " `QTY` as 'الكمية المتوفرة', " +
+                " `HOLD` as 'الكمية المحجوزة', " +
+                "`UNIT` as 'الوحدة'," +
+                " `PROJECT` as 'المشروع'," +
+                " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', " +
+                "CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
+                //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
+                " `NOTE` as 'ملاحظات'" +
+                " FROM `tblitems`" +
+                " ORDER BY `الكمية المتوفرة` DESC" +
+                " limit " + limit + ";";
+
+
+            config.Load_DTG(sql, dtgCus_itemlist);
+            funct.ResponsiveDtg(dtgCus_itemlist);
+        }
+
+        private void ScannerTxtBox_KeyDown(object sender, KeyEventArgs e)
             {
-                employeeOrPhoneNumberLabel.Text = ":رقم المستلم";
-                txtCus_lname.Enabled = false;
-                txtCus_fname.Enabled = false;
+            if (e.KeyCode != Keys.Return)
+                    //.ToString().ToLower() != "return")
+                    return;
+                if (string.IsNullOrWhiteSpace(scannerTxtBox.Text) || string.IsNullOrEmpty(scannerTxtBox.Text))
+                    return;
+
+                txtsearch.Text = scannerTxtBox.Text;
+                if (dtgCus_itemlist.Rows.Count == 0)
+                {
+                    MessageBox.Show("هذا الصنف غير موجود");
+                    return;
+                }
+                try
+                {
+
+
+                    string s = scannerTxtBox.Text;
+                    // if (dtCus_addedlist.Rows.Count!=0)
+                    //    dtCus_addedlist.FirstDisplayedScrollingRowIndex = 0;
+
+                    foreach (DataGridViewRow r in dtCus_addedlist.Rows)
+                    {
+                        if (String.Equals(dtgCus_itemlist.CurrentRow.Cells[0].Value, r.Cells[0].Value))
+                        //if (Convert.ToInt32(dtgCus_itemlist.CurrentRow.Cells[0].Value) == Convert.ToInt32(r.Cells[0].Value))
+                        {
+                            r.Cells[4].Value = Convert.ToString(Convert.ToInt32(r.Cells[4].Value) + 1);
+                            return;
+                        }
+                    }
+                    DtgCus_itemlist_DoubleClick(sender, e);
+                    //MessageBox.Show("هذا العنصر غير موجود في القائمة");
+
+                }
+                catch (Exception) { }
+                // finally { txtsearch.Text = scannerTxtBox.Text = null; }
+
+
             }
-            else
+
+            private void IsEmployeeCombo_SelectedIndexChanged(object sender, EventArgs e)
             {
-                employeeOrPhoneNumberLabel.Text = ":رقم الهاتف" +
-                    "";
-                txtCus_lname.Enabled = true;
-                txtCus_fname.Enabled = true;
+                if (isEmployeeCombo.SelectedIndex == 0)
+                {
+                    employeeOrPhoneNumberLabel.Text = ":رقم المستلم";
+                    txtCus_lname.Enabled = false;
+                    txtCus_fname.Enabled = false;
+                }
+                else
+                {
+                    employeeOrPhoneNumberLabel.Text = ":رقم الهاتف" +
+                        "";
+                    txtCus_lname.Enabled = true;
+                    txtCus_fname.Enabled = true;
+                }
             }
         }
     }
-}
+

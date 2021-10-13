@@ -50,10 +50,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>BFDB2BC61224D0FFB609DAFA7B6DC242D67C5A5B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>6CB23986AC3D82219DB8D5FE67DE31D2AC956CDB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>InventorySystem1.0_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>InventorySystem1.0_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -137,6 +137,12 @@
     <Compile Include="frmReports.Designer.cs">
       <DependentUpon>frmReports.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRequest.Designer.cs">
+      <DependentUpon>frmRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmReturn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     <EmbeddedResource Include="frmReports.resx">
       <DependentUpon>frmReports.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmRequest.resx">
+      <DependentUpon>frmRequest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReturn.resx">
       <DependentUpon>frmReturn.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,6 +218,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="InventorySystem1.0_1_TemporaryKey.pfx" />
     <None Include="InventorySystem1.0_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
