@@ -302,15 +302,13 @@ namespace InventorySystem1._0
             // returnBtn
             // 
             this.returnBtn.BackColor = System.Drawing.Color.Transparent;
-            this.returnBtn.Enabled = false;
             this.returnBtn.ForeColor = System.Drawing.Color.Black;
             this.returnBtn.Location = new System.Drawing.Point(484, 593);
             this.returnBtn.Name = "returnBtn";
             this.returnBtn.Size = new System.Drawing.Size(88, 36);
             this.returnBtn.TabIndex = 35;
-            this.returnBtn.Text = "إرجاع الصنف";
+            this.returnBtn.Text = "test pf";
             this.returnBtn.UseVisualStyleBackColor = false;
-            this.returnBtn.Visible = false;
             this.returnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // scannerTxtBox

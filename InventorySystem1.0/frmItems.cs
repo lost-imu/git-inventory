@@ -90,12 +90,6 @@ namespace InventorySystem1._0
         }
 
 
-        private void Cbotype_SelectedIndexChanged(object sender, EventArgs e)
-        { 
-                sql = "SELECT concat(`STRT`, `END`) FROM `tblautonumber` WHERE `DESCRIPTION`= '" + typeCombo.Text + "'";
-                //config.autonumber(sql, itemIDTxtBox);
- 
-        }
         private string ExpiryDate()
         {
             string expiryDate = "10000101";
@@ -105,13 +99,7 @@ namespace InventorySystem1._0
                 expiryDate = expiryDatePicker.Value.Date.ToString("yyyyMMdd");
             return expiryDate;
         }
-        private string ProjectExpiry()
-        {
-            string projectExpiry = "10000101";
-            if (!projectExpiryCheckBx.Checked)
-                projectExpiry = projectExpiryPicker.Value.Date.ToString("yyyyMMdd");
-            return projectExpiry;
-        }
+       
 
         private void Btnsave_Click(object sender, EventArgs e)
         {
@@ -213,7 +201,6 @@ namespace InventorySystem1._0
                     command.Parameters.Add(new MySqlParameter("PROJECT", projectTextBox.Text));
                     command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked));
                     command.Parameters.Add(new MySqlParameter("EXPIRYDATE", ExpiryDate()));
-                    command.Parameters.Add(new MySqlParameter("PROJECTEXPIRY", ProjectExpiry()));
 
                     //command.Parameters.Add(new MySqlParameter("RECIEVER_NUMBER", frmLogin.user_id));
                     //command.Parameters.Add(new MySqlParameter("RECIEVER_STATE", "Employee"));
@@ -274,7 +261,7 @@ namespace InventorySystem1._0
                 ", PROJECT = '" + projectTextBox.Text + "'" +
                 ", ISNEW = '" + isNew + "'" +
                 ", EXPIRYDATE = '" + ExpiryDate() + "'" +
-                ", PROJECTEXPIRY = '" + ProjectExpiry() + "'" +
+                //", PROJECTEXPIRY = '" + ProjectExpiry() + "'" +
                 "WHERE ITEMID= '" + itemID + "'";
             //sql = "UPDATE tblitems SET `NAME`='" + itemNameTextBox.Text + "', `DESCRIPTION`='" + descriptionTextBox.Text + "', `TYPE`='" + typeCombo.Text + "', `PRICE`='" + projectTextBox.Text + "'" +
             //",`UNIT`='" + unitComo.Text + "' WHERE ITEMID='" + itemIDTxtBox.Text + "'";
@@ -424,31 +411,7 @@ namespace InventorySystem1._0
                         expiryDatePicker.Enabled = false;
                     }
 
-                    try
-                    {
-                        //MessageBox.Show("date2 " + config.dt.Rows[0].Field<DateTime>(9));
-                        if (config.dt.Rows[0].Field<DateTime>(9) >= projectExpiryPicker.MinDate && config.dt.Rows[0].Field<DateTime>(9) <= projectExpiryPicker.MaxDate)
-                        {
-
-
-                            projectExpiryPicker.Value = config.dt.Rows[0].Field<DateTime>(9);
-                            projectExpiryCheckBx.Checked = false;
-                            projectExpiryPicker.Enabled = true;
-                        }
-                        else
-                        {
-                            //dtglist.CurrentRow.Cells[9].Value = null;
-                            projectExpiryCheckBx.Checked = true;
-                            projectExpiryPicker.Enabled = false;
-                        }
-                    }
-                    catch
-                    {
-                        // MessageBox.Show("string2 " + config.dt.Rows[0].Field<string>(9));
-
-                        projectExpiryCheckBx.Checked = true;
-                        projectExpiryPicker.Enabled = false;
-                    }
+                   
 
 
                     ///////////////isNew7
@@ -512,6 +475,8 @@ namespace InventorySystem1._0
                 isNew = 0;
         }
 
+        
+
         private void ExpiryDateCheckBx_CheckedChanged(object sender, EventArgs e)
         {
             if (expiryDateCheckBx.Checked)
@@ -520,13 +485,7 @@ namespace InventorySystem1._0
                 expiryDatePicker.Enabled = true;
         }
 
-        private void ProjectExpiryCheckBx_CheckedChanged(object sender, EventArgs e)
-        {
-            if (projectExpiryCheckBx.Checked)
-                projectExpiryPicker.Enabled = false;
-            else
-                projectExpiryPicker.Enabled = true;
-        }
+        
         
     }
 }

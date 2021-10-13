@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 **/
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
@@ -610,7 +612,17 @@ namespace InventorySystem1._0
 
 
         private void ReturnBtn_Click(object sender, EventArgs e)
-        {
+        {/**
+            string file = "test.properties";
+            IDictionary<string, string> properties;
+
+            var data = new Dictionary<string, string>();
+            foreach (var row in File.ReadAllLines("PATH_TO_FILE"))
+                data.Add(row.Split('=')[0], string.Join("=", row.Split('=').Skip(1).ToArray()));
+
+            Console.WriteLine(data["ServerName"]);
+            **/
+            /**
             recieverID = txt_cusid.Text;
             recieverName = txtCus_fname.Text + " " + txtCus_lname.Text;
 
@@ -623,7 +635,7 @@ namespace InventorySystem1._0
             {
                 recieverState = "Not Employee";
                 ReturnBtn_not_emp(sender, e);
-            }
+            }**/
         }
         private void ReturnBtn_Click_emp(object sender, EventArgs e)
         {
