@@ -127,14 +127,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Inventory System.exe" size="2601896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Inventory System.exe" size="2604456">
       <assemblyIdentity name="Inventory System" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Rnf2v5IVpXUJ5zgZlphFXdDGlognw0TKj31tre5wOIQ=</dsig:DigestValue>
+        <dsig:DigestValue>V/CBhMVFe18qMQDSPRtDajWrJvcHDJTW+zIfsSjn6G8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -198,13 +198,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Inventory System.exe.config" size="222">
+  <file name="Inventory System.exe.config" size="228">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>KznLCKnlc6MZDTBI/uCw3/izIPazCNP2Nzy7FyJffug=</dsig:DigestValue>
+      <dsig:DigestValue>X36ULSEUYCzDZfk/Oxzh8HQvJ7BZntHYliWfbW1zRWw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="inventory.ico" size="106943">

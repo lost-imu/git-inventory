@@ -23,7 +23,8 @@ namespace InventorySystem1._0
 
         readonly SQLConfig config = new SQLConfig();
         readonly usableFunction funct = new  usableFunction();
-        string sql, itemID;
+        string sql;
+        int itemID;
         int maxcolumn;
         //int inc = 0;
         int maxrow;
@@ -62,21 +63,19 @@ namespace InventorySystem1._0
             sql = "SELECT * FROM tblitems where `DELETED`=0";
             config.Load_DTG(sql, dtglist);  
 
-            maxcolumn = dtglist.Columns.Count - 1;
+            //maxcolumn = dtglist.Columns.Count - 1;
 
-            dtglist.Columns[maxcolumn].Visible = false;
+            //dtglist.Columns[maxcolumn].Visible = false;
 
-            btnadd.Visible = false;
              
-            Select_navigation("SELECT ITEMID FROM tblitems where `DELETED`=0");
+            //Select_navigation("SELECT id FROM tblitems where `DELETED`=0");
             //lblmax.Text = maxrow.ToString();
             //lblinc.Text = inc.ToString();
 
-            sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='CATEGORY' AND DELETED=0";
-            config.Fiil_CBO(sql, typeCombo);
+            
 
-            sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='Unit' AND DELETED=0";
-            config.Fiil_CBO(sql, unitCombo);
+            //sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='Unit' AND DELETED=0";
+            //config.Fiil_CBO(sql, unitCombo);
 
 
             funct.clearTxt(pnl_stockmaster);
@@ -85,8 +84,10 @@ namespace InventorySystem1._0
 
         private void FrmItems_Load(object sender, EventArgs e)
         {
-            Btnnew_Click(sender, e);
+            
             this.WindowState = FormWindowState.Maximized;
+            sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='Unit' AND DELETED=0";
+            config.Fiil_CBO(sql, unitCombo);
         }
 
 
@@ -103,52 +104,66 @@ namespace InventorySystem1._0
 
         private void Btnsave_Click(object sender, EventArgs e)
         {
+            
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
             MySqlCommand command;
             /////////////////////////////////////////
             ///check if values are existing no blank
-
-            foreach (Control obj in pnl_stockmaster.Controls)
+            foreach (Control obj in panel1.Controls)
             {
-                if(obj is TextBox)
+                if (obj is TextBox)
                 {
-                    if(obj.Text == "")
+                    if (string.IsNullOrWhiteSpace(obj.Text))
                     {
                         MessageBox.Show("إملأ كل الفراغات بالمعلومات المطلوبة", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
                 }
             }
+            foreach (Control obj in pnl_stockmaster.Controls)
+            {
+                if(obj is TextBox)
+                {
+                    if(string.IsNullOrWhiteSpace(obj.Text))
+                    {
+                        MessageBox.Show("إملأ كل الفراغات بالمعلومات المطلوبة", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+            }
+            if (!invoice_changed)
+            {
+                MessageBox.Show("Please change the invoice date");
+                return;
+            }
 
-            
+
             /////////////////////////////////////////////////////////////
             ///check if exist
-            sql = "SELECT ITEMID FROM tblitems WHERE NAME = @NAME" +
-               " AND DESCRIPTION = @DESCRIPTION" +
-               " AND TYPE = @TYPE" +
+            sql = "SELECT id FROM tblitems WHERE " +
+                    "GLINE = @GLINE" +
+               " AND SLINE DESCRIPTION = @SLINE" +
+               " AND NAME = @NAME" +
+               " AND DESCRIPTION = @DESCRIPTION " +
+               " AND BRAND = @BRAND " +
                " AND UNIT = @UNIT " +
-               " AND UPPER(PROJECT) =  UPPER(@PROJECT)" +
-               " AND ISNEW = @ISNEW"; // + 
-               //" AND EXPIRYDATE = @EXPIRYDATE" +
-               //" AND PROJECTEXPIRY = @PROJECTEXPIRY;";
-
-            //sql = "select * from tblitems where ITEMID= '"+ itemIDTxtBox.Text+"'";
-
-
-
+               " AND PROJECT = @PROJECT " +
+               " AND ISNEW = @ISNEW " +
+               " AND EXPIRYDATE = @EXPIRYDATE;"; 
             try
             {
                 con.Close();
                 con.Open();
                 command = new MySqlCommand(sql, con);
+                command.Parameters.Add(new MySqlParameter("GLINE", gLineTxtBox.Text));
+                command.Parameters.Add(new MySqlParameter("SLINE", sLineTxtBox.Text));
                 command.Parameters.Add(new MySqlParameter("NAME", itemNameTextBox.Text));
                 command.Parameters.Add(new MySqlParameter("DESCRIPTION", descriptionTextBox.Text));
-                command.Parameters.Add(new MySqlParameter("TYPE", Convert.ToString(typeCombo.SelectedValue)));
-                command.Parameters.Add(new MySqlParameter("UNIT", Convert.ToString(unitCombo.SelectedValue)));
-                command.Parameters.Add(new MySqlParameter("PROJECT", projectTextBox.Text));
+                command.Parameters.Add(new MySqlParameter("BRAND", brandTxtBox.Text));
+                command.Parameters.Add(new MySqlParameter("UNIT", unitCombo.SelectedValue.ToString()));
+                command.Parameters.Add(new MySqlParameter("PROJECT", projectTextBox));
                 command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked));
-                //command.Parameters.Add(new MySqlParameter("EXPIRYDATE", expiryDate));
-                //command.Parameters.Add(new MySqlParameter("PROJECTEXPIRY", projectExpiry));
+                command.Parameters.Add(new MySqlParameter("EXPIRYDATE", ExpiryDate()));
                 MySqlDataReader reader = command.ExecuteReader();
                 //string testCom = command.CommandText;
                 //MessageBox.Show(testCom);
@@ -163,19 +178,17 @@ namespace InventorySystem1._0
                     //MessageBox.Show("date1='" + Convert.ToString(reader.GetOrdinal("EXPIRYDATE")+"'"));
                     //MessageBox.Show("date2='" + Convert.ToString(reader.GetOrdinal("PROJECTEXPIRY")+"'"));
 
-                    string s = reader.GetString("ITEMID");
+                    string s = reader.GetString("id");
                     //MessageBox.Show(reader.HasRows + "\n" + s);
-                    sql = "UPDATE tblitems SET qty =qty + '" + qtyUpDown.Value + "' WHERE ITEMID = '" + s + "'";
+                    sql = "UPDATE tblitems SET qty =qty + '" + qtyUpDown.Value + "' WHERE id = '" + s + "'";
                     reader.Close();
                     
                     command = new MySqlCommand(sql, con);
                     if (command.ExecuteNonQuery() > 0)
                         while (!isReported)
                         {
-                            isReported = MyCon.ReportIt("Add Quantity To Existing Item", "QTY", s, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, -1, ExpiryDate());//, ProjectExpiry());
-//                          MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate(), ProjectExpiry());
-
-                            MessageBox.Show(" تم تعديل الكمية الى " + "\n" + s);
+                            MyCon.ReportAdd(suppliertxtbox.Text, invoiveNoTxtBox.Text, invoiceDateTime.Value.ToString("yyyyMMdd"), itemID.ToString(), qtyUpDown.Value.ToString(), projectTextBox.Text, frmLogin.username);                            
+                            MessageBox.Show("تمت الإضافة بنجاح");
                         }
                     else
                         MessageBox.Show("حصل خطأما\nerror: 3753");
@@ -188,27 +201,31 @@ namespace InventorySystem1._0
                     //    "date2: '" + projectExpiry+"'";
                     //MessageBox.Show(testi);
                     reader.Close();
-                    sql = "insert into tblitems  (ITEMID,NAME, DESCRIPTION, TYPE, QTY, UNIT,PROJECT, ISNEW, EXPIRYDATE, PROJECTEXPIRY)" + //, RECIEVER_NUMBER, RECIEVER_STATE, RECIEVER_NAME)" +
-                     "VALUES (@ITEMID, @NAME, @DESCRIPTION, @TYPE, @QTY, @UNIT, @PROJECT, @ISNEW, @EXPIRYDATE, @PROJECTEXPIRY)"; //, @RECIEVER_NUMBER, @RECIEVER_STATE, @RECIEVER_NAME)";
+                    
+                    sql = "insert into tblitems  (GLINE, SLINE , NAME, DESCRIPTION, BRAND, QTY, UNIT, PROJECT, ISNEW, EXPIRYDATE)" + //, RECIEVER_NUMBER, RECIEVER_STATE, RECIEVER_NAME)" +
+                                        "VALUES (@GLINE, @SLINE , @NAME, @DESCRIPTION, @BRAND, @QTY, @UNIT, @PROJECT, @ISNEW, @EXPIRYDATE)"; //, @RECIEVER_NUMBER, @RECIEVER_STATE, @RECIEVER_NAME)";
 
                     command = new MySqlCommand(sql, con);
-                    command.Parameters.Add(new MySqlParameter("ITEMID", itemIDTxtBox.Text));
+                    command.Parameters.Add(new MySqlParameter("GLINE", gLineTxtBox.Text));
+                    command.Parameters.Add(new MySqlParameter("SLINE", sLineTxtBox.Text));
                     command.Parameters.Add(new MySqlParameter("NAME", itemNameTextBox.Text));
                     command.Parameters.Add(new MySqlParameter("DESCRIPTION", descriptionTextBox.Text));
-                    command.Parameters.Add(new MySqlParameter("TYPE", Convert.ToString(typeCombo.SelectedValue)));
-                    command.Parameters.Add(new MySqlParameter("QTY", qtyUpDown.Value));
+                    command.Parameters.Add(new MySqlParameter("BRAND", brandTxtBox.Text));
+                    command.Parameters.Add(new MySqlParameter("QTY", qtyUpDown.Value.ToString()));
                     command.Parameters.Add(new MySqlParameter("UNIT", Convert.ToString(unitCombo.SelectedValue)));
                     command.Parameters.Add(new MySqlParameter("PROJECT", projectTextBox.Text));
-                    command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked));
+                    command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked.ToString()));
                     command.Parameters.Add(new MySqlParameter("EXPIRYDATE", ExpiryDate()));
 
-                    //command.Parameters.Add(new MySqlParameter("RECIEVER_NUMBER", frmLogin.user_id));
                     //command.Parameters.Add(new MySqlParameter("RECIEVER_STATE", "Employee"));
                     //command.Parameters.Add(new MySqlParameter("RECIEVER_NAME", frmLogin.fullName));
 
                     if (command.ExecuteNonQuery() > 0)
                     {
-                        MyCon.ReportIt("Add New Item Btn", "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate());//, ProjectExpiry());
+                        MyCon.ReportAdd(suppliertxtbox.Text, invoiveNoTxtBox.Text, invoiceDateTime.Value.ToString("yyyyMMdd"), itemID.ToString(), qtyUpDown.Value.ToString(), projectTextBox.Text, frmLogin.username);
+
+                        //Convert.ToString(
+                        //typeCombo.SelectedValue),
                         MessageBox.Show("تمت الاضافة بنجاح");
                     }
                     else
@@ -225,11 +242,11 @@ namespace InventorySystem1._0
             {
                 con.Close();
             }
-                    ///////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////
 
 
             //Btnnew_Click(sender, e);
-            
+            invoice_changed = false;
         }
         public static T ConvertFromDBVal<T>(object obj)
         {
@@ -252,10 +269,10 @@ namespace InventorySystem1._0
             }
 
             sql = "UPDATE tblitems SET" +
-                " ITEMID= '" + itemIDTxtBox.Text + "'" +
+                " ITEMID= '" + brandTxtBox.Text + "'" +
                 ", NAME= '" + itemNameTextBox.Text + "'" +
                 ", DESCRIPTION = '" + descriptionTextBox.Text + "'" +
-                ", TYPE = '" + typeCombo.SelectedValue + "'" +
+                //", TYPE = '" + typeCombo.SelectedValue + "'" +
                 //", QTY = '" + qtyUpDown.Value +"'"+
                 ", UNIT = '" + unitCombo.SelectedValue + "'" +
                 ", PROJECT = '" + projectTextBox.Text + "'" +
@@ -287,7 +304,9 @@ namespace InventorySystem1._0
 
                 if (result > 0)
                 {
-                    MyCon.ReportIt(reportFunaction, "All", itemIDTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, Convert.ToString(typeCombo.SelectedValue), Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate());//, ProjectExpiry());
+                    //MyCon.ReportIt(reportFunaction, "All", brandTxtBox.Text, itemNameTextBox.Text, descriptionTextBox.Text, 
+                        //Convert.ToString(typeCombo.SelectedValue),
+                        //Convert.ToInt32(qtyUpDown.Value), Convert.ToString(unitCombo.SelectedValue), projectTextBox.Text, Convert.ToInt16(isNewRadio.Checked), ExpiryDate());//, ProjectExpiry());
 
                     MessageBox.Show(msg_true);
 
@@ -375,24 +394,27 @@ namespace InventorySystem1._0
             try
             {
                 
-                sql = "SELECT * FROM tblitems WHERE ITEMID='" + dtglist.CurrentRow.Cells[0].Value.ToString() + "'";
+                sql = "SELECT * FROM tblitems WHERE id='" + dtglist.CurrentRow.Cells[0].Value.ToString() + "'";
                 config.SingleResult(sql);
                 if (config.dt.Rows.Count > 0)
                 {
-                    itemID = config.dt.Rows[0].Field<string>(0);
-                    itemIDTxtBox.Text = config.dt.Rows[0].Field<string>(0);
-                    itemNameTextBox.Text = config.dt.Rows[0].Field<string>(1);
-                    descriptionTextBox.Text = config.dt.Rows[0].Field<string>(2);
-                    typeCombo.SelectedIndex = typeCombo.FindString(config.dt.Rows[0].Field<string>(3));
-                    unitCombo.SelectedIndex = unitCombo.FindString(config.dt.Rows[0].Field<string>(5));
-                    projectTextBox.Text = config.dt.Rows[0].Field<string>(6).ToString();
+                    itemID = config.dt.Rows[0].Field<int>("id");
+                    gLineTxtBox.Text = config.dt.Rows[0].Field<string>("GLINE");
+                    sLineTxtBox.Text = config.dt.Rows[0].Field<string>("SLINE");
+                    projectTextBox.Text = config.dt.Rows[0].Field<string>("PROJECT");
+                    brandTxtBox.Text = config.dt.Rows[0].Field<string>("BRAND");
+                    itemNameTextBox.Text = config.dt.Rows[0].Field<string>("NAME");
+                    descriptionTextBox.Text = config.dt.Rows[0].Field<string>("DESCRIPTION");
+                    
+                    ////////////////////////////
+                    
 
                     try
                     {
                         //MessageBox.Show("date1 " + config.dt.Rows[0].Field<DateTime>(8));
-                        if (config.dt.Rows[0].Field<DateTime>(8) >= expiryDatePicker.MinDate && config.dt.Rows[0].Field<DateTime>(8) <= expiryDatePicker.MaxDate)
+                        if (config.dt.Rows[0].Field<DateTime>("EXPIRYDATE") >= expiryDatePicker.MinDate && config.dt.Rows[0].Field<DateTime>("EXPIRYDATE") <= expiryDatePicker.MaxDate)
                         {
-                            expiryDatePicker.Value = config.dt.Rows[0].Field<DateTime>(8);
+                            expiryDatePicker.Value = config.dt.Rows[0].Field<DateTime>("EXPIRYDATE");
                             expiryDateCheckBx.Checked = false;
                             expiryDatePicker.Enabled = true;
                         }
@@ -415,7 +437,7 @@ namespace InventorySystem1._0
 
 
                     ///////////////isNew7
-                    if (config.dt.Rows[0].Field<bool>(7))
+                    if (config.dt.Rows[0].Field<bool>("ISNEW"))
                     {
                         isNewRadio.Checked = true;
                         isNotNewRadio.Checked = false;
@@ -475,7 +497,16 @@ namespace InventorySystem1._0
                 isNew = 0;
         }
 
-        
+        private void btnadd_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            btnReload.Text = "Reload";
+            Btnnew_Click(sender, e);
+        }
 
         private void ExpiryDateCheckBx_CheckedChanged(object sender, EventArgs e)
         {
@@ -484,8 +515,10 @@ namespace InventorySystem1._0
             else
                 expiryDatePicker.Enabled = true;
         }
-
-        
-        
+        bool invoice_changed = false;
+        private void invoiceDateTime_ValueChanged(object sender, EventArgs e)
+        {
+            invoice_changed = true;
+        }
     }
 }

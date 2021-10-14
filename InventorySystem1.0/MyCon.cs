@@ -30,33 +30,11 @@ namespace InventorySystem1._0
         ///////////////////////////////////////////////
         ///global report functions
         ///
-        public static bool ReportIt(string FUNCTION, string CHANGED_VALUES, string ITEM_ID, string ITEM_NAME, string DESCRIPTION, string TYPE, double QTY, string UNIT, string PROJECT, int IS_NEW, string EXPIRY_DATE)//, string PROJECT_EXPIRY)
+        public static bool ReportAdd(string supplier, string invoice_number, string invoice_date, string item_id, string qty, string project, string user_id)
         {
-            string RECIEVER_NUMBER, RECIEVER_STATE, RECIEVER_NAME;
             
-            if (string.Equals(EXPIRY_DATE, "N/A"))
-                EXPIRY_DATE = null;
             
-            //if (string.Equals(PROJECT_EXPIRY, "N/A"))
-              //  PROJECT_EXPIRY = null;
-
-            if (string.IsNullOrEmpty(frmStockOut.recieverID) || string.IsNullOrWhiteSpace(frmStockOut.recieverID))
-            {
-                RECIEVER_NUMBER = frmLogin.user_id.ToString();
-                RECIEVER_STATE = "Employee";
-                RECIEVER_NAME = frmLogin.fullName;
-            }
-            else
-            {
-                RECIEVER_NUMBER = frmStockOut.recieverID.ToString();
-                RECIEVER_STATE = frmStockOut.recieverState;
-                RECIEVER_NAME = frmStockOut.recieverName;
-
-            }
-
-
-            //string reportSQL = "INSERT INTO `tblreport` (`USER_ID`, `FUNCTION`, `CHANGED_VALUES`, `ITEM_ID`, `ITEM_NAME`, `DESCRIPTION`, `TYPE`, `QTY`, `UNIT`, `PROJECT`, `IS_NEW`, `EXPIRY_DATE`, `PROJECT_EXPIRY`, RECIEVER_NUMBER , RECIEVER_STATE, RECIEVER_NAME) VALUES (@USER_ID, @FUNCTION, @CHANGED_VALUES, @ITEM_ID, @ITEM_NAME, @DESCRIPTION, @TYPE, @QTY, @UNIT, @PROJECT, @IS_NEW, @EXPIRY_DATE, @RECIEVER_NUMBER , @RECIEVER_STATE, @RECIEVER_NAME);";
-            string reportSQL ="" ;
+            string reportSQL = "INSERT INTO `tblstockin` ( supplier, invoice_number, invoice_date, item_id, qty, project, user_id) VALUES (@supplier, @invoice_number, @invoice_date @item_id, @qty, @project, @user_id)";
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
             MySqlCommand cmd;
 
@@ -67,38 +45,26 @@ namespace InventorySystem1._0
                 Connection = con,
                 CommandText = reportSQL
             };
+            
+            cmd.Parameters.Add(new MySqlParameter("@supplier", supplier));
+            cmd.Parameters.Add(new MySqlParameter("@invoice_number", invoice_number));
+            cmd.Parameters.Add(new MySqlParameter("@invoice_date", invoice_date));
+            cmd.Parameters.Add(new MySqlParameter("@item_id", item_id));
+            cmd.Parameters.Add(new MySqlParameter("@qty", qty));
+            cmd.Parameters.Add(new MySqlParameter("@project", project));
+            cmd.Parameters.Add(new MySqlParameter("user_id", user_id));
+            //cmd.Parameters.Add(new MySqlParameter("TYPE", TYPE));
+            //cmd.Parameters.Add(new MySqlParameter("RECIEVER_NUMBER", RECIEVER_NUMBER));
+            //cmd.Parameters.Add(new MySqlParameter("RECIEVER_STATE", RECIEVER_STATE));
+            //cmd.Parameters.Add(new MySqlParameter("RECIEVER_NAME", RECIEVER_NAME));
 
-            cmd.Parameters.Add(new MySqlParameter("USER_ID", frmLogin.user_id));
-            cmd.Parameters.Add(new MySqlParameter("FUNCTION", FUNCTION));
-            cmd.Parameters.Add(new MySqlParameter("CHANGED_VALUES", CHANGED_VALUES));
-            cmd.Parameters.Add(new MySqlParameter("ITEM_ID", ITEM_ID));
-            cmd.Parameters.Add(new MySqlParameter("ITEM_NAME", ITEM_NAME));
-            cmd.Parameters.Add(new MySqlParameter("DESCRIPTION", DESCRIPTION));
-            cmd.Parameters.Add(new MySqlParameter("TYPE", TYPE));
-            cmd.Parameters.Add(new MySqlParameter("RECIEVER_NUMBER", RECIEVER_NUMBER));
-            cmd.Parameters.Add(new MySqlParameter("RECIEVER_STATE", RECIEVER_STATE));
-            cmd.Parameters.Add(new MySqlParameter("RECIEVER_NAME", RECIEVER_NAME));
-
-            if (QTY == -1)
-                cmd.Parameters.Add(new MySqlParameter("null", QTY));
-            else
-                cmd.Parameters.Add(new MySqlParameter("QTY", QTY));
-
-            cmd.Parameters.Add(new MySqlParameter("UNIT", UNIT));
-            cmd.Parameters.Add(new MySqlParameter("PROJECT", PROJECT));
-
-            if (IS_NEW == -1)
-                cmd.Parameters.Add(new MySqlParameter("null", IS_NEW));
-            else
-                cmd.Parameters.Add(new MySqlParameter("IS_NEW", IS_NEW));
-
-            cmd.Parameters.Add(new MySqlParameter("EXPIRY_DATE", EXPIRY_DATE));
-            //cmd.Parameters.Add(new MySqlParameter("PROJECT_EXPIRY", PROJECT_EXPIRY));
+            
 
             //System.Windows.Forms.MessageBox.Show(cmd.CommandText);
             if (cmd.ExecuteNonQuery() > 0)
                 return true;
-            return ReportIt(FUNCTION, CHANGED_VALUES, ITEM_ID, ITEM_NAME, DESCRIPTION, TYPE, QTY, UNIT, PROJECT, IS_NEW, EXPIRY_DATE);//, PROJECT_EXPIRY);
+            return ReportAdd(supplier, invoice_number, invoice_date, item_id, qty, project, user_id);
+                
         }
 
         public static string ReturnSingleResult(string sql, string value)

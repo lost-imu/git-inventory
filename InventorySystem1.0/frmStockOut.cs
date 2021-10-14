@@ -356,7 +356,9 @@ namespace InventorySystem1._0
                 {
                     bool b;
 
-                    b = MyCon.ReportIt(tsansType + isEmployeeCombo.SelectedItem, "ALL", stockoutID, itemName, description, type, qty, unit, project, Convert.ToInt32(isNew), ExpiryDate);//, projectExpiry);
+                    //b = MyCon.ReportIt(tsansType + isEmployeeCombo.SelectedItem, "ALL", stockoutID, itemName, description, 
+                        //type,
+                      //  qty, unit, project, Convert.ToInt32(isNew), ExpiryDate);//, projectExpiry);
 
                 }
             }
