@@ -60,7 +60,7 @@ namespace InventorySystem1._0
 
             //inc = 0;
           
-            sql = "SELECT * FROM tblitems where `DELETED`=0";
+            sql = "SELECT * FROM tblitems where `DELETED`=0 limit 10";
             config.Load_DTG(sql, dtglist);  
 
             //maxcolumn = dtglist.Columns.Count - 1;
@@ -91,20 +91,28 @@ namespace InventorySystem1._0
         }
 
 
-        private string ExpiryDate()
+        private DateTime ExpiryDate()
         {
-            string expiryDate = "10000101";
+            DateTime expiryDate = new DateTime(1000,01,01);
             
 
+
+
             if (!expiryDateCheckBx.Checked)
-                expiryDate = expiryDatePicker.Value.Date.ToString("yyyyMMdd");
+                expiryDate = expiryDatePicker.Value;
             return expiryDate;
+            
+        }
+        private string expiryString(DateTime dt)
+        {
+            if (dt > DateTime.MinValue && dt < DateTime.MaxValue)
+                return dt.ToString("yyyy-MM-dd");
+            return null;
         }
        
 
         private void Btnsave_Click(object sender, EventArgs e)
         {
-            
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
             MySqlCommand command;
             /////////////////////////////////////////
@@ -131,39 +139,59 @@ namespace InventorySystem1._0
                     }
                 }
             }
-            if (!invoice_changed)
+            if (qtyUpDown.Value == 0)
             {
-                MessageBox.Show("Please change the invoice date");
+                MessageBox.Show("Quantity is Zero!\nNothing Changed");
                 return;
             }
+            if (!invoice_changed)
+        
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to proceed without changing the invoice date?!", "INVOICE DATE!", MessageBoxButtons.YesNo);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+                //MessageBox.Show("Please change the invoice date");
+                //return;
+            
 
 
             /////////////////////////////////////////////////////////////
             ///check if exist
             sql = "SELECT id FROM tblitems WHERE " +
-                    "GLINE = @GLINE" +
-               " AND SLINE DESCRIPTION = @SLINE" +
+                   " GLINE = @GLINE" +
+               " AND SLINE = @SLINE" +
                " AND NAME = @NAME" +
-               " AND DESCRIPTION = @DESCRIPTION " +
-               " AND BRAND = @BRAND " +
-               " AND UNIT = @UNIT " +
-               " AND PROJECT = @PROJECT " +
-               " AND ISNEW = @ISNEW " +
-               " AND EXPIRYDATE = @EXPIRYDATE;"; 
+               " AND DESCRIPTION = @DESCRIPTION" +
+               " AND BRAND = @BRAND" +
+               " AND UNIT = @UNIT" +
+               " AND PROJECT = @PROJECT" +
+               " AND ISNEW = @ISNEW" +
+               " AND EXPIRYDATE = @EXPIRYDATE;";
+            //sql = "SELECT * FROM tblitems WHERE  GLINE = 'زراعة' AND SLINE = 'SLINE' AND NAME = 'قاعدة حديد' AND DESCRIPTION = 'قاعدة حديد للمزرعة (ستاند)' AND BRAND = 'Brand1' AND UNIT = 'قطعة' AND PROJECT = 'Poject1' AND ISNEW = '0' AND EXPIRYDATE = '2021-01-01';";
             try
             {
                 con.Close();
                 con.Open();
                 command = new MySqlCommand(sql, con);
-                command.Parameters.Add(new MySqlParameter("GLINE", gLineTxtBox.Text));
-                command.Parameters.Add(new MySqlParameter("SLINE", sLineTxtBox.Text));
-                command.Parameters.Add(new MySqlParameter("NAME", itemNameTextBox.Text));
-                command.Parameters.Add(new MySqlParameter("DESCRIPTION", descriptionTextBox.Text));
-                command.Parameters.Add(new MySqlParameter("BRAND", brandTxtBox.Text));
-                command.Parameters.Add(new MySqlParameter("UNIT", unitCombo.SelectedValue.ToString()));
-                command.Parameters.Add(new MySqlParameter("PROJECT", projectTextBox));
-                command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked));
-                command.Parameters.Add(new MySqlParameter("EXPIRYDATE", ExpiryDate()));
+                command.Parameters.Add(new MySqlParameter("@GLINE", gLineTxtBox.Text));
+                command.Parameters.Add(new MySqlParameter("@SLINE", sLineTxtBox.Text));
+                command.Parameters.Add(new MySqlParameter("@NAME", itemNameTextBox.Text));
+                command.Parameters.Add(new MySqlParameter("@DESCRIPTION", descriptionTextBox.Text));
+                command.Parameters.Add(new MySqlParameter("@BRAND", brandTxtBox.Text));
+                command.Parameters.Add(new MySqlParameter("@UNIT", unitCombo.SelectedValue.ToString()));
+                command.Parameters.Add(new MySqlParameter("@PROJECT", projectTextBox.Text));
+                int isnew = Convert.ToInt16(isNewRadio.Checked);
+                command.Parameters.Add(new MySqlParameter("@ISNEW", isnew));
+                command.Parameters.Add(new MySqlParameter("@EXPIRYDATE", expiryString(ExpiryDate())));
+                string st = ExpiryDate().ToString("yyyy-MM-dd");
                 MySqlDataReader reader = command.ExecuteReader();
                 //string testCom = command.CommandText;
                 //MessageBox.Show(testCom);
@@ -180,19 +208,20 @@ namespace InventorySystem1._0
 
                     string s = reader.GetString("id");
                     //MessageBox.Show(reader.HasRows + "\n" + s);
-                    sql = "UPDATE tblitems SET qty =qty + '" + qtyUpDown.Value + "' WHERE id = '" + s + "'";
+                    sql = "UPDATE tblitems SET QTY =QTY + '" + qtyUpDown.Value + "' WHERE id = '" + s + "'";
                     reader.Close();
                     
                     command = new MySqlCommand(sql, con);
                     if (command.ExecuteNonQuery() > 0)
                         while (!isReported)
                         {
-                            MyCon.ReportAdd(suppliertxtbox.Text, invoiveNoTxtBox.Text, invoiceDateTime.Value.ToString("yyyyMMdd"), itemID.ToString(), qtyUpDown.Value.ToString(), projectTextBox.Text, frmLogin.username);                            
-                            MessageBox.Show("تمت الإضافة بنجاح");
+                            isReported =MyCon.ReportAdd(suppliertxtbox.Text, invoiveNoTxtBox.Text, invoiceDateTime.Value.ToString("yyyy-MM-dd"), itemID.ToString(), qtyUpDown.Value.ToString(), projectTextBox.Text, frmLogin.username);                            
+                            
                         }
                     else
                         MessageBox.Show("حصل خطأما\nerror: 3753");
                     con.Close();
+                    MessageBox.Show("تمت الإضافة بنجاح");
                 }
                 
                 else
@@ -214,7 +243,7 @@ namespace InventorySystem1._0
                     command.Parameters.Add(new MySqlParameter("QTY", qtyUpDown.Value.ToString()));
                     command.Parameters.Add(new MySqlParameter("UNIT", Convert.ToString(unitCombo.SelectedValue)));
                     command.Parameters.Add(new MySqlParameter("PROJECT", projectTextBox.Text));
-                    command.Parameters.Add(new MySqlParameter("ISNEW", isNewRadio.Checked.ToString()));
+                    command.Parameters.Add(new MySqlParameter("ISNEW",Convert.ToInt16(isNewRadio.Checked)));
                     command.Parameters.Add(new MySqlParameter("EXPIRYDATE", ExpiryDate()));
 
                     //command.Parameters.Add(new MySqlParameter("RECIEVER_STATE", "Employee"));
@@ -391,6 +420,7 @@ namespace InventorySystem1._0
 
         private void Dtglist_Click(object sender, EventArgs e)
         {
+           
             try
             {
                 
@@ -433,9 +463,6 @@ namespace InventorySystem1._0
                         expiryDatePicker.Enabled = false;
                     }
 
-                   
-
-
                     ///////////////isNew7
                     if (config.dt.Rows[0].Field<bool>("ISNEW"))
                     {
@@ -447,19 +474,10 @@ namespace InventorySystem1._0
                         isNewRadio.Checked = false;
                         isNotNewRadio.Checked = true;
                     }
-
-
                 }
             }
             catch (Exception) { }
         }
-        
-
-        
-
-       
-
-       
 
         private void Txtsearch_TextChanged(object sender, EventArgs e)
         {
@@ -472,14 +490,10 @@ namespace InventorySystem1._0
                 "%')";
             config.Load_DTG(sql, dtglist);
 
-
             maxcolumn = dtglist.Columns.Count - 1;
-
             dtglist.Columns[maxcolumn].Visible = false;
 
         }
-
-        
 
         private void IsNewRadio_CheckedChanged(object sender, EventArgs e)
         {
@@ -496,12 +510,7 @@ namespace InventorySystem1._0
             if (isNotNewRadio.Checked)
                 isNew = 0;
         }
-
-        private void btnadd_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
+        
         private void btnReload_Click(object sender, EventArgs e)
         {
             btnReload.Text = "Reload";

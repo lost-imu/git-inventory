@@ -56,20 +56,20 @@
             this.expiryDatePicker = new System.Windows.Forms.DateTimePicker();
             this.sLineTxtBox = new System.Windows.Forms.TextBox();
             this.gLineTxtBox = new System.Windows.Forms.TextBox();
-            this.suppliertxtbox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.suppliertxtbox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.invoiveNoTxtBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.invoiceDateTime = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dtglist)).BeginInit();
             this.Panel2.SuspendLayout();
@@ -158,20 +158,21 @@
             // 
             this.btnupdate.BackColor = System.Drawing.Color.Transparent;
             this.btnupdate.ForeColor = System.Drawing.Color.Black;
-            this.btnupdate.Location = new System.Drawing.Point(1219, 304);
+            this.btnupdate.Location = new System.Drawing.Point(904, 305);
             this.btnupdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnupdate.Name = "btnupdate";
             this.btnupdate.Size = new System.Drawing.Size(137, 37);
             this.btnupdate.TabIndex = 35;
             this.btnupdate.Text = "Edit";
             this.btnupdate.UseVisualStyleBackColor = false;
+            this.btnupdate.Visible = false;
             this.btnupdate.Click += new System.EventHandler(this.Btnupdate_Click);
             // 
             // btnsave
             // 
             this.btnsave.BackColor = System.Drawing.Color.Transparent;
             this.btnsave.ForeColor = System.Drawing.Color.Black;
-            this.btnsave.Location = new System.Drawing.Point(1069, 304);
+            this.btnsave.Location = new System.Drawing.Point(1214, 305);
             this.btnsave.Margin = new System.Windows.Forms.Padding(4);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(141, 37);
@@ -266,7 +267,7 @@
             // 
             // btnReload
             // 
-            this.btnReload.Location = new System.Drawing.Point(904, 304);
+            this.btnReload.Location = new System.Drawing.Point(1049, 305);
             this.btnReload.Margin = new System.Windows.Forms.Padding(4);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(157, 37);
@@ -421,16 +422,6 @@
             this.gLineTxtBox.TabIndex = 1;
             this.gLineTxtBox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
             // 
-            // suppliertxtbox
-            // 
-            this.suppliertxtbox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.suppliertxtbox.Location = new System.Drawing.Point(133, 29);
-            this.suppliertxtbox.Margin = new System.Windows.Forms.Padding(4);
-            this.suppliertxtbox.Name = "suppliertxtbox";
-            this.suppliertxtbox.Size = new System.Drawing.Size(400, 26);
-            this.suppliertxtbox.TabIndex = 1;
-            this.suppliertxtbox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -453,6 +444,27 @@
             this.label9.TabIndex = 8;
             this.label9.Text = "General Line";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(1223, 109);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 22);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Expiry Date";
+            // 
+            // suppliertxtbox
+            // 
+            this.suppliertxtbox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.suppliertxtbox.Location = new System.Drawing.Point(133, 29);
+            this.suppliertxtbox.Margin = new System.Windows.Forms.Padding(4);
+            this.suppliertxtbox.Name = "suppliertxtbox";
+            this.suppliertxtbox.Size = new System.Drawing.Size(400, 26);
+            this.suppliertxtbox.TabIndex = 1;
+            this.suppliertxtbox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -464,17 +476,6 @@
             this.label5.Size = new System.Drawing.Size(68, 22);
             this.label5.TabIndex = 8;
             this.label5.Text = "Supplier";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(1223, 109);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(89, 22);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Expiry Date";
             // 
             // textBox3
             // 
@@ -540,17 +541,15 @@
             this.panel1.Size = new System.Drawing.Size(1665, 78);
             this.panel1.TabIndex = 45;
             // 
-            // label13
+            // invoiveNoTxtBox
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.SystemColors.Window;
-            this.label13.Location = new System.Drawing.Point(587, 31);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(118, 22);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "Invoice Number";
+            this.invoiveNoTxtBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoiveNoTxtBox.Location = new System.Drawing.Point(713, 29);
+            this.invoiveNoTxtBox.Margin = new System.Windows.Forms.Padding(4);
+            this.invoiveNoTxtBox.Name = "invoiveNoTxtBox";
+            this.invoiveNoTxtBox.Size = new System.Drawing.Size(400, 26);
+            this.invoiveNoTxtBox.TabIndex = 1;
+            this.invoiveNoTxtBox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
             // 
             // label14
             // 
@@ -564,15 +563,17 @@
             this.label14.TabIndex = 8;
             this.label14.Text = "Invoice Date";
             // 
-            // invoiveNoTxtBox
+            // label13
             // 
-            this.invoiveNoTxtBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoiveNoTxtBox.Location = new System.Drawing.Point(713, 29);
-            this.invoiveNoTxtBox.Margin = new System.Windows.Forms.Padding(4);
-            this.invoiveNoTxtBox.Name = "invoiveNoTxtBox";
-            this.invoiveNoTxtBox.Size = new System.Drawing.Size(400, 26);
-            this.invoiveNoTxtBox.TabIndex = 1;
-            this.invoiveNoTxtBox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.SystemColors.Window;
+            this.label13.Location = new System.Drawing.Point(587, 31);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(118, 22);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Invoice Number";
             // 
             // invoiceDateTime
             // 
@@ -591,6 +592,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1667, 726);
+            this.Controls.Add(this.btnupdate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.btnClose);
@@ -601,7 +603,6 @@
             this.Controls.Add(this.Label6);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.btndelete);
-            this.Controls.Add(this.btnupdate);
             this.Controls.Add(this.btnsave);
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.pnl_stockmaster);

@@ -75,7 +75,7 @@ namespace InventorySystem1._0
             // sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', case when `EXPIRYDATE` IS NULL then '' ELSE `EXPIRYDATE` END as 'Expiry Date', `PROJECTEXPIRY` as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
 
             //sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'Expiry Date', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
-            sql = "SELECT `ITEMID` as 'رقم الصنف'," +
+            sql = "SELECT `id` as 'رقم الصنف'," +
                 " `NAME` as 'الاسم'," +
                 " `DESCRIPTION` as 'الشرح'," +
                 " `TYPE` as 'النوع'," +
@@ -115,7 +115,7 @@ namespace InventorySystem1._0
                 return;
 
             if (string.IsNullOrWhiteSpace(scannerTxtBox.Text))
-                sql = "SELECT `ITEMID` as 'رقم الصنف'," +
+                sql = "SELECT `id` as 'رقم الصنف'," +
                     " `NAME` as 'الاسم'," +
                     " `DESCRIPTION` as 'الشرح', " +
                     "`TYPE` as 'النوع'," +
@@ -130,11 +130,11 @@ namespace InventorySystem1._0
                     " FROM `tblitems` WHERE QTY>=0 AND(" +
                     " `NAME` like '%" + txtsearch.Text + "%' " +
                     "or `DESCRIPTION` like '%" + txtsearch.Text + "%' " +
-                    "or `ITEMID` like '%" + txtsearch.Text + "%')" +
+                    "or `id` like '%" + txtsearch.Text + "%')" +
                     " ORDER BY `الكمية المتوفرة` DESC;";
             else
             {
-                sql = "SELECT `ITEMID` as 'رقم الصنف'," +
+                sql = "SELECT `id` as 'رقم الصنف'," +
                 " `NAME` as 'الاسم'," +
                 " `DESCRIPTION` as 'الشرح', " +
                 "`TYPE` as 'النوع'," +
@@ -147,7 +147,7 @@ namespace InventorySystem1._0
                 //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', " +
                 "`NOTE` as 'ملاحظات'" +
                 " FROM `tblitems` WHERE QTY>=0 AND" +
-                " `ITEMID` = '" + txtsearch.Text + "'" +
+                " `id` = '" + txtsearch.Text + "'" +
                 " ORDER BY `الكمية المتوفرة` DESC;";
             }
             //sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة', `UNIT` as 'الوحدة', `PROJECT` as 'المشروع', case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', `NOTE` as 'ملاحظات' FROM `tblitems`";
@@ -164,44 +164,41 @@ namespace InventorySystem1._0
             //MessageBox.Show("test");
             if (dtCus_addedlist.RowCount == 0)
             {
-                string projectExpiry, expiryDate;
+                string expiryDate;
+                /**
                 string isNew = "جديد";
-                if (dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString().ToLower() is "false" ||
-                    dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString() is "0" ||
-                    dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString() is "مستعمل" ||
-                    dtgCus_itemlist.CurrentRow.Cells["جديد-مستعمل"].Value.ToString().ToLower() is "old")
+                if (dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString().ToLower() is "false" ||
+                    dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString() is "0" ||
+                    dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString() is "مستعمل" ||
+                    dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString().ToLower() is "old")
                     isNew = "مستعمل";
-                if (dtgCus_itemlist.CurrentRow.Cells["انتهاء الصلاحية"].Value.ToString() == "0000-00-00")
-                    expiryDate = null;
+                **/
+                if (dtgCus_itemlist.CurrentRow.Cells["EXPIRYDATE"].Value.ToString() == "1000-01-01")
+                    expiryDate = "N/A";
+                //expiryDate = null;
                 else
-                    expiryDate = dtgCus_itemlist.CurrentRow.Cells["انتهاء الصلاحية"].Value.ToString();
-                try
-                {
-                    projectExpiry = DateTime.Parse(dtgCus_itemlist.CurrentRow.Cells["انتهاء المشروع"].Value.ToString()).Date.ToString("yyyy-MM-dd");
-                }
-                catch
-                {
-                    projectExpiry = null;
-                }
-
-
+                    expiryDate = dtgCus_itemlist.CurrentRow.Cells["EXPIRYDATE"].Value.ToString();
+                
                 qty = 1;
                 _ = double.Parse(dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString()) * 1;
-                string[] row = new string[] { dtgCus_itemlist.CurrentRow.Cells[0].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[1].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[2].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[3].Value.ToString(),
+                string[] row = new string[] { 
+                    dtgCus_itemlist.CurrentRow.Cells["id"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["GLINE"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["SLINE"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["NAME"].Value.ToString(),
                     qty.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[5].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[6].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
-                    isNew,
+                    dtgCus_itemlist.CurrentRow.Cells["HOLD"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["UNIT"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["DESCRIPTION"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["BRAND"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["PROJECT"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString(),
                     //dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
                     //dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString(),
                     //Convert.ToDateTime(dtgCus_itemlist.CurrentRow.Cells[9].Value).Date.ToString("yyyy-MM-dd"),
                     expiryDate,
                     //projectExpiry,
-                    dtgCus_itemlist.CurrentRow.Cells[10].Value.ToString(),
+                    //dtgCus_itemlist.CurrentRow.Cells[10].Value.ToString(),
                     // qty.ToString()
                     // tot.ToString()
                 };
@@ -230,45 +227,48 @@ namespace InventorySystem1._0
 
                 if (dtCus_addedlist.CurrentRow.Cells[0].Value != dtgCus_itemlist.CurrentRow.Cells[0].Value)
                 {
-                    string projectExpiry, expiryDate;
-                    if (dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString() == "0000-00-00")
-                        expiryDate = null;
-                    else
-                        expiryDate = dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString();
-                    try
-                    {
-                        projectExpiry = DateTime.Parse(dtgCus_itemlist.CurrentRow.Cells[9].Value.ToString()).Date.ToString("yyyy-MM-dd");
-                    }
-                    catch
-                    {
-                        projectExpiry = null;
-                    }
+                    ////////////////////////
+                    string expiryDate;
+                    /**
                     string isNew = "جديد";
-                    if (dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "false" ||
-                        dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "0" ||
-                        dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString() is "مستعمل" ||
-                        dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString().ToLower() is "old")
+                    if (dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString().ToLower() is "false" ||
+                        dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString() is "0" ||
+                        dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString() is "مستعمل" ||
+                        dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString().ToLower() is "old")
                         isNew = "مستعمل";
-
+                    **/
+                    if (dtgCus_itemlist.CurrentRow.Cells["EXPIRYDATE"].Value.ToString() == "1000-01-01")
+                        expiryDate = "N/A";
+                    //expiryDate = null;
+                    else
+                        expiryDate = dtgCus_itemlist.CurrentRow.Cells["EXPIRYDATE"].Value.ToString();
 
                     qty = 1;
-                    tot = double.Parse(dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString()) * 1;
-                    string[] row = new string[] { dtgCus_itemlist.CurrentRow.Cells[0].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[1].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[2].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[3].Value.ToString(),
+                    _ = double.Parse(dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString()) * 1;
+                    string[] row = new string[] {
+                    dtgCus_itemlist.CurrentRow.Cells["id"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["GLINE"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["SLINE"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["NAME"].Value.ToString(),
                     qty.ToString(),
-                    //dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[5].Value.ToString(),
-                    dtgCus_itemlist.CurrentRow.Cells[6].Value.ToString(),
-                    isNew,
-                     //dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["HOLD"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["UNIT"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["DESCRIPTION"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["BRAND"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["PROJECT"].Value.ToString(),
+                    dtgCus_itemlist.CurrentRow.Cells["ISNEW"].Value.ToString(),
+                    //dtgCus_itemlist.CurrentRow.Cells[7].Value.ToString(),
+                    //dtgCus_itemlist.CurrentRow.Cells[8].Value.ToString(),
+                    //Convert.ToDateTime(dtgCus_itemlist.CurrentRow.Cells[9].Value).Date.ToString("yyyy-MM-dd"),
                     expiryDate,
-                    projectExpiry,
-                    dtgCus_itemlist.CurrentRow.Cells[10].Value.ToString(),
-                    // qty.ToString(),
-                    tot.ToString()};
+                    //projectExpiry,
+                    //dtgCus_itemlist.CurrentRow.Cells[10].Value.ToString(),
+                    // qty.ToString()
+                    // tot.ToString()
+                };
+
                     dtCus_addedlist.Rows.Add(row);
+                    ////////////////////
                 }
                 else
                 {
@@ -325,7 +325,7 @@ namespace InventorySystem1._0
                     return;
                 }
 
-                sql = "SELECT ITEMID,`QTY` FROM `tblitems`";
+                sql = "SELECT id,`QTY` FROM `tblitems`";
                 config.SingleResult(sql);
 
                 foreach (DataRow row in config.dt.Rows)
@@ -356,7 +356,7 @@ namespace InventorySystem1._0
                     "','" + r.Cells[5].Value + "','" + txt_cusid.Text + "','StockOut')";
                     Execute_Query(sql,r);
                     */
-                    sql = "UPDATE `tblitems`  SET `QTY`= QTY - '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                    sql = "UPDATE `tblitems`  SET `QTY`= QTY - '" + r.Cells[4].Value + "' WHERE id='" + r.Cells[0].Value + "'";
                     Execute_Query(sql, r, "Stock Out");
                 }
 
@@ -408,7 +408,7 @@ namespace InventorySystem1._0
             //////////////////////////////////////////
             if (string.IsNullOrWhiteSpace(projecttxtbox.Text))
             {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you don't want to enter project name?!", "لم تختر إسم المشروع", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to proceed without a project name?!", "لم تختر إسم المشروع", MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -421,7 +421,7 @@ namespace InventorySystem1._0
             }
             //////////////////////////////////////
 
-            sql = "SELECT `ITEMID`,`QTY`,`HOLD` FROM `tblitems`";
+            sql = "SELECT `id`,`QTY`,`HOLD` FROM `tblitems`";
             config.SingleResult(sql);
             MySqlConnection conn = new MySqlConnection(MyCon.GetConString());
             conn.Open();
@@ -430,7 +430,7 @@ namespace InventorySystem1._0
             {
                 for (int i = 0; i < dtCus_addedlist.Rows.Count; i++)
                 {
-                    if (dtCus_addedlist.Rows[i].Cells[0].Value.ToString() == row.Field<string>(0))
+                    if (Convert.ToInt32(dtCus_addedlist.Rows[i].Cells[0].Value) == row.Field<Int32>(0))
                     {
                         double a = double.Parse(dtCus_addedlist.Rows[i].Cells[4].Value.ToString());
                         double b = double.Parse(dtCus_addedlist.Rows[i].Cells[5].Value.ToString());
@@ -461,7 +461,7 @@ namespace InventorySystem1._0
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
             finally
             {
@@ -477,7 +477,7 @@ namespace InventorySystem1._0
             openRequest(newmax);
             foreach (DataGridViewRow r in dtCus_addedlist.Rows)
             {
-                sql = "UPDATE `tblitems`  SET `HOLD`= `HOLD` + '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                sql = "UPDATE `tblitems`  SET `HOLD`= `HOLD` + '" + r.Cells[4].Value + "' WHERE id='" + r.Cells[0].Value + "'";
 
                 items[count, 0] = r.Cells[0].Value.ToString();
                 items[count, 1] = r.Cells[4].Value.ToString();
@@ -686,7 +686,7 @@ namespace InventorySystem1._0
                 "','" + r.Cells[5].Value + "','" + txt_cusid.Text + "','StockOut')";
                 Execute_Query(sql,r);
                 */
-                sql = "UPDATE `tblitems`  SET `QTY`= QTY + '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                sql = "UPDATE `tblitems`  SET `QTY`= QTY + '" + r.Cells[4].Value + "' WHERE id='" + r.Cells[0].Value + "'";
                 Execute_Query(sql, r, "Return");
             }
 
@@ -739,7 +739,7 @@ namespace InventorySystem1._0
                 foreach (DataGridViewRow r in dtCus_addedlist.Rows)
                 {
 
-                    sql = "UPDATE `tblitems`  SET `QTY`= QTY + '" + r.Cells[4].Value + "' WHERE ITEMID='" + r.Cells[0].Value + "'";
+                    sql = "UPDATE `tblitems`  SET `QTY`= QTY + '" + r.Cells[4].Value + "' WHERE id='" + r.Cells[0].Value + "'";
                     Execute_Query(sql, r, "Return");
                 }
                 config.Execute_Query("UPDATE tblautonumber SET END= END + INCREMENT WHERE ID = 5");
@@ -983,26 +983,28 @@ namespace InventorySystem1._0
             // sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', case when `EXPIRYDATE` IS NULL then '' ELSE `EXPIRYDATE` END as 'Expiry Date', `PROJECTEXPIRY` as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
 
             //sql = "SELECT `ITEMID` as 'Item ID', `NAME` as 'Name', `DESCRIPTION` as 'Description', `TYPE` as 'Type', `QTY` as 'Quantity', `UNIT` as 'Unit', `PROJECT` as 'Project', case when ISNEW =0 then 'Old' else 'New' END as 'New-Old', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'Expiry Date', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'Project Expiry', `NOTE` as 'Notes' FROM `tblitems`";
-            sql = "SELECT `ITEMID` as 'رقم الصنف'," +
-                " `NAME` as 'الاسم'," +
-                " `DESCRIPTION` as 'الشرح'," +
-                " `TYPE` as 'النوع'," +
-                " `QTY` as 'الكمية المتوفرة', " +
-                " `HOLD` as 'الكمية المحجوزة', " +
-                "`UNIT` as 'الوحدة'," +
-                " `PROJECT` as 'المشروع'," +
-                " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', " +
-                "CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
-                //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع'," +
-                " `NOTE` as 'ملاحظات'" +
-                " FROM `tblitems`" +
-                " ORDER BY `الكمية المتوفرة` DESC" +
-                " limit " + limit + ";";
-
+            
+           
+            sql = "SELECT id,"+ 
+                " GLINE," +
+               " SLINE," +
+               " NAME," +
+               " QTY," +
+               " HOLD," +
+               " UNIT," +
+               " BRAND," +
+               " DESCRIPTION," +
+               " PROJECT," +
+               " ISNEW," +
+               " EXPIRYDATE"+
+               " FROM lost_new_inventory.tblitems" +
+               " WHERE QTY > 0" +
+               " limit " + limit + ";";
 
             config.Load_DTG(sql, dtgCus_itemlist);
             funct.ResponsiveDtg(dtgCus_itemlist);
         }
+
 
         private void ScannerTxtBox_KeyDown(object sender, KeyEventArgs e)
             {

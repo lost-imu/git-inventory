@@ -34,7 +34,9 @@ namespace InventorySystem1._0
         {
             
             
-            string reportSQL = "INSERT INTO `tblstockin` ( supplier, invoice_number, invoice_date, item_id, qty, project, user_id) VALUES (@supplier, @invoice_number, @invoice_date @item_id, @qty, @project, @user_id)";
+            string reportSQL = "INSERT INTO `tblstockin` ( supplier, invoice_number, invoice_date, item_id, qty, project, user_id) VALUES" +
+                                                      " (@supplier, @invoice_number, @invoice_date, @item_id, @qty, @project, @user_id)";
+
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
             MySqlCommand cmd;
 
@@ -52,7 +54,7 @@ namespace InventorySystem1._0
             cmd.Parameters.Add(new MySqlParameter("@item_id", item_id));
             cmd.Parameters.Add(new MySqlParameter("@qty", qty));
             cmd.Parameters.Add(new MySqlParameter("@project", project));
-            cmd.Parameters.Add(new MySqlParameter("user_id", user_id));
+            cmd.Parameters.Add(new MySqlParameter("@user_id", user_id));
             //cmd.Parameters.Add(new MySqlParameter("TYPE", TYPE));
             //cmd.Parameters.Add(new MySqlParameter("RECIEVER_NUMBER", RECIEVER_NUMBER));
             //cmd.Parameters.Add(new MySqlParameter("RECIEVER_STATE", RECIEVER_STATE));
