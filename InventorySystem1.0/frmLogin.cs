@@ -1,9 +1,12 @@
 ﻿using InventorySystem1._0.Includes;
 using MySql.Data.MySqlClient;
 using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
+
 
 namespace InventorySystem1._0
 {
@@ -43,51 +46,52 @@ namespace InventorySystem1._0
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             Timer1.Start();
+            
             /////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
             ///
-           /* bool ssl = true;
-            int maxWaitMillisec = 20000;
+            /* bool ssl = true;
+             int maxWaitMillisec = 20000;
 
-            // The SSL server hostname may be an IP address, a domain name,
-            // or "localhost".  You'll need to change this:
-            string sslServerHost;
-            sslServerHost = "localhost";
-            int sslServerPort = 8123;
+             // The SSL server hostname may be an IP address, a domain name,
+             // or "localhost".  You'll need to change this:
+             string sslServerHost;
+             sslServerHost = "localhost";
+             int sslServerPort = 8123;
 
-            // Connect to the SSL server:
-            bool success = socket.Connect(sslServerHost, sslServerPort, ssl, maxWaitMillisec);
-            if (success != true)
-            {
-                Debug.WriteLine(socket.LastErrorText);
-                return;
-            }
+             // Connect to the SSL server:
+             bool success = socket.Connect(sslServerHost, sslServerPort, ssl, maxWaitMillisec);
+             if (success != true)
+             {
+                 Debug.WriteLine(socket.LastErrorText);
+                 return;
+             }
 
-            // Set maximum timeouts for reading an writing (in millisec)
-            socket.MaxReadIdleMs = 20000;
-            socket.MaxSendIdleMs = 20000;
+             // Set maximum timeouts for reading an writing (in millisec)
+             socket.MaxReadIdleMs = 20000;
+             socket.MaxSendIdleMs = 20000;
 
-            // Send a "Hello Server! -EOM-" message:
-            success = socket.SendString("Hello Server! -EOM-");
-            if (success != true)
-            {
-                Debug.WriteLine(socket.LastErrorText);
-                return;
-            }
+             // Send a "Hello Server! -EOM-" message:
+             success = socket.SendString("Hello Server! -EOM-");
+             if (success != true)
+             {
+                 Debug.WriteLine(socket.LastErrorText);
+                 return;
+             }
 
-            // The server (in this example) is going to send a "Hello Client! -EOM-" 
-            // message.  Read it:
-            string receivedMsg = socket.ReceiveUntilMatch("-EOM-");
-            if (socket.LastMethodSuccess != true)
-            {
-                Debug.WriteLine(socket.LastErrorText);
-                return;
-            }
+             // The server (in this example) is going to send a "Hello Client! -EOM-" 
+             // message.  Read it:
+             string receivedMsg = socket.ReceiveUntilMatch("-EOM-");
+             if (socket.LastMethodSuccess != true)
+             {
+                 Debug.WriteLine(socket.LastErrorText);
+                 return;
+             }
 
-            // Close the connection with the server
-            // Wait a max of 20 seconds (20000 millsec)
-            success = socket.Close(20000);
+             // Close the connection with the server
+             // Wait a max of 20 seconds (20000 millsec)
+             success = socket.Close(20000);
 
-            Debug.WriteLine(receivedMsg);*/
+             Debug.WriteLine(receivedMsg);*/
             ///////////////////////////////////////////////////////////////////////////////////
         }
         static string Hash(string input)

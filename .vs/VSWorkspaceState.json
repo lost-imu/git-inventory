@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\InventorySystem1.0"
+    "\\InventorySystem1.0",
+    "\\InventorySystem1.0\\bin",
+    "\\InventorySystem1.0\\bin\\Debug",
+    "\\InventorySystem1.0\\bin\\Debug\\reports",
+    "\\InventorySystem1.0\\obj",
+    "\\InventorySystem1.0\\obj\\Debug"
   ],
   "SelectedNode": "\\InventorySystem1.0\\frmItems.cs",
   "PreviewInSolutionExplorer": false

@@ -25,23 +25,23 @@ namespace InventorySystem1._0
 
         private void frmRepository_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'lost_new_inventoryDataSet.tblrequest' table. You can move, or remove it, as needed.
+            //this.tblrequestTableAdapter.Fill(this.lost_new_inventoryDataSet.tblrequest);
+
             this.WindowState = FormWindowState.Maximized;
             refreshAll();
-            expiryFromDate.Value = DateTime.Now;
-            expiryToDate.Value = DateTime.Now;
-            projectExpiryFromDate.Value = DateTime.Now;
-            projectExpiryToDate.Value = DateTime.Now;
-            transFromDate.Value = DateTime.Now;
-            transToDate.Value = DateTime.Now;
+            invoiceFromDate.Value = DateTime.Now;
+            invoiceToDate.Value = DateTime.Now;
+            
         }
 
         private void refreshAll()
         {
-            userNameComboAutoComplete();
+            userNameComboAutoComplete();//supplierCombo
             functionComboAutoComplete();
             itemIDComboAutoComplete();
             projectComboAutoComplete();
-            userNameCombo.SelectedIndex = functionComboBox.SelectedIndex = itemIDCombo.SelectedIndex = projectCombo.SelectedIndex = 0;
+            supplierCombo.SelectedIndex = invoiceNoCombo.SelectedIndex = projectCombo.SelectedIndex = projectCombo.SelectedIndex = 0;
           /*  getDriverList(); //available drivers
             employeeComboBoxAutoComplete();
             driverComboBoxAutoComplete();
@@ -53,23 +53,23 @@ namespace InventorySystem1._0
 
         }
         
-        private void userNameComboAutoComplete()
+        private void userNameComboAutoComplete() //supplierCombo
         {
-            userNameCombo.Items.Clear();
-            userNameCombo.Items.Add("الكل");
-            userNameCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
-            userNameCombo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            supplierCombo.Items.Clear();
+            supplierCombo.Items.Add("الكل");
+            supplierCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            supplierCombo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection combData = new AutoCompleteStringCollection();
             getDataForuserNameCombo(combData);
-            userNameCombo.AutoCompleteCustomSource = combData;
+            supplierCombo.AutoCompleteCustomSource = combData;
         }
-        private void getDataForuserNameCombo(AutoCompleteStringCollection dataCollection)
+        private void getDataForuserNameCombo(AutoCompleteStringCollection dataCollection) //supplier
         {
             MySqlConnection connection;
             MySqlCommand command;
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataSet ds = new DataSet();
-            string sql = "SELECT DISTINCT `name` FROM `user` WHERE `deleted`=0 ORDER BY `user`.`name` ASC ";
+            string sql = "SELECT DISTINCT `supplier` FROM `tblstockin` ORDER BY `supplier` ASC ";
             connection = new MySqlConnection(conString);
             try
             {
@@ -84,7 +84,7 @@ namespace InventorySystem1._0
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     dataCollection.Add(row[0].ToString());
-                    userNameCombo.Items.Add(row[0].ToString());
+                    supplierCombo.Items.Add(row[0].ToString());
                     
                 }
             }
@@ -93,23 +93,23 @@ namespace InventorySystem1._0
                 MessageBox.Show("Can not open connection ! " + ex);
             }
         }
-        private void functionComboAutoComplete()
+        private void functionComboAutoComplete() //invoiceNoCombo
         {
-            functionComboBox.Items.Clear();
-            functionComboBox.Items.Add("الكل");
-            functionComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            functionComboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            invoiceNoCombo.Items.Clear();
+            invoiceNoCombo.Items.Add("الكل");
+            invoiceNoCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            invoiceNoCombo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection combData = new AutoCompleteStringCollection();
             getDataForFunctionCombo(combData);
-            functionComboBox.AutoCompleteCustomSource = combData;
+            invoiceNoCombo.AutoCompleteCustomSource = combData;
         }
-        private void getDataForFunctionCombo(AutoCompleteStringCollection dataCollection)
+        private void getDataForFunctionCombo(AutoCompleteStringCollection dataCollection) //invoiceNoCombo
         {
             MySqlConnection connection;
             MySqlCommand command;
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataSet ds = new DataSet();
-            string sql = "SELECT DISTINCT `FUNCTION` FROM `tblreport` ORDER BY `tblreport`.`FUNCTION` ASC ";
+            string sql = "SELECT DISTINCT `invoice_number` FROM `tblstockin` ORDER BY `tblstockin`.`invoice_number` ASC ";
             connection = new MySqlConnection(conString);
             try
             {
@@ -124,7 +124,7 @@ namespace InventorySystem1._0
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     dataCollection.Add(row[0].ToString());
-                    functionComboBox.Items.Add(row[0].ToString());
+                    invoiceNoCombo.Items.Add(row[0].ToString());
 
                 }
             }
@@ -133,23 +133,23 @@ namespace InventorySystem1._0
                 MessageBox.Show("Can not open connection ! " + ex);
             }
         }
-        private void itemIDComboAutoComplete()
+        private void itemIDComboAutoComplete()//projectCombo
         {
-            itemIDCombo.Items.Clear();
-            itemIDCombo.Items.Add("الكل");
-            itemIDCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
-            itemIDCombo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            projectCombo.Items.Clear();
+            projectCombo.Items.Add("الكل");
+            projectCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            projectCombo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection combData = new AutoCompleteStringCollection();
             getDataForItemIDCombo(combData);
-            itemIDCombo.AutoCompleteCustomSource = combData;
+            projectCombo.AutoCompleteCustomSource = combData;
         }
-        private void getDataForItemIDCombo(AutoCompleteStringCollection dataCollection)
+        private void getDataForItemIDCombo(AutoCompleteStringCollection dataCollection)//projectCombo
         {
             MySqlConnection connection;
             MySqlCommand command;
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataSet ds = new DataSet();
-            string sql = "SELECT DISTINCT `ITEM_ID` FROM `tblreport` ORDER BY `tblreport`.`ITEM_ID` ASC";
+            string sql = "SELECT DISTINCT `project` FROM `tblstockin` ORDER BY `tblstockin`.`project` ASC";
             connection = new MySqlConnection(conString);
             try
             {
@@ -164,7 +164,7 @@ namespace InventorySystem1._0
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     dataCollection.Add(row[0].ToString());
-                    itemIDCombo.Items.Add(row[0].ToString());
+                    projectCombo.Items.Add(row[0].ToString());
 
                 }
             }
@@ -189,7 +189,7 @@ namespace InventorySystem1._0
             MySqlCommand command;
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataSet ds = new DataSet();
-            string sql = "SELECT DISTINCT `PROJECT` FROM `tblreport` ORDER BY `tblreport`.`PROJECT` ASC";
+            string sql = "SELECT DISTINCT `project` FROM `tblstockin` ORDER BY `tblstockin`.`project` ASC";
             connection = new MySqlConnection(conString);
             try
             {
@@ -223,90 +223,17 @@ namespace InventorySystem1._0
 
         }
 
-        private void checkoutCheckBox_CheckedChanged_1(object sender, EventArgs e)
-        {
-            if (projectExpiryCheckBox.Checked)
-            {
-                projectExpiryFromDate.Enabled = false;
-                projectExpiryToDate.Enabled = false;
-                projectExpiryFromTime.Enabled = false;
-                projectExpiryToTime.Enabled = false;
-                fromProjectExpiry = null;
-                toProjectExpiry = null;
-            }
-            else
-            {
-                projectExpiryFromDate.Enabled = true;
-                projectExpiryToDate.Enabled = true;
-                projectExpiryFromTime.Enabled = true;
-                projectExpiryToTime.Enabled = true;
-                fromProjectExpiry = projectExpiryFromDate.Value.Date.ToString();
-                toProjectExpiry = projectExpiryToDate.Value.Date.ToString();
-            }
-        }
+       
 
-        private void tranDateCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tranDateCheckBox.Checked)
-            {
-                transFromDate.Enabled = false;
-                transToDate.Enabled = false;
-                transFromTime.Enabled = false;
-                transToTime.Enabled = false;
-                fromTransDate = null;
-                toTransDate = null;
-            }
-            else
-            {
-                transFromDate.Enabled = true;
-                transToDate.Enabled = true;
-                transFromTime.Enabled = true;
-                transToTime.Enabled = true;
-                fromTransDate = transFromDate.Value.Date.ToString();
-                toTransDate = transToDate.Value.Date.ToString();
-            }
-        }
-
+        
         private void expiryFromDate_ValueChanged(object sender, EventArgs e)
         {
-            fromExpiryDate = expiryFromDate.Value.Date.ToString("yyyy-MM-dd ");
+            fromExpiryDate = invoiceFromDate.Value.Date.ToString("yyyy-MM-dd ");
         }
 
         private void expiryToDate_ValueChanged(object sender, EventArgs e)
         {
-            toExpiryDate = expiryToDate.Value.Date.ToString("yyyy-MM-dd ");
-
-        }
-
-        private void projectExpiryFromDate_ValueChanged(object sender, EventArgs e)
-        {
-            fromProjectExpiry = projectExpiryFromDate.Value.Date.ToString("yyyy-MM-dd ");
-
-        }
-
-        private void projectExpiryToDate_ValueChanged(object sender, EventArgs e)
-        {
-            toProjectExpiry = projectExpiryToDate.Value.Date.ToString("yyyy-MM-dd ");
-        }
-
-        private void transFromDate_ValueChanged(object sender, EventArgs e)
-        {
-            fromTransDate = transFromDate.Value.Date.ToString("yyyy-MM-dd ");
-
-        }
-
-        private void transToDate_ValueChanged(object sender, EventArgs e)
-        {
-            toTransDate = transToDate.Value.Date.ToString("yyyy-MM-dd ");
-        }
-
-        private void checkinCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkoutCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
+            toExpiryDate = invoiceToDate.Value.Date.ToString("yyyy-MM-dd ");
 
         }
 
@@ -319,56 +246,58 @@ namespace InventorySystem1._0
         {
             if (expiryDateCheckBox.Checked)
             {
-                expiryFromDate.Enabled = false;
-                expiryToDate.Enabled = false;
-                expiryFromTime.Enabled = false;
-                expiryToTime.Enabled = false;
+                invoiceFromDate.Enabled = false;
+                invoiceToDate.Enabled = false;
+                invoiceFromTime.Enabled = false;
+                invoiceToTime.Enabled = false;
                 fromExpiryDate = null;
                 toExpiryDate = null;
             }
             else
             {
-                expiryFromDate.Enabled = true;
-                expiryToDate.Enabled = true;
-                expiryFromTime.Enabled = true;
-                expiryToTime.Enabled = true;
-                fromExpiryDate = expiryFromDate.Value.Date.ToString();
-                toExpiryDate = expiryToDate.Value.Date.ToString();
+                invoiceFromDate.Enabled = true;
+                invoiceToDate.Enabled = true;
+                invoiceFromTime.Enabled = true;
+                invoiceToTime.Enabled = true;
+                fromExpiryDate = invoiceFromDate.Value.Date.ToString();
+                toExpiryDate = invoiceToDate.Value.Date.ToString();
             }
         }
 
             private void reportSubmitBtn_Click_1(object sender, EventArgs e)
         {
 
-            string s1 = "SELECT " +
-                " `user`.`name` AS 'User Name', "+
-                " `tblreport`.`FUNCTION` AS 'Function', " +
-                " `tblreport`.`CHANGED_VALUES` AS 'Values Changed', " +
-                " `tblreport`.`ITEM_ID` AS 'Item ID', " +
-                " `tblreport`.`ITEM_NAME` AS 'Item Name', " +
-                " `tblreport`.`DESCRIPTION`AS 'Description', " +
-                " `tblreport`.`TYPE` AS 'Type', " +
-                " `tblreport`.`QTY` AS 'QTY', " +
-                " `tblreport`.`UNIT` AS 'Unit', " +
-                " `tblreport`.`PROJECT` 'Project', " +
-                " if (`tblreport`.`IS_NEW`= 0,'False', 'True') AS 'Is New', " +
-                " `tblreport`.`EXPIRY_DATE` AS 'Expiry Date', " +
-                " `PROJECT_EXPIRY` AS 'Project Expiry', " +
-                " `tblreport`.`DATE_STAMP` AS 'Transaction Time', " +
-                " `tblreport`.`RECIEVER_NUMBER` AS 'Reciever Number', " +
-                " `tblreport`.`RECIEVER_STATE` AS 'Employee State', " +
-                " `tblreport`.`RECIEVER_NAME` AS 'Reciever Name' " +
-                " FROM `tblreport`,`user` " +
-                " WHERE `user`.`user_id`=`tblreport`.`USER_ID`";
+            //string s1 = "SELECT " +
+            //    " `user`.`name` AS 'User Name', "+
+            //    " `tblreport`.`FUNCTION` AS 'Function', " +
+            //    " `tblreport`.`CHANGED_VALUES` AS 'Values Changed', " +
+            //    " `tblreport`.`ITEM_ID` AS 'Item ID', " +
+            //    " `tblreport`.`ITEM_NAME` AS 'Item Name', " +
+            //    " `tblreport`.`DESCRIPTION`AS 'Description', " +
+            //    " `tblreport`.`TYPE` AS 'Type', " +
+            //    " `tblreport`.`QTY` AS 'QTY', " +
+            //    " `tblreport`.`UNIT` AS 'Unit', " +
+            //    " `tblreport`.`PROJECT` 'Project', " +
+            //    " if (`tblreport`.`IS_NEW`= 0,'False', 'True') AS 'Is New', " +
+            //    " `tblreport`.`EXPIRY_DATE` AS 'Expiry Date', " +
+            //    " `PROJECT_EXPIRY` AS 'Project Expiry', " +
+            //    " `tblreport`.`DATE_STAMP` AS 'Transaction Time', " +
+            //    " `tblreport`.`RECIEVER_NUMBER` AS 'Reciever Number', " +
+            //    " `tblreport`.`RECIEVER_STATE` AS 'Employee State', " +
+            //    " `tblreport`.`RECIEVER_NAME` AS 'Reciever Name' " +
+            //    " FROM `tblreport`,`user` " +
+            //    " WHERE `user`.`user_id`=`tblreport`.`USER_ID`";
+            string s1 = "SELECT id ,supplier as 'Supplier',invoice_number as 'Invoice Number',invoice_date as 'Invoice Date',item_id as 'Item ID',qty as 'Quantity',project as 'Project Name' FROM `tblstockin` WHERE 1";
 
-            string s2 = sqlFunction() + sqlItemID() + sqlProject() + sqlUserName() + getExpiryDateString() + getProjectExpiryString()+ getTransDateString();
+            string s2 = invoiceNumber() + sqlProject() + sqlsupplier() + getExpiryDateString();
 
+            
             //string s3 = " AND driver.driverID=reservation.driverID AND employee.empID=reservation.requesterID AND car.carID=reservation.carID ";
             //textBox1.Text = s1 + s2 + s3;
             //try
-           // {
+            // {
 
-                MySqlConnection con = new MySqlConnection(conString);
+            MySqlConnection con = new MySqlConnection(conString);
 
 
 
@@ -394,26 +323,29 @@ namespace InventorySystem1._0
             }*/
         }
 
-        private string sqlUserName()
+        private string sqlsupplier()
         {
-            if (userNameCombo.SelectedIndex == 0)
+            if (supplierCombo.SelectedIndex == 0)
                 return null;
             else
             {
 
-               // return " AND `USER_ID` = '" + userNameCombo.SelectedItem.ToString() + "'";
-                return " AND `tblreport`.`USER_ID` = (SELECT `user_id` FROM `user` WHERE `name` = '" + userNameCombo.SelectedItem.ToString() + "')";
+                // return " AND `USER_ID` = '" + userNameCombo.SelectedItem.ToString() + "'";
+                return " AND `supplier` = '" + supplierCombo.SelectedItem.ToString() + "'";
+
             }
         }
 
 
-        private string sqlFunction()
+        private string invoiceNumber()
         {
-            if (functionComboBox.SelectedIndex == 0)
+            if (invoiceNoCombo.SelectedIndex == 0)
                 return null;
             else
-                return " AND `FUNCTION` = '" + functionComboBox.SelectedItem.ToString() + "'";
+                return " AND `invoice_number` = '" + invoiceNoCombo.SelectedItem.ToString() + "'";
         }
+
+        
 
         private void checkinFromTime_ValueChanged(object sender, EventArgs e)
         {
@@ -425,74 +357,49 @@ namespace InventorySystem1._0
 
         }
 
-        private string sqlItemID()
+        private void fillToolStripButton_Click(object sender, EventArgs e)
         {
-            if (itemIDCombo.SelectedIndex == 0)
-                return null;
-            else
-                return " AND `ITEM_ID` = '" + itemIDCombo.SelectedItem.ToString() + "'";
+            try
+            {
+                this.tblrequestTableAdapter.Fill(this.lost_new_inventoryDataSet.tblrequest);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
         }
+
+        
         private string sqlProject()
         {
             if (projectCombo.SelectedIndex == 0)
                 return null;
             else
-                return " AND `PROJECT` = '" + projectCombo.SelectedItem.ToString() + "'";
+                return " AND `project` = '" + projectCombo.SelectedItem.ToString() + "'";
         }
         private string getExpiryDateString()
         {
             if (expiryDateCheckBox.Checked)
                 return null;
 
-            DateTime dtFrom = expiryFromDate.Value.Date + expiryFromTime.Value.TimeOfDay;
-            DateTime dtTo = expiryToDate.Value.Date + expiryToTime.Value.TimeOfDay;
+            DateTime dtFrom = invoiceFromDate.Value.Date + invoiceFromTime.Value.TimeOfDay;
+            DateTime dtTo = invoiceToDate.Value.Date + invoiceToTime.Value.TimeOfDay;
             string dtF = dtFrom.ToString("yyyy-MM-dd HH:mm:ss");
             string dtT = dtTo.ToString("yyyy-MM-dd HH:mm:ss");
 
             //string s = " AND reservation.checkoutTime >= '" + dtFrom +
             //   "' AND reservation.checkoutTime<= '" + dtTo + "' ";
 
-            string s = " AND `tblreport`.`EXPIRY_DATE` BETWEEN '" + dtF + "' AND '" + dtT + "' ";
+            string s = " AND `tblstockin`.`invoice_date` BETWEEN '" + dtF + "' AND '" + dtT + "' ";
 
             return s;
 
         }
-        private string getProjectExpiryString()
-        {
-            if (projectExpiryCheckBox.Checked)
-                return null;
+       
 
-            DateTime dtFrom = projectExpiryFromDate.Value.Date + projectExpiryFromTime.Value.TimeOfDay;
-            DateTime dtTo = projectExpiryToDate.Value.Date + projectExpiryToTime.Value.TimeOfDay;
-            string dtF = dtFrom.ToString("yyyy-MM-dd HH:mm:ss");
-            string dtT = dtTo.ToString("yyyy-MM-dd HH:mm:ss");
-
-            //string s = " AND reservation.checkoutTime >= '" + dtFrom +
-            //   "' AND reservation.checkoutTime<= '" + dtTo + "' ";
-
-            string s = " AND `tblreport`.`PROJECT_EXPIRY` BETWEEN '" + dtF + "' AND '" + dtT + "' ";
-
-            return s;
-
-        }
-        private string getTransDateString()
-        {
-            if (tranDateCheckBox.Checked)
-                return null;
-            
-            DateTime dtFrom = transFromDate.Value.Date + transFromTime.Value.TimeOfDay;
-            DateTime dtTo = transToDate.Value.Date + transToTime.Value.TimeOfDay;
-            string dtF = dtFrom.ToString("yyyy-MM-dd HH:mm:ss");
-            string dtT = dtTo.ToString("yyyy-MM-dd HH:mm:ss");
-
-            //string s = " AND reservation.checkoutTime >= '" + dtFrom +
-            //   "' AND reservation.checkoutTime<= '" + dtTo + "' ";
-
-            string s = " AND `tblreport`.`DATE_STAMP` BETWEEN '" + dtF + "' AND '" + dtT + "' ";
-
-            return s;
-
-        }
+        
+       
 
 
 
