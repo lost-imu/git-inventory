@@ -67,7 +67,7 @@ namespace InventorySystem1._0
                      + "values('" + txt_name.Text + "','" + txt_username.Text
                      + "',sha1('" + txt_pass.Text + "'),'" + cbo_type.Text
                      + "')";
-                config.Execute_CUD(sql, "Unable to saved", "Data has been saved in the database.");
+                config.Execute_CUD(sql, "Unable to save", "Data has been saved in the database.");
                 FrmUsers_Load(sender, e);
             }
            //

@@ -49,9 +49,9 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Right;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(50, 35);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ts_Request,
             this.ts_stocks,
             this.ts_StockOut,
+            this.ts_Request,
             this.ts_Return,
             this.ts_ManageUsers,
             this.ts_repository,
@@ -59,21 +59,24 @@
             this.ts_settings,
             this.ts_Login,
             this.versionTSLabel});
-            this.toolStrip1.Location = new System.Drawing.Point(639, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(865, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(132, 556);
+            this.toolStrip1.Size = new System.Drawing.Size(163, 684);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // ts_Request
             // 
-            this.ts_Request.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ts_Request.Checked = true;
+            this.ts_Request.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.ts_Request.Enabled = false;
+            this.ts_Request.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.ts_Request.Image = ((System.Drawing.Image)(resources.GetObject("ts_Request.Image")));
             this.ts_Request.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_Request.Name = "ts_Request";
-            this.ts_Request.Size = new System.Drawing.Size(129, 39);
+            this.ts_Request.Size = new System.Drawing.Size(160, 64);
             this.ts_Request.Text = "Request";
+            this.ts_Request.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_Request.Visible = false;
             this.ts_Request.Click += new System.EventHandler(this.ts_Request_Click);
             // 
@@ -87,7 +90,7 @@
             this.ts_stocks.Image = ((System.Drawing.Image)(resources.GetObject("ts_stocks.Image")));
             this.ts_stocks.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_stocks.Name = "ts_stocks";
-            this.ts_stocks.Size = new System.Drawing.Size(129, 59);
+            this.ts_stocks.Size = new System.Drawing.Size(160, 64);
             this.ts_stocks.Text = "إدارة المستودع";
             this.ts_stocks.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_stocks.Visible = false;
@@ -102,7 +105,7 @@
             this.ts_StockOut.Image = ((System.Drawing.Image)(resources.GetObject("ts_StockOut.Image")));
             this.ts_StockOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_StockOut.Name = "ts_StockOut";
-            this.ts_StockOut.Size = new System.Drawing.Size(129, 59);
+            this.ts_StockOut.Size = new System.Drawing.Size(160, 64);
             this.ts_StockOut.Text = "إخراج من المستودع";
             this.ts_StockOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_StockOut.Visible = false;
@@ -117,7 +120,7 @@
             this.ts_Return.Image = ((System.Drawing.Image)(resources.GetObject("ts_Return.Image")));
             this.ts_Return.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_Return.Name = "ts_Return";
-            this.ts_Return.Size = new System.Drawing.Size(129, 59);
+            this.ts_Return.Size = new System.Drawing.Size(160, 64);
             this.ts_Return.Text = "إسترجاع";
             this.ts_Return.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_Return.Visible = false;
@@ -130,7 +133,7 @@
             this.ts_ManageUsers.Image = ((System.Drawing.Image)(resources.GetObject("ts_ManageUsers.Image")));
             this.ts_ManageUsers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_ManageUsers.Name = "ts_ManageUsers";
-            this.ts_ManageUsers.Size = new System.Drawing.Size(129, 59);
+            this.ts_ManageUsers.Size = new System.Drawing.Size(160, 64);
             this.ts_ManageUsers.Text = "إدارة المستخدمين";
             this.ts_ManageUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_ManageUsers.Visible = false;
@@ -143,7 +146,7 @@
             this.ts_repository.Image = global::InventorySystem1._0.Properties.Resources.repository;
             this.ts_repository.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_repository.Name = "ts_repository";
-            this.ts_repository.Size = new System.Drawing.Size(129, 59);
+            this.ts_repository.Size = new System.Drawing.Size(160, 64);
             this.ts_repository.Text = "اضافة الى ال";
             this.ts_repository.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_repository.Visible = false;
@@ -156,7 +159,7 @@
             this.ts_Report.Image = ((System.Drawing.Image)(resources.GetObject("ts_Report.Image")));
             this.ts_Report.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_Report.Name = "ts_Report";
-            this.ts_Report.Size = new System.Drawing.Size(129, 59);
+            this.ts_Report.Size = new System.Drawing.Size(160, 64);
             this.ts_Report.Text = "تقرير";
             this.ts_Report.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_Report.Visible = false;
@@ -168,7 +171,7 @@
             this.ts_settings.Image = ((System.Drawing.Image)(resources.GetObject("ts_settings.Image")));
             this.ts_settings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_settings.Name = "ts_settings";
-            this.ts_settings.Size = new System.Drawing.Size(129, 59);
+            this.ts_settings.Size = new System.Drawing.Size(160, 64);
             this.ts_settings.Text = "الضبط";
             this.ts_settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_settings.Visible = false;
@@ -180,7 +183,7 @@
             this.ts_Login.Image = global::InventorySystem1._0.Properties.Resources.login;
             this.ts_Login.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_Login.Name = "ts_Login";
-            this.ts_Login.Size = new System.Drawing.Size(94, 59);
+            this.ts_Login.Size = new System.Drawing.Size(160, 64);
             this.ts_Login.Text = "تسجيل دخول";
             this.ts_Login.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_Login.Click += new System.EventHandler(this.Ts_Login_Click);
@@ -188,28 +191,30 @@
             // versionTSLabel
             // 
             this.versionTSLabel.Name = "versionTSLabel";
-            this.versionTSLabel.Size = new System.Drawing.Size(51, 15);
+            this.versionTSLabel.Size = new System.Drawing.Size(160, 20);
             this.versionTSLabel.Text = "version: ";
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 534);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 662);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(639, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(865, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 556);
+            this.ClientSize = new System.Drawing.Size(1028, 684);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory System Dashboard";

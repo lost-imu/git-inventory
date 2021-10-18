@@ -33,35 +33,40 @@ namespace InventorySystem1._0
             ts_Login.Text = "تسجيل خروج";
             ts_Login.Image = Resources.lock_open;
 
-            if (prev == 0)
+            if (prev == 0) //procurement
             {
                 //enability
                 ts_ManageUsers.Enabled = false;
                 ts_Report.Enabled = false;
                 ts_Return.Enabled = false;
                 ts_StockOut.Enabled = false;
-                ts_stocks.Enabled = false;
-                ts_settings.Enabled = false;
+                ts_stocks.Enabled = true;
+                ts_settings.Enabled = true;
                 ts_repository.Enabled = false;
+                ts_Request.Enabled = false;
                 //visibility
                 ts_ManageUsers.Visible = false;
                 ts_Report.Visible = false;
                 ts_Return.Visible = false;
                 ts_StockOut.Visible = false;
-                ts_stocks.Visible = false;
-                ts_settings.Visible = false;
+                ts_stocks.Visible = true;
+                ts_settings.Visible = true;
                 ts_repository.Visible = false;
+                ts_Request.Visible = false;
+                //reports
+                ts_Report.Enabled = true;
+                ts_Report.Visible = true;
 
             }
 
-            else if (prev == 1)
+            else if (prev == 1) //keeper
             {
                 //request
                 ts_Request.Enabled = false;
                 ts_Request.Visible = false;
                 //stock in
-                ts_stocks.Enabled = true;
-                ts_stocks.Visible = true;
+                ts_stocks.Enabled = false;
+                ts_stocks.Visible = false;
                 //stockout
                 ts_StockOut.Enabled = true;
                 ts_StockOut.Visible = true;
@@ -69,31 +74,31 @@ namespace InventorySystem1._0
                 ts_ManageUsers.Enabled = false; 
                 ts_ManageUsers.Visible = false;
                 //settings
-                ts_settings.Enabled = true;
-                ts_settings.Visible = true;
+                ts_settings.Enabled = false;
+                ts_settings.Visible = false;
                 //reports
-                ts_Report.Enabled = true;
-                ts_Report.Visible = true;
+                ts_Report.Enabled = false;
+                ts_Report.Visible = false;
 
             }
 
-            else if (prev == 2)
+            else if (prev == 2) //manager
             {
                 //request
                 ts_Request.Enabled = true;
                 ts_Request.Visible = true;
                 //stock in
-                ts_stocks.Enabled = true;
-                ts_stocks.Visible = true;
+                ts_stocks.Enabled = false;
+                ts_stocks.Visible = false;
                 //stockout
-                ts_StockOut.Enabled = true;
-                ts_StockOut.Visible = true;
+                ts_StockOut.Enabled = false;
+                ts_StockOut.Visible = false;
                 //manage users
                 ts_ManageUsers.Enabled = true;
                 ts_ManageUsers.Visible = true;
                 //settings
-                ts_settings.Enabled = true;
-                ts_settings.Visible = true;
+                ts_settings.Enabled = false;
+                ts_settings.Visible = false;
                 //reports
                 ts_Report.Enabled = true;
                 ts_Report.Visible = true;
@@ -121,6 +126,9 @@ namespace InventorySystem1._0
             //reports
             ts_Report.Enabled = false;
             ts_Report.Visible = false;
+            //request
+            ts_Request.Enabled = false;
+            ts_Request.Visible = false;
         }
         public void ShowFrm(Form frm)
         {

@@ -141,14 +141,19 @@ namespace InventorySystem1._0
                         fullName = reader.GetString("name");
                         username = txtusername.Text;
                         userType = reader.GetString("type");
-                        if (userType == "Administrator")
+                        if (userType == "WH Manager")
                         {
                             frm.Enabled_menu(2);
                             this.Close();
                         }
-                        else if (userType == "Staff")
+                        else if (userType == "WH Keeper")
                         {
                             frm.Enabled_menu(1);
+                            this.Close();
+                        }
+                        else if (userType == "Procurement")
+                        {
+                            frm.Enabled_menu(0);
                             this.Close();
                         }
                     }
