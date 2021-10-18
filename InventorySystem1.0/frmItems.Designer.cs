@@ -48,6 +48,8 @@
             this.Label1 = new System.Windows.Forms.Label();
             this.Label7 = new System.Windows.Forms.Label();
             this.pnl_stockmaster = new System.Windows.Forms.Panel();
+            this.sLineCombo = new System.Windows.Forms.ComboBox();
+            this.gLineCombo = new System.Windows.Forms.ComboBox();
             this.expiryDateCheckBx = new System.Windows.Forms.CheckBox();
             this.isNewRadio = new System.Windows.Forms.RadioButton();
             this.isNotNewRadio = new System.Windows.Forms.RadioButton();
@@ -61,9 +63,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.suppliertxtbox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -71,6 +71,9 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.invoiceDateTime = new System.Windows.Forms.DateTimePicker();
+            this.loadLines = new System.Windows.Forms.Button();
+            this.gLineCombo2 = new System.Windows.Forms.ComboBox();
+            this.sLineCombo2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtglist)).BeginInit();
             this.Panel2.SuspendLayout();
             this.pnl_stockmaster.SuspendLayout();
@@ -302,6 +305,8 @@
             // pnl_stockmaster
             // 
             this.pnl_stockmaster.BackColor = System.Drawing.Color.White;
+            this.pnl_stockmaster.Controls.Add(this.sLineCombo);
+            this.pnl_stockmaster.Controls.Add(this.gLineCombo);
             this.pnl_stockmaster.Controls.Add(this.expiryDateCheckBx);
             this.pnl_stockmaster.Controls.Add(this.isNewRadio);
             this.pnl_stockmaster.Controls.Add(this.isNotNewRadio);
@@ -329,6 +334,22 @@
             this.pnl_stockmaster.Name = "pnl_stockmaster";
             this.pnl_stockmaster.Size = new System.Drawing.Size(1667, 216);
             this.pnl_stockmaster.TabIndex = 30;
+            // 
+            // sLineCombo
+            // 
+            this.sLineCombo.FormattingEnabled = true;
+            this.sLineCombo.Location = new System.Drawing.Point(134, 63);
+            this.sLineCombo.Name = "sLineCombo";
+            this.sLineCombo.Size = new System.Drawing.Size(226, 25);
+            this.sLineCombo.TabIndex = 11;
+            // 
+            // gLineCombo
+            // 
+            this.gLineCombo.FormattingEnabled = true;
+            this.gLineCombo.Location = new System.Drawing.Point(133, 25);
+            this.gLineCombo.Name = "gLineCombo";
+            this.gLineCombo.Size = new System.Drawing.Size(226, 25);
+            this.gLineCombo.TabIndex = 11;
             // 
             // expiryDateCheckBx
             // 
@@ -405,20 +426,20 @@
             // sLineTxtBox
             // 
             this.sLineTxtBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sLineTxtBox.Location = new System.Drawing.Point(133, 62);
+            this.sLineTxtBox.Location = new System.Drawing.Point(454, 62);
             this.sLineTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.sLineTxtBox.Name = "sLineTxtBox";
-            this.sLineTxtBox.Size = new System.Drawing.Size(400, 26);
+            this.sLineTxtBox.Size = new System.Drawing.Size(79, 26);
             this.sLineTxtBox.TabIndex = 1;
             this.sLineTxtBox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
             // 
             // gLineTxtBox
             // 
             this.gLineTxtBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gLineTxtBox.Location = new System.Drawing.Point(133, 22);
+            this.gLineTxtBox.Location = new System.Drawing.Point(454, 22);
             this.gLineTxtBox.Margin = new System.Windows.Forms.Padding(4);
             this.gLineTxtBox.Name = "gLineTxtBox";
-            this.gLineTxtBox.Size = new System.Drawing.Size(400, 26);
+            this.gLineTxtBox.Size = new System.Drawing.Size(79, 26);
             this.gLineTxtBox.TabIndex = 1;
             this.gLineTxtBox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
             // 
@@ -477,45 +498,27 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Supplier";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(708, 312);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(174, 22);
-            this.textBox3.TabIndex = 29;
-            this.textBox3.TextChanged += new System.EventHandler(this.Txtsearch_TextChanged);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(647, 315);
+            this.label3.Location = new System.Drawing.Point(622, 315);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label3.Size = new System.Drawing.Size(53, 17);
+            this.label3.Size = new System.Drawing.Size(48, 17);
             this.label3.TabIndex = 31;
-            this.label3.Text = "Search";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(429, 312);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(212, 22);
-            this.textBox4.TabIndex = 29;
-            this.textBox4.TextChanged += new System.EventHandler(this.Txtsearch_TextChanged);
+            this.label3.Text = "S Line";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(368, 314);
+            this.label12.Location = new System.Drawing.Point(371, 315);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label12.Size = new System.Drawing.Size(53, 17);
+            this.label12.Size = new System.Drawing.Size(50, 17);
             this.label12.TabIndex = 31;
-            this.label12.Text = "Search";
+            this.label12.Text = "G Line";
             // 
             // btnLoad
             // 
@@ -587,25 +590,54 @@
             this.invoiceDateTime.TabIndex = 10;
             this.invoiceDateTime.ValueChanged += new System.EventHandler(this.invoiceDateTime_ValueChanged);
             // 
+            // loadLines
+            // 
+            this.loadLines.Location = new System.Drawing.Point(904, 305);
+            this.loadLines.Name = "loadLines";
+            this.loadLines.Size = new System.Drawing.Size(137, 37);
+            this.loadLines.TabIndex = 12;
+            this.loadLines.Text = "Reload Lines";
+            this.loadLines.UseVisualStyleBackColor = true;
+            this.loadLines.Click += new System.EventHandler(this.loadLines_Click);
+            // 
+            // gLineCombo2
+            // 
+            this.gLineCombo2.FormattingEnabled = true;
+            this.gLineCombo2.Location = new System.Drawing.Point(428, 312);
+            this.gLineCombo2.Name = "gLineCombo2";
+            this.gLineCombo2.Size = new System.Drawing.Size(187, 24);
+            this.gLineCombo2.TabIndex = 11;
+            this.gLineCombo2.SelectedIndexChanged += new System.EventHandler(this.gLineCombo2_SelectedIndexChanged);
+            // 
+            // sLineCombo2
+            // 
+            this.sLineCombo2.FormattingEnabled = true;
+            this.sLineCombo2.Location = new System.Drawing.Point(674, 312);
+            this.sLineCombo2.Name = "sLineCombo2";
+            this.sLineCombo2.Size = new System.Drawing.Size(199, 24);
+            this.sLineCombo2.TabIndex = 11;
+            this.sLineCombo2.SelectedIndexChanged += new System.EventHandler(this.sLineCombo2_SelectedIndexChanged);
+            // 
             // frmItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1667, 726);
-            this.Controls.Add(this.btnupdate);
+            this.Controls.Add(this.sLineCombo2);
+            this.Controls.Add(this.gLineCombo2);
+            this.Controls.Add(this.loadLines);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.Label6);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.btndelete);
             this.Controls.Add(this.btnsave);
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.pnl_stockmaster);
+            this.Controls.Add(this.btnupdate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmItems";
@@ -658,9 +690,7 @@
         internal System.Windows.Forms.TextBox gLineTxtBox;
         internal System.Windows.Forms.Label label11;
         internal System.Windows.Forms.Label label9;
-        internal System.Windows.Forms.TextBox textBox3;
         internal System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox textBox4;
         internal System.Windows.Forms.Label label12;
         internal System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Panel panel1;
@@ -668,5 +698,10 @@
         internal System.Windows.Forms.Label label14;
         internal System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker invoiceDateTime;
+        private System.Windows.Forms.ComboBox sLineCombo;
+        public System.Windows.Forms.ComboBox gLineCombo;
+        private System.Windows.Forms.Button loadLines;
+        private System.Windows.Forms.ComboBox gLineCombo2;
+        private System.Windows.Forms.ComboBox sLineCombo2;
     }
 }

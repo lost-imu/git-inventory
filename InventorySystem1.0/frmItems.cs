@@ -86,6 +86,7 @@ namespace InventorySystem1._0
         {
             
             this.WindowState = FormWindowState.Maximized;
+            loadLines_Click(sender, e);
             sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='Unit' AND DELETED=0";
             config.Fiil_CBO(sql, unitCombo);
         }
@@ -362,7 +363,7 @@ namespace InventorySystem1._0
 
             if (dialogResult == DialogResult.Yes)
             {
-                sql = "UPDATE `tblitems` SET `DELETED`=1 WHERE ITEMID='" + dtglist.CurrentRow.Cells[0].Value + "'";
+                sql = "UPDATE `tblitems` SET `DELETED`=1 WHERE id='" + dtglist.CurrentRow.Cells[0].Value + "'";
                 string reportFunction = "DELETE";
                 Execute_CUD(sql, "error to delete", "Data has been deleted.", reportFunction);
                 Btnnew_Click(sender, e);
@@ -478,16 +479,50 @@ namespace InventorySystem1._0
             }
             catch (Exception) { }
         }
+        private string gLineString()
+        {
+            try
+            {
+                if (gLineCombo2.SelectedIndex <= 0)
+                    return null;
+                return " AND `GLINE` = '" + gLineCombo2.SelectedItem.ToString() + "'";
+            }
+            catch { return null; }
+        }
+        private string sLineString()
+        {
+            try
+            {
+                if (sLineCombo2.SelectedIndex <= 0)
+                    return null;
 
+                return " AND `SLINE` = '" + sLineCombo2.SelectedItem.ToString() + "'";
+
+            }
+            catch (Exception) { return null; }
+        }
+        
         private void Txtsearch_TextChanged(object sender, EventArgs e)
         {
-            sql = "SELECT * FROM tblitems WHERE"+
-                " DELETED = 0 AND ("+ 
-                " ITEMID LIKE '%" + txtsearch.Text +
-                "%' OR NAME LIKE '%" + txtsearch.Text +
-                "%' OR DESCRIPTION LIKE '%" + txtsearch.Text +
-                "%' OR PROJECT LIKE '%" + txtsearch.Text +
-                "%')";
+            if (string.IsNullOrWhiteSpace(txtsearch.Text))
+                sql = "SELECT * FROM tblitems WHERE" +
+               " DELETED = 0" +
+               gLineString() +
+               sLineString() + ";";
+            else
+            {
+                sql = "SELECT * FROM tblitems WHERE" +
+                     " DELETED = 0" +
+                     gLineString() +
+                     sLineString() +
+                     //" AND 1"+
+                     " AND (" +
+                     //" id LIKE '%" + txtsearch.Text +
+                     " NAME LIKE '%" + txtsearch.Text +
+                     "%' OR DESCRIPTION LIKE '%" + txtsearch.Text +
+                     "%' OR PROJECT LIKE '%" + txtsearch.Text +
+                     "%')";
+            }
             config.Load_DTG(sql, dtglist);
 
             maxcolumn = dtglist.Columns.Count - 1;
@@ -528,6 +563,29 @@ namespace InventorySystem1._0
         private void invoiceDateTime_ValueChanged(object sender, EventArgs e)
         {
             invoice_changed = true;
+        }
+
+        private void loadLines_Click(object sender, EventArgs e)
+        {
+            sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='GLINE' AND DELETED=0 ORDER BY `DESCRIPTION`;";
+            config.Fiil_CBO(sql, gLineCombo, gLineCombo2);
+            sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='SLINE' AND DELETED=0 ORDER BY `DESCRIPTION`;";
+            config.Fiil_CBO(sql, sLineCombo, sLineCombo2);
+            //gLineCombo.Items.Remove(gLineCombo.Items[0]);
+           
+            gLineCombo2.SelectedIndex = 0;
+            sLineCombo2.SelectedIndex = 0;
+
+        }
+
+        private void gLineCombo2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Txtsearch_TextChanged(sender, e);
+        }
+
+        private void sLineCombo2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Txtsearch_TextChanged(sender, e);
         }
     }
 }

@@ -22,18 +22,18 @@ namespace InventorySystem1._0
 
         readonly SQLConfig config = new SQLConfig();
         readonly usableFunction funct = new usableFunction();
-        string sql,typeid,unitid,personID;
+        string sql,unitid,personID,sLineID,gLineID;
 
         private void BtnTypesave_Click(object sender, EventArgs e)
         {
            
-            if (string.IsNullOrWhiteSpace(txtCategory.Text))
+            if (string.IsNullOrWhiteSpace(gLineTxtBox.Text))
             {
                 MessageBox.Show("املأ الإسم أولا");
                 return;
             }
             
-            string checkSql = "SELECT * FROM tblsettings WHERE DESCRIPTION ='" + txtCategory.Text + "'";
+            string checkSql = "SELECT * FROM tblsettings WHERE DESCRIPTION ='" + gLineTxtBox.Text + "'";
             MySqlConnection con = new MySqlConnection(MyCon.GetConString());
 
             MySqlCommand command = new MySqlCommand(checkSql, con);
@@ -55,7 +55,7 @@ namespace InventorySystem1._0
             }
             else
             {
-                sql = "INSERT INTO tblsettings (DESCRIPTION,PARA) VALUES ('" + txtCategory.Text + "','Category')";
+                sql = "INSERT INTO tblsettings (DESCRIPTION,PARA) VALUES ('" + gLineTxtBox.Text + "','GLINE')";
                 config.Execute_CUD(sql, "error to save date", "Data has been saved in the database.");
                 BtntypeLoad_Click(sender, e);
             }
@@ -63,10 +63,10 @@ namespace InventorySystem1._0
            
         private void BtntypeLoad_Click(object sender, EventArgs e)
         {
-            sql = "SELECT ID, DESCRIPTION as 'Category' FROM tblsettings WHERE PARA='Category' AND `DELETED`=0";
-            config.Load_DTG(sql, dtgtypelist); 
-            dtgtypelist.Columns[0].Visible = false;
-            txtCategory.Clear();
+            sql = "SELECT ID, DESCRIPTION as 'GLINE' FROM tblsettings WHERE PARA='GLINE' AND `DELETED`=0";
+            config.Load_DTG(sql, dtgGLINElist); 
+            dtgGLINElist.Columns[0].Visible = false;
+            gLineTxtBox.Clear();
         }
 
         private void Btncdel_Click(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace InventorySystem1._0
             sql = "DELETE FROM `tblautonumber` WHERE `ID`='" + dtgtypelist.CurrentRow.Cells[0].Value + "'";
             config.Execute_Query(sql);*/
 
-            sql = "UPDATE `tblsettings` SET DELETED=1 WHERE `ID`='" + dtgtypelist.CurrentRow.Cells[0].Value + "'";
+            sql = "UPDATE `tblsettings` SET DELETED=1 WHERE `ID`='" + dtgGLINElist.CurrentRow.Cells[0].Value + "'";
             config.Execute_CUD(sql, "حصل خطأ ما", "تم الحذف");
 
             BtntypeLoad_Click(sender, e);
@@ -83,8 +83,8 @@ namespace InventorySystem1._0
 
         private void Dtgtypelist_Click(object sender, EventArgs e)
         {
-            txtCategory.Text = dtgtypelist.CurrentRow.Cells[1].Value.ToString();
-            typeid = dtgtypelist.CurrentRow.Cells[0].Value.ToString();
+            gLineTxtBox.Text = dtgGLINElist.CurrentRow.Cells[1].Value.ToString();
+            gLineID = dtgGLINElist.CurrentRow.Cells[0].Value.ToString();
         }
 
         private void Btnuload_Click(object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace InventorySystem1._0
             sql = "SELECT ID, DESCRIPTION as 'Unit' FROM tblsettings WHERE PARA='Unit' AND `DELETED`=0";
             config.Load_DTG(sql, dtgulist);
             dtgulist.Columns[0].Visible = false;
-            txtCategory.Clear();
+            gLineTxtBox.Clear();
             
         }
 
@@ -151,6 +151,19 @@ namespace InventorySystem1._0
                 MessageBox.Show("catched");
             }
         }
+        private void DtgSLINElist_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                sLineTxtBox.Text = dtgSLINElist.CurrentRow.Cells[1].Value.ToString();
+                sLineID = dtgSLINElist.CurrentRow.Cells[0].Value.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("catched");
+            }
+        }
         private void PersonDTGV_Click(object sender, EventArgs e)
         {
 
@@ -174,6 +187,8 @@ namespace InventorySystem1._0
             BtntypeLoad_Click(sender, e);
             Btnuload_Click(sender, e);
             LoadPersonBtn_Click(sender, e);
+            btntSLineLoad_Click(sender, e);
+            
 
         }
 
@@ -226,7 +241,7 @@ namespace InventorySystem1._0
             else
             {
                 sql = "INSERT INTO tblperson (SUPLIERCUSTOMERID,FIRSTNAME, LASTNAME, TYPE) VALUES ('" + personIDTxtBox.Text + "','" + personFirstNameTxtBox.Text + "','" + personLastNameTxtBox.Text + "', 'CUSTOMER')";
-                config.Execute_CUD(sql, "error to save date", "Data has been saved in the database.");
+                config.Execute_CUD(sql, "error saving data", "Data has been saved in the database.");
                 LoadPersonBtn_Click(sender, e);
             }
         }
@@ -251,6 +266,57 @@ namespace InventorySystem1._0
             LoadPersonBtn_Click(sender, e);
         }
 
+        private void btntSLineLoad_Click(object sender, EventArgs e)
+        {
+            sql = "SELECT ID, DESCRIPTION as 'SLINE' FROM tblsettings WHERE PARA='SLINE' AND `DELETED`=0";
+            config.Load_DTG(sql, dtgSLINElist);
+            dtgSLINElist.Columns[0].Visible = false;
+            sLineTxtBox.Clear();
+        }
+
+        private void btnSLinesave_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(sLineTxtBox.Text))
+            {
+                MessageBox.Show("املأ الإسم أولا");
+                return;
+            }
+
+            string checkSql = "SELECT * FROM tblsettings WHERE DESCRIPTION ='" + sLineTxtBox.Text + "'";
+            MySqlConnection con = new MySqlConnection(MyCon.GetConString());
+
+            MySqlCommand command = new MySqlCommand(checkSql, con);
+            con.Open();
+            MySqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+
+
+            if (reader.HasRows)
+            {
+                if (reader.GetInt16("DELETED") == 1)
+                {
+                    sql = "UPDATE `tblsettings` SET DELETED=0 WHERE `ID`=" + reader.GetInt16("ID");
+                    config.Execute_CUD(sql, "حصل خطأ ما", "تمت الاضافة");
+                    BtntypeLoad_Click(sender, e);
+                    return;
+                }
+                MessageBox.Show("هذا العنصر موجود في اللائحة");
+            }
+            else
+            {
+                sql = "INSERT INTO tblsettings (DESCRIPTION,PARA) VALUES ('" + sLineTxtBox.Text + "','SLINE')";
+                config.Execute_CUD(sql, "error to saving data", "Data has been saved in the database.");
+                btntSLineLoad_Click(sender, e);
+            }
+        }
+
+        private void sLineUpdateBtn_Click(object sender, EventArgs e)
+        {
+            sql = "UPDATE tblsettings  SET DESCRIPTION= '" + sLineTxtBox.Text + "' WHERE ID ='" + sLineID + "'";
+            config.Execute_CUD(sql, "حصل خطأ ما", "تم تعديل المعلومات");
+            btntSLineLoad_Click(sender, e);
+        }
+
         private void DeletePersonBtn_Click(object sender, EventArgs e)
         {
             sql = "UPDATE `tblperson` SET DELETED=1 WHERE `SUPLIERCUSTOMERID`='" + personID + "'";
@@ -267,7 +333,7 @@ namespace InventorySystem1._0
 
         private void Btntypeupdate_Click(object sender, EventArgs e)
         {
-            sql = "UPDATE tblsettings  SET DESCRIPTION= '" + txtCategory.Text + "' WHERE ID ='" + typeid + "'";
+            sql = "UPDATE tblsettings  SET DESCRIPTION= '" + gLineTxtBox.Text + "' WHERE ID ='" + gLineID + "'";
             config.Execute_CUD(sql, "حصل خطأ ما", "تم تعديل المعلومات");
             BtntypeLoad_Click(sender, e);
         }

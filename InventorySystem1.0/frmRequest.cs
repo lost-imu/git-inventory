@@ -104,6 +104,30 @@ namespace InventorySystem1._0
                 "WHERE `TYPE`='CUSTOMER' ORDER BY `concat(``FIRSTNAME``,' ',``LASTNAME``)` ASC ";
             config.Fiil_CBO(sql, empNameComboBox);
         }
+
+        private string gLineString()
+        {
+            try
+            {
+                if (gLineCombo2.SelectedIndex <= 0)
+                    return null;
+                return " AND `GLINE` = '" + gLineCombo2.SelectedItem.ToString() + "'";
+            }
+            catch { return null; }
+        }
+        private string sLineString()
+        {
+            try
+            {
+                if (sLineCombo2.SelectedIndex <= 0)
+                    return null;
+
+                return " AND `SLINE` = '" + sLineCombo2.SelectedItem.ToString() + "'";
+
+            }
+            catch (Exception) { return null; }
+        }
+
         private void Txtsearch_TextChanged(object sender, KeyEventArgs e)
         {
 
@@ -111,50 +135,40 @@ namespace InventorySystem1._0
             if (e.KeyCode != Keys.Return)
                 //.ToString().ToLower() != "return")
                 return;
-            if (string.IsNullOrWhiteSpace(txtsearch.Text) || string.IsNullOrEmpty(txtsearch.Text))
-                return;
 
-            if (string.IsNullOrWhiteSpace(scannerTxtBox.Text))
-                sql = "SELECT `id` as 'رقم الصنف'," +
-                    " `NAME` as 'الاسم'," +
-                    " `DESCRIPTION` as 'الشرح', " +
-                    "`TYPE` as 'النوع'," +
-                    " `QTY` as 'الكمية المتوفرة'," +
-                    " `HOLD` as 'الكمية المحجوزة'," +
-                    " `UNIT` as 'الوحدة'," +
-                    " `PROJECT` as 'المشروع'," +
-                    " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل'," +
-                    " CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
-                    //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', " +
-                    "`NOTE` as 'ملاحظات'" +
-                    " FROM `tblitems` WHERE QTY>=0 AND(" +
-                    " `NAME` like '%" + txtsearch.Text + "%' " +
-                    "or `DESCRIPTION` like '%" + txtsearch.Text + "%' " +
-                    "or `id` like '%" + txtsearch.Text + "%')" +
-                    " ORDER BY `الكمية المتوفرة` DESC;";
+            //if (string.IsNullOrWhiteSpace(txtsearch.Text))
+            //    sql = "SELECT * FROM tblitems WHERE" +
+            //   " DELETED = 0" +
+            //   gLineString() +
+            //   sLineString() + ";";
+
+            //else
+            //{
+
+            if (string.IsNullOrWhiteSpace(txtsearch.Text))
+                sql = "SELECT * FROM tblitems WHERE" +
+               " DELETED = 0" +
+               gLineString() +
+               sLineString() + ";";
             else
             {
-                sql = "SELECT `id` as 'رقم الصنف'," +
-                " `NAME` as 'الاسم'," +
-                " `DESCRIPTION` as 'الشرح', " +
-                "`TYPE` as 'النوع'," +
-                " `QTY` as 'الكمية المتوفرة'," +
-                " `HOLD` as 'الكمية المحجوزة'," +
-                " `UNIT` as 'الوحدة'," +
-                " `PROJECT` as 'المشروع'," +
-                " case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل'," +
-                " CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية'," +
-                //" CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', " +
-                "`NOTE` as 'ملاحظات'" +
-                " FROM `tblitems` WHERE QTY>=0 AND" +
-                " `id` = '" + txtsearch.Text + "'" +
-                " ORDER BY `الكمية المتوفرة` DESC;";
-            }
-            //sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `TYPE` as 'النوع', `QTY` as 'الكمية المتوفرة', `UNIT` as 'الوحدة', `PROJECT` as 'المشروع', case when ISNEW =0 then 'مستعمل' else 'جديد' END as 'جديد-مستعمل', CASE WHEN `EXPIRYDATE` BETWEEN '2010-01-01' AND '2100-01-31' THEN `EXPIRYDATE` ELSE 'N/A' END as 'انتهاء الصلاحية', CASE WHEN `PROJECTEXPIRY` BETWEEN '2010-01-01' AND '2100-01-31' THEN `PROJECTEXPIRY` ELSE 'N/A' END as 'انتهاء المشروع', `NOTE` as 'ملاحظات' FROM `tblitems`";
+                sql = "SELECT * FROM tblitems WHERE" +
+                     " DELETED = 0" +
+                     gLineString() +
+                     sLineString() +
+                     //" AND 1"+
+                     " AND (" +
+                     //" id LIKE '%" + txtsearch.Text +
+                     " NAME LIKE '%" + txtsearch.Text +
+                     "%' OR DESCRIPTION LIKE '%" + txtsearch.Text +
+                     "%' OR PROJECT LIKE '%" + txtsearch.Text +
+                     "%')";
 
-            //sql = "SELECT `ITEMID` as 'رقم الصنف', `NAME` as 'الاسم', `DESCRIPTION` as 'الشرح', `PRICE` as 'السعر', `QTY` as 'الكمية المتوفرة' FROM `tblitems` WHERE  `NAME` like '%" + txtsearch.Text + "%' or `DESCRIPTION` like '%" + txtsearch.Text + "%' or `ITEMID` like '%" + txtsearch.Text + "%'";
+            }
             config.Load_DTG(sql, dtgCus_itemlist);
-            funct.ResponsiveDtg(dtgCus_itemlist);
+
+
+
         }
 
         private void DtgCus_itemlist_DoubleClick(object sender, EventArgs e)
@@ -970,7 +984,7 @@ namespace InventorySystem1._0
         private void frmRequest_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            
+            loadLines_Click(sender, e);
             scannerTxtBox.Focus();
         }
 
@@ -1005,6 +1019,17 @@ namespace InventorySystem1._0
             funct.ResponsiveDtg(dtgCus_itemlist);
         }
 
+        private void loadLines_Click(object sender, EventArgs e)
+        {
+            sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='GLINE' AND DELETED=0 ORDER BY `DESCRIPTION`;";
+            config.Fiil_CBO(sql, gLineCombo, gLineCombo2);
+            sql = "SELECT DESCRIPTION FROM `tblsettings` WHERE `PARA`='SLINE' AND DELETED=0 ORDER BY `DESCRIPTION`;";
+            config.Fiil_CBO(sql, sLineCombo, sLineCombo2);
+            
+            //gLineCombo.Items.Remove(gLineCombo.Items[0]);
+            gLineCombo2.SelectedIndex = 0;
+            sLineCombo2.SelectedIndex = 0;
+        }
 
         private void ScannerTxtBox_KeyDown(object sender, KeyEventArgs e)
             {

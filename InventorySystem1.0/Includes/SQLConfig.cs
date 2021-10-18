@@ -165,6 +165,40 @@ namespace InventorySystem1._0.Includes
             }
 
         }
+        public void Fiil_CBO(string sql, ComboBox cbo, ComboBox cbo2)
+        {
+            MySqlConnection connection;
+            MySqlCommand command;
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            DataSet ds = new DataSet();
+            connection = new MySqlConnection(MyCon.GetConString());
+            try
+            {
+
+                connection.Open();
+                command = new MySqlCommand(sql, connection);
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                adapter.Dispose();
+                command.Dispose();
+                connection.Close();
+                cbo.Items.Clear();
+                cbo2.Items.Clear();
+                cbo2.Items.Add("ALL");
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    //dataCollection.Add(row[0].ToString());
+                    cbo.Items.Add(row[0].ToString());
+                    cbo2.Items.Add(row[0].ToString());
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can not open connection ! " + ex);
+            }
+
+        }
         public void SingleResult(string sql)
 
         {

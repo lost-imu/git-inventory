@@ -30,6 +30,18 @@ namespace InventorySystem1._0
         private void InitializeComponent()
         {
             this.dtCus_addedlist = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sline = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isNew = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.expiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Label8 = new System.Windows.Forms.Label();
             this.Panel2 = new System.Windows.Forms.Panel();
             this.load_items_numericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -61,18 +73,13 @@ namespace InventorySystem1._0
             this.printLastBtn = new System.Windows.Forms.Button();
             this.btnCus_save = new System.Windows.Forms.Button();
             this.Panel3 = new System.Windows.Forms.Panel();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gline = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sline = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hold = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.project = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isNew = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.expiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sLineCombo2 = new System.Windows.Forms.ComboBox();
+            this.gLineCombo2 = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.loadLines = new System.Windows.Forms.Button();
+            this.gLineCombo = new System.Windows.Forms.ComboBox();
+            this.sLineCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtCus_addedlist)).BeginInit();
             this.Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.load_items_numericUpDown)).BeginInit();
@@ -108,6 +115,114 @@ namespace InventorySystem1._0
             this.dtCus_addedlist.Size = new System.Drawing.Size(1714, 313);
             this.dtCus_addedlist.TabIndex = 30;
             // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.id.HeaderText = "id";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.Visible = false;
+            this.id.Width = 125;
+            // 
+            // gline
+            // 
+            this.gline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.gline.HeaderText = "GLINE";
+            this.gline.MinimumWidth = 6;
+            this.gline.Name = "gline";
+            this.gline.ReadOnly = true;
+            this.gline.Width = 78;
+            // 
+            // sline
+            // 
+            this.sline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.sline.HeaderText = "SLINE";
+            this.sline.MinimumWidth = 6;
+            this.sline.Name = "sline";
+            this.sline.ReadOnly = true;
+            this.sline.Width = 76;
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.name.HeaderText = "Name";
+            this.name.MinimumWidth = 6;
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 74;
+            // 
+            // qty
+            // 
+            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.qty.HeaderText = "QTY";
+            this.qty.MinimumWidth = 6;
+            this.qty.Name = "qty";
+            this.qty.Width = 66;
+            // 
+            // hold
+            // 
+            this.hold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.hold.HeaderText = "Hold";
+            this.hold.MinimumWidth = 6;
+            this.hold.Name = "hold";
+            this.hold.ReadOnly = true;
+            this.hold.Width = 66;
+            // 
+            // unit
+            // 
+            this.unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.unit.HeaderText = "Unit";
+            this.unit.MinimumWidth = 6;
+            this.unit.Name = "unit";
+            this.unit.ReadOnly = true;
+            this.unit.Width = 62;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.description.HeaderText = "Description";
+            this.description.MinimumWidth = 6;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            this.description.Width = 108;
+            // 
+            // brand
+            // 
+            this.brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.brand.HeaderText = "Brand";
+            this.brand.MinimumWidth = 6;
+            this.brand.Name = "brand";
+            this.brand.ReadOnly = true;
+            this.brand.Width = 75;
+            // 
+            // project
+            // 
+            this.project.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.project.HeaderText = "Project";
+            this.project.MinimumWidth = 6;
+            this.project.Name = "project";
+            this.project.ReadOnly = true;
+            this.project.Width = 81;
+            // 
+            // isNew
+            // 
+            this.isNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.isNew.HeaderText = "Is New";
+            this.isNew.MinimumWidth = 6;
+            this.isNew.Name = "isNew";
+            this.isNew.ReadOnly = true;
+            this.isNew.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.isNew.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.isNew.Width = 78;
+            // 
+            // expiryDate
+            // 
+            this.expiryDate.HeaderText = "Expiry Date";
+            this.expiryDate.MinimumWidth = 6;
+            this.expiryDate.Name = "expiryDate";
+            this.expiryDate.ReadOnly = true;
+            this.expiryDate.Width = 125;
+            // 
             // Label8
             // 
             this.Label8.AutoSize = true;
@@ -123,12 +238,19 @@ namespace InventorySystem1._0
             // 
             this.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel2.Controls.Add(this.loadLines);
+            this.Panel2.Controls.Add(this.sLineCombo2);
+            this.Panel2.Controls.Add(this.gLineCombo2);
+            this.Panel2.Controls.Add(this.label12);
+            this.Panel2.Controls.Add(this.label4);
             this.Panel2.Controls.Add(this.load_items_numericUpDown);
             this.Panel2.Controls.Add(this.load_items_btn);
             this.Panel2.Controls.Add(this.Label7);
             this.Panel2.Controls.Add(this.Label6);
-            this.Panel2.Controls.Add(this.dtgCus_itemlist);
             this.Panel2.Controls.Add(this.txtsearch);
+            this.Panel2.Controls.Add(this.dtgCus_itemlist);
+            this.Panel2.Controls.Add(this.sLineCombo);
+            this.Panel2.Controls.Add(this.gLineCombo);
             this.Panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.Panel2.Location = new System.Drawing.Point(16, 130);
             this.Panel2.Margin = new System.Windows.Forms.Padding(4);
@@ -164,22 +286,22 @@ namespace InventorySystem1._0
             // 
             this.Label7.AutoSize = true;
             this.Label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label7.Location = new System.Drawing.Point(919, 2);
+            this.Label7.Location = new System.Drawing.Point(4, 4);
             this.Label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label7.Name = "Label7";
-            this.Label7.Size = new System.Drawing.Size(208, 29);
+            this.Label7.Size = new System.Drawing.Size(71, 29);
             this.Label7.TabIndex = 3;
-            this.Label7.Text = ":لائحة بالأصناف المتوفرة";
+            this.Label7.Text = "Items";
             // 
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(843, 11);
+            this.Label6.Location = new System.Drawing.Point(831, 13);
             this.Label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(33, 17);
+            this.Label6.Size = new System.Drawing.Size(53, 17);
             this.Label6.TabIndex = 4;
-            this.Label6.Text = ":بحث";
+            this.Label6.Text = "Search";
             // 
             // dtgCus_itemlist
             // 
@@ -192,12 +314,12 @@ namespace InventorySystem1._0
             this.dtgCus_itemlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgCus_itemlist.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dtgCus_itemlist.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dtgCus_itemlist.Location = new System.Drawing.Point(0, 36);
+            this.dtgCus_itemlist.Location = new System.Drawing.Point(0, 42);
             this.dtgCus_itemlist.Margin = new System.Windows.Forms.Padding(4);
             this.dtgCus_itemlist.Name = "dtgCus_itemlist";
             this.dtgCus_itemlist.RowHeadersVisible = false;
             this.dtgCus_itemlist.RowHeadersWidth = 51;
-            this.dtgCus_itemlist.Size = new System.Drawing.Size(1714, 192);
+            this.dtgCus_itemlist.Size = new System.Drawing.Size(1714, 186);
             this.dtgCus_itemlist.TabIndex = 0;
             this.dtgCus_itemlist.DoubleClick += new System.EventHandler(this.DtgCus_itemlist_DoubleClick);
             // 
@@ -205,7 +327,7 @@ namespace InventorySystem1._0
             // 
             this.txtsearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtsearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtsearch.Location = new System.Drawing.Point(541, 7);
+            this.txtsearch.Location = new System.Drawing.Point(894, 11);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(292, 23);
@@ -488,113 +610,73 @@ namespace InventorySystem1._0
             this.Panel3.Size = new System.Drawing.Size(1716, 354);
             this.Panel3.TabIndex = 32;
             // 
-            // id
+            // sLineCombo2
             // 
-            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.id.HeaderText = "id";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.Visible = false;
-            this.id.Width = 25;
+            this.sLineCombo2.FormattingEnabled = true;
+            this.sLineCombo2.Location = new System.Drawing.Point(599, 8);
+            this.sLineCombo2.Name = "sLineCombo2";
+            this.sLineCombo2.Size = new System.Drawing.Size(199, 25);
+            this.sLineCombo2.TabIndex = 32;
             // 
-            // gline
+            // gLineCombo2
             // 
-            this.gline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.gline.HeaderText = "GLINE";
-            this.gline.MinimumWidth = 6;
-            this.gline.Name = "gline";
-            this.gline.ReadOnly = true;
-            this.gline.Width = 78;
+            this.gLineCombo2.FormattingEnabled = true;
+            this.gLineCombo2.Location = new System.Drawing.Point(353, 8);
+            this.gLineCombo2.Name = "gLineCombo2";
+            this.gLineCombo2.Size = new System.Drawing.Size(187, 25);
+            this.gLineCombo2.TabIndex = 33;
             // 
-            // sline
+            // label12
             // 
-            this.sline.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.sline.HeaderText = "SLINE";
-            this.sline.MinimumWidth = 6;
-            this.sline.Name = "sline";
-            this.sline.ReadOnly = true;
-            this.sline.Width = 76;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(296, 11);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label12.Size = new System.Drawing.Size(50, 17);
+            this.label12.TabIndex = 34;
+            this.label12.Text = "G Line";
             // 
-            // name
+            // label4
             // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.name.HeaderText = "Name";
-            this.name.MinimumWidth = 6;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 74;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(547, 11);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label4.Size = new System.Drawing.Size(48, 17);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "S Line";
             // 
-            // qty
+            // loadLines
             // 
-            this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.qty.HeaderText = "QTY";
-            this.qty.MinimumWidth = 6;
-            this.qty.Name = "qty";
-            this.qty.Width = 66;
+            this.loadLines.Location = new System.Drawing.Point(82, 5);
+            this.loadLines.Name = "loadLines";
+            this.loadLines.Size = new System.Drawing.Size(132, 23);
+            this.loadLines.TabIndex = 36;
+            this.loadLines.Text = "Reload Lines";
+            this.loadLines.UseVisualStyleBackColor = true;
+            this.loadLines.Click += new System.EventHandler(this.loadLines_Click);
             // 
-            // hold
+            // gLineCombo
             // 
-            this.hold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.hold.HeaderText = "Hold";
-            this.hold.MinimumWidth = 6;
-            this.hold.Name = "hold";
-            this.hold.ReadOnly = true;
-            this.hold.Width = 66;
+            this.gLineCombo.Enabled = false;
+            this.gLineCombo.FormattingEnabled = true;
+            this.gLineCombo.Location = new System.Drawing.Point(353, 51);
+            this.gLineCombo.Name = "gLineCombo";
+            this.gLineCombo.Size = new System.Drawing.Size(187, 25);
+            this.gLineCombo.TabIndex = 33;
+            this.gLineCombo.Visible = false;
             // 
-            // unit
+            // sLineCombo
             // 
-            this.unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.unit.HeaderText = "Unit";
-            this.unit.MinimumWidth = 6;
-            this.unit.Name = "unit";
-            this.unit.ReadOnly = true;
-            this.unit.Width = 62;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.description.HeaderText = "Description";
-            this.description.MinimumWidth = 6;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            this.description.Width = 108;
-            // 
-            // brand
-            // 
-            this.brand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.brand.HeaderText = "Brand";
-            this.brand.MinimumWidth = 6;
-            this.brand.Name = "brand";
-            this.brand.ReadOnly = true;
-            this.brand.Width = 75;
-            // 
-            // project
-            // 
-            this.project.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.project.HeaderText = "Project";
-            this.project.MinimumWidth = 6;
-            this.project.Name = "project";
-            this.project.ReadOnly = true;
-            this.project.Width = 81;
-            // 
-            // isNew
-            // 
-            this.isNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.isNew.HeaderText = "Is New";
-            this.isNew.MinimumWidth = 6;
-            this.isNew.Name = "isNew";
-            this.isNew.ReadOnly = true;
-            this.isNew.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.isNew.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.isNew.Width = 78;
-            // 
-            // expiryDate
-            // 
-            this.expiryDate.HeaderText = "Expiry Date";
-            this.expiryDate.MinimumWidth = 6;
-            this.expiryDate.Name = "expiryDate";
-            this.expiryDate.ReadOnly = true;
-            this.expiryDate.Width = 125;
+            this.sLineCombo.Enabled = false;
+            this.sLineCombo.FormattingEnabled = true;
+            this.sLineCombo.Location = new System.Drawing.Point(599, 51);
+            this.sLineCombo.Name = "sLineCombo";
+            this.sLineCombo.Size = new System.Drawing.Size(199, 25);
+            this.sLineCombo.TabIndex = 32;
+            this.sLineCombo.Visible = false;
             // 
             // frmRequest
             // 
@@ -675,5 +757,12 @@ namespace InventorySystem1._0
         private System.Windows.Forms.DataGridViewTextBoxColumn project;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isNew;
         private System.Windows.Forms.DataGridViewTextBoxColumn expiryDate;
+        private System.Windows.Forms.ComboBox sLineCombo2;
+        private System.Windows.Forms.ComboBox gLineCombo2;
+        internal System.Windows.Forms.Label label12;
+        internal System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button loadLines;
+        private System.Windows.Forms.ComboBox sLineCombo;
+        private System.Windows.Forms.ComboBox gLineCombo;
     }
 }

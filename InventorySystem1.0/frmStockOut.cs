@@ -52,6 +52,7 @@ namespace InventorySystem1._0
         private void FrmStockOut_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+            load_items_btn_Click(sender, e);
             /**
             sql = "SELECT SUPLIERCUSTOMERID FROM tblperson WHERE TYPE = 'CUSTOMER'";
             config.Autocomplete(sql, txt_cusid);
@@ -61,7 +62,7 @@ namespace InventorySystem1._0
             config.Load_DTG(sql, dtgCus_itemlist);
             funct.ResponsiveDtg(dtgCus_itemlist);
             **/
-            scannerTxtBox.Focus();
+            txtsearch.Focus();
             
         }
         private void load_items_btn_Click(object sender, EventArgs e)
@@ -211,7 +212,7 @@ namespace InventorySystem1._0
             foreach (DataGridViewRow r in dtCus_addedlist.Rows)
             {
                 //sql = "UPDATE `tblitems`  SET `HOLD`= `HOLD` - '" + r.Cells[4].Value + "' WHERE id='" + r.Cells[0].Value + "'";
-                sql = "UPDATE `tblitems`  SET `qty` = `qty`- "+ r.Cells[4].Value + " , `HOLD`= `HOLD` - "+ r.Cells[4].Value + " where id ="+ r.Cells[0].Value + ";";
+                sql = "UPDATE `tblitems`  SET `qty` = `qty`- "+ r.Cells[6].Value + " , `HOLD`= `HOLD` - "+ r.Cells[6].Value + " where id ="+ r.Cells[0].Value + ";";
                 Execute_Query(sql);
                 //sql = ""
             }
@@ -221,6 +222,7 @@ namespace InventorySystem1._0
             PrintLastBtn(sender, e);
 
             //dtCus_addedlist.Rows.Clear();
+            dtCus_addedlist.DataSource = null;
 
             funct.clearTxt(Panel1);
             FrmStockOut_Load(sender, e);
@@ -277,7 +279,7 @@ namespace InventorySystem1._0
                 if (result > 0)
                 {
                     bool b;
-                    MessageBox.Show("Done!");
+                    //MessageBox.Show("Done!");
                     //b = MyCon.ReportIt(tsansType + isEmployeeCombo.SelectedItem, "ALL", stockoutID, itemName, description, 
                     //type,
                     //  qty, unit, project, Convert.ToInt32(isNew), ExpiryDate);//, projectExpiry);
@@ -301,7 +303,9 @@ namespace InventorySystem1._0
 
         private void BtnCus_clear_Click(object sender, EventArgs e)
         {
-            dtCus_addedlist.Rows.Clear();
+            dtCus_addedlist.DataSource = null;
+
+            //dtCus_addedlist.Rows.Clear();
         }
 
         private void Button2_Click(object sender, EventArgs e)
