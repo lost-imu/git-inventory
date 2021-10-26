@@ -56,8 +56,6 @@
             this.qtyUpDown = new System.Windows.Forms.NumericUpDown();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.expiryDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.sLineTxtBox = new System.Windows.Forms.TextBox();
-            this.gLineTxtBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -313,8 +311,6 @@
             this.pnl_stockmaster.Controls.Add(this.qtyUpDown);
             this.pnl_stockmaster.Controls.Add(this.dateTimePicker3);
             this.pnl_stockmaster.Controls.Add(this.expiryDatePicker);
-            this.pnl_stockmaster.Controls.Add(this.sLineTxtBox);
-            this.pnl_stockmaster.Controls.Add(this.gLineTxtBox);
             this.pnl_stockmaster.Controls.Add(this.label11);
             this.pnl_stockmaster.Controls.Add(this.label9);
             this.pnl_stockmaster.Controls.Add(this.brandTxtBox);
@@ -422,26 +418,6 @@
             this.expiryDatePicker.Name = "expiryDatePicker";
             this.expiryDatePicker.Size = new System.Drawing.Size(155, 23);
             this.expiryDatePicker.TabIndex = 10;
-            // 
-            // sLineTxtBox
-            // 
-            this.sLineTxtBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sLineTxtBox.Location = new System.Drawing.Point(454, 62);
-            this.sLineTxtBox.Margin = new System.Windows.Forms.Padding(4);
-            this.sLineTxtBox.Name = "sLineTxtBox";
-            this.sLineTxtBox.Size = new System.Drawing.Size(79, 26);
-            this.sLineTxtBox.TabIndex = 1;
-            this.sLineTxtBox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
-            // 
-            // gLineTxtBox
-            // 
-            this.gLineTxtBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gLineTxtBox.Location = new System.Drawing.Point(454, 22);
-            this.gLineTxtBox.Margin = new System.Windows.Forms.Padding(4);
-            this.gLineTxtBox.Name = "gLineTxtBox";
-            this.gLineTxtBox.Size = new System.Drawing.Size(79, 26);
-            this.gLineTxtBox.TabIndex = 1;
-            this.gLineTxtBox.TextChanged += new System.EventHandler(this.Txtitemid_TextChanged);
             // 
             // label11
             // 
@@ -686,8 +662,6 @@
         private System.Windows.Forms.CheckBox expiryDateCheckBx;
         internal System.Windows.Forms.TextBox suppliertxtbox;
         internal System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.TextBox sLineTxtBox;
-        internal System.Windows.Forms.TextBox gLineTxtBox;
         internal System.Windows.Forms.Label label11;
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label3;

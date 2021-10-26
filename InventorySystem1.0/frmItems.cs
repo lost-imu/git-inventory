@@ -182,8 +182,8 @@ namespace InventorySystem1._0
                 con.Close();
                 con.Open();
                 command = new MySqlCommand(sql, con);
-                command.Parameters.Add(new MySqlParameter("@GLINE", gLineTxtBox.Text));
-                command.Parameters.Add(new MySqlParameter("@SLINE", sLineTxtBox.Text));
+                command.Parameters.Add(new MySqlParameter("@GLINE", gLineCombo.SelectedItem.ToString()));
+                command.Parameters.Add(new MySqlParameter("@SLINE", sLineCombo.SelectedItem.ToString()));
                 command.Parameters.Add(new MySqlParameter("@NAME", itemNameTextBox.Text));
                 command.Parameters.Add(new MySqlParameter("@DESCRIPTION", descriptionTextBox.Text));
                 command.Parameters.Add(new MySqlParameter("@BRAND", brandTxtBox.Text));
@@ -236,8 +236,8 @@ namespace InventorySystem1._0
                                         "VALUES (@GLINE, @SLINE , @NAME, @DESCRIPTION, @BRAND, @QTY, @UNIT, @PROJECT, @ISNEW, @EXPIRYDATE)"; //, @RECIEVER_NUMBER, @RECIEVER_STATE, @RECIEVER_NAME)";
 
                     command = new MySqlCommand(sql, con);
-                    command.Parameters.Add(new MySqlParameter("GLINE", gLineTxtBox.Text));
-                    command.Parameters.Add(new MySqlParameter("SLINE", sLineTxtBox.Text));
+                    command.Parameters.Add(new MySqlParameter("GLINE", gLineCombo.SelectedValue.ToString()));
+                    command.Parameters.Add(new MySqlParameter("SLINE", sLineCombo.SelectedValue.ToString()));
                     command.Parameters.Add(new MySqlParameter("NAME", itemNameTextBox.Text));
                     command.Parameters.Add(new MySqlParameter("DESCRIPTION", descriptionTextBox.Text));
                     command.Parameters.Add(new MySqlParameter("BRAND", brandTxtBox.Text));
@@ -430,8 +430,8 @@ namespace InventorySystem1._0
                 if (config.dt.Rows.Count > 0)
                 {
                     itemID = config.dt.Rows[0].Field<int>("id");
-                    gLineTxtBox.Text = config.dt.Rows[0].Field<string>("GLINE");
-                    sLineTxtBox.Text = config.dt.Rows[0].Field<string>("SLINE");
+                    gLineCombo.SelectedValue = config.dt.Rows[0].Field<string>("GLINE");
+                    sLineCombo.SelectedValue = config.dt.Rows[0].Field<string>("SLINE");
                     projectTextBox.Text = config.dt.Rows[0].Field<string>("PROJECT");
                     brandTxtBox.Text = config.dt.Rows[0].Field<string>("BRAND");
                     itemNameTextBox.Text = config.dt.Rows[0].Field<string>("NAME");

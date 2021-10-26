@@ -194,7 +194,7 @@ namespace InventorySystem1._0
                     expiryDate = dtgCus_itemlist.CurrentRow.Cells["EXPIRYDATE"].Value.ToString();
                 
                 qty = 1;
-                _ = double.Parse(dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString()) * 1;
+                _ = double.Parse(dtgCus_itemlist.CurrentRow.Cells[6].Value.ToString()) * 1;
                 string[] row = new string[] { 
                     dtgCus_itemlist.CurrentRow.Cells["id"].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells["GLINE"].Value.ToString(),
@@ -258,7 +258,7 @@ namespace InventorySystem1._0
                         expiryDate = dtgCus_itemlist.CurrentRow.Cells["EXPIRYDATE"].Value.ToString();
 
                     qty = 1;
-                    _ = double.Parse(dtgCus_itemlist.CurrentRow.Cells[4].Value.ToString()) * 1;
+                    _ = double.Parse(dtgCus_itemlist.CurrentRow.Cells[6].Value.ToString()) * 1;
                     string[] row = new string[] {
                     dtgCus_itemlist.CurrentRow.Cells["id"].Value.ToString(),
                     dtgCus_itemlist.CurrentRow.Cells["GLINE"].Value.ToString(),
