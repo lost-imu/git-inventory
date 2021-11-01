@@ -43,6 +43,7 @@ namespace InventorySystem1._0
                 ts_stocks.Enabled = false;
                 ts_settings.Enabled = false;
                 ts_repository.Enabled = false;
+                toolStripButton1.Enabled = false;
                 //visibility
                 ts_ManageUsers.Visible = false;
                 ts_Report.Visible = false;
@@ -51,6 +52,7 @@ namespace InventorySystem1._0
                 ts_stocks.Visible = false;
                 ts_settings.Visible = false;
                 ts_repository.Visible = false;
+                toolStripButton1.Visible = false;
 
             }
 
@@ -71,6 +73,9 @@ namespace InventorySystem1._0
                 //reports
                 ts_Report.Enabled = true;
                 ts_Report.Visible = true;
+                //reports2
+                toolStripButton1.Enabled = true;
+                toolStripButton1.Visible = true;
 
             }
 
@@ -91,6 +96,9 @@ namespace InventorySystem1._0
                 //reports
                 ts_Report.Enabled = true;
                 ts_Report.Visible = true;
+                //reports2
+                toolStripButton1.Enabled = true;
+                toolStripButton1.Visible = true;
 
             }
             
@@ -215,9 +223,18 @@ namespace InventorySystem1._0
             ts_ManageUsers.Checked = false;
             ts_repository.Checked = false;
             ts_Report.Checked = false;
+            toolStripButton1.Checked = false;
             ts_settings.Checked = false;
             ts_Login.Checked = false;
             t.Checked = true;
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            CheckBtn(toolStripButton1);
+            CloseForm();
+            ShowFrm(new frmReports2());
+
         }
     }
 }

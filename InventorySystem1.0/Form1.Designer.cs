@@ -40,6 +40,7 @@
             this.ts_Login = new System.Windows.Forms.ToolStripButton();
             this.versionTSLabel = new System.Windows.Forms.ToolStripLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,13 +54,14 @@
             this.ts_Return,
             this.ts_ManageUsers,
             this.ts_repository,
+            this.toolStripButton1,
             this.ts_Report,
             this.ts_settings,
             this.ts_Login,
             this.versionTSLabel});
-            this.toolStrip1.Location = new System.Drawing.Point(1199, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(1154, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(118, 684);
+            this.toolStrip1.Size = new System.Drawing.Size(163, 684);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -103,7 +105,7 @@
             this.ts_Return.Image = ((System.Drawing.Image)(resources.GetObject("ts_Return.Image")));
             this.ts_Return.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_Return.Name = "ts_Return";
-            this.ts_Return.Size = new System.Drawing.Size(150, 64);
+            this.ts_Return.Size = new System.Drawing.Size(160, 64);
             this.ts_Return.Text = "إسترجاع";
             this.ts_Return.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_Return.Visible = false;
@@ -116,7 +118,7 @@
             this.ts_ManageUsers.Image = ((System.Drawing.Image)(resources.GetObject("ts_ManageUsers.Image")));
             this.ts_ManageUsers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_ManageUsers.Name = "ts_ManageUsers";
-            this.ts_ManageUsers.Size = new System.Drawing.Size(150, 64);
+            this.ts_ManageUsers.Size = new System.Drawing.Size(160, 64);
             this.ts_ManageUsers.Text = "إدارة المستخدمين";
             this.ts_ManageUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_ManageUsers.Visible = false;
@@ -129,7 +131,7 @@
             this.ts_repository.Image = global::InventorySystem1._0.Properties.Resources.repository;
             this.ts_repository.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_repository.Name = "ts_repository";
-            this.ts_repository.Size = new System.Drawing.Size(118, 64);
+            this.ts_repository.Size = new System.Drawing.Size(160, 64);
             this.ts_repository.Text = "اضافة الى ال";
             this.ts_repository.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_repository.Visible = false;
@@ -142,7 +144,7 @@
             this.ts_Report.Image = ((System.Drawing.Image)(resources.GetObject("ts_Report.Image")));
             this.ts_Report.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_Report.Name = "ts_Report";
-            this.ts_Report.Size = new System.Drawing.Size(115, 64);
+            this.ts_Report.Size = new System.Drawing.Size(160, 64);
             this.ts_Report.Text = "تقرير";
             this.ts_Report.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_Report.Visible = false;
@@ -154,7 +156,7 @@
             this.ts_settings.Image = ((System.Drawing.Image)(resources.GetObject("ts_settings.Image")));
             this.ts_settings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_settings.Name = "ts_settings";
-            this.ts_settings.Size = new System.Drawing.Size(115, 64);
+            this.ts_settings.Size = new System.Drawing.Size(160, 64);
             this.ts_settings.Text = "الضبط";
             this.ts_settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_settings.Visible = false;
@@ -166,7 +168,7 @@
             this.ts_Login.Image = global::InventorySystem1._0.Properties.Resources.login;
             this.ts_Login.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_Login.Name = "ts_Login";
-            this.ts_Login.Size = new System.Drawing.Size(115, 64);
+            this.ts_Login.Size = new System.Drawing.Size(160, 64);
             this.ts_Login.Text = "تسجيل دخول";
             this.ts_Login.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ts_Login.Click += new System.EventHandler(this.Ts_Login_Click);
@@ -174,7 +176,7 @@
             // versionTSLabel
             // 
             this.versionTSLabel.Name = "versionTSLabel";
-            this.versionTSLabel.Size = new System.Drawing.Size(115, 20);
+            this.versionTSLabel.Size = new System.Drawing.Size(160, 20);
             this.versionTSLabel.Text = "version: ";
             // 
             // statusStrip1
@@ -183,9 +185,22 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 662);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1199, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1154, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Enabled = false;
+            this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(160, 64);
+            this.toolStripButton1.Text = "تقرير 2";
+            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton1.Visible = false;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Form1
             // 
@@ -197,7 +212,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory System Dashboard";
@@ -223,6 +238,7 @@
         private System.Windows.Forms.ToolStripButton ts_settings;
         private System.Windows.Forms.ToolStripButton ts_repository;
         private System.Windows.Forms.ToolStripLabel versionTSLabel;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
