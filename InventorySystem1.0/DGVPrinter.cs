@@ -1703,9 +1703,14 @@ namespace DGVPrinterHelper //AllocationRequest
         public void PrintDataGridView(DataGridView dgv)
         {
             if (EnableLogging) Logger.LogInfoMsg("PrintDataGridView process started");
-            if (null == dgv) throw new Exception("Null Parameter passed to DGVPrinter.");
-            if (!(typeof(DataGridView).IsInstanceOfType(dgv)))
-                throw new Exception("Invalid Parameter passed to DGVPrinter.");
+            try { if (null == dgv) throw new Exception("Null Parameter passed to DGVPrinter."); }
+            catch( Exception e){ }
+            try
+            {
+                if (!(typeof(DataGridView).IsInstanceOfType(dgv)))
+                    throw new Exception("Invalid Parameter passed to DGVPrinter.");
+            }
+            catch (Exception e) { }
 
             // save the datagridview we're printing
             this.dgv = dgv;
@@ -1790,9 +1795,13 @@ namespace DGVPrinterHelper //AllocationRequest
         public void PrintNoDisplay(DataGridView dgv)
         {
             if (EnableLogging) Logger.LogInfoMsg("PrintNoDisplay process started");
-            if (null == dgv) throw new Exception("Null Parameter passed to DGVPrinter.");
-            if (!(dgv is DataGridView))
-                throw new Exception("Invalid Parameter passed to DGVPrinter.");
+            try { if (null == dgv) throw new Exception("Null Parameter passed to DGVPrinter."); } catch (Exception e) { }
+            try
+            {
+                if (!(dgv is DataGridView))
+                    throw new Exception("Invalid Parameter passed to DGVPrinter.");
+            }
+            catch (Exception e) { }
 
             // save the grid we're printing
             this.dgv = dgv;

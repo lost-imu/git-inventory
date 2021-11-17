@@ -33,7 +33,7 @@ namespace InventorySystem1._0
             ts_Login.Text = "تسجيل خروج";
             ts_Login.Image = Resources.lock_open;
 
-            if (prev == 0)
+            if (prev == 0)//reader,viewer
             {
                 //enability
                 ts_ManageUsers.Enabled = false;
@@ -56,7 +56,7 @@ namespace InventorySystem1._0
 
             }
 
-            else if (prev == 1)
+            else if (prev == 1)//staff
             {
                 //stock in
                 ts_stocks.Enabled = true;
@@ -79,7 +79,7 @@ namespace InventorySystem1._0
 
             }
 
-            else if (prev == 2)
+            else if (prev == 2)//administrator
             {
                 //stock in
                 ts_stocks.Enabled = true;
@@ -123,6 +123,9 @@ namespace InventorySystem1._0
             //reports
             ts_Report.Enabled = false;
             ts_Report.Visible = false;
+            //reports2
+            toolStripButton1.Enabled = false;
+            toolStripButton1.Visible = false;
         }
         public void ShowFrm(Form frm)
         {

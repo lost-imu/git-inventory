@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DGVPrinterHelper;
 
 namespace InventorySystem1._0
 {
@@ -227,9 +228,119 @@ namespace InventorySystem1._0
 
         }
 
+        DGVPrinter printer;
+        DataGridView newDGRV;//= DataGridView();
+        private void printerEmpty()
+        {
+            printer = new DGVPrinter
+            {
+                Title = "تقرير",
+
+                SubTitle = "التاريخ: " + DateTime.Now.ToString("dd-MM-yyyy HH:mm"),
+
+                SubTitleFormatFlags = StringFormatFlags.LineLimit |
+
+                                          StringFormatFlags.NoClip,
+
+
+                PageNumbers = true,
+
+                ShowTotalPageNumber = true,
+
+                PageNumberInHeader = false,
+
+                PorportionalColumns = false,
+
+                HeaderCellAlignment = StringAlignment.Near,
+
+                Footer = "الجمعية اللبنانية للدراسات والتدريب",
+
+                FooterSpacing = 15,
+
+                PrinterName = default
+            };
+        }
+        public DataGridView CloneDataGrid(DataGridView mainDataGridView)
+        {
+            DataGridView cloneDataGridView = new DataGridView();
+
+            if (cloneDataGridView.Columns.Count == 0)
+            {
+                foreach (DataGridViewColumn datagrid in mainDataGridView.Columns)
+                {
+                    cloneDataGridView.Columns.Add(datagrid.Clone() as DataGridViewColumn);
+                }
+            }
+
+            _ = new DataGridViewRow();
+
+            for (int i = 0; i < mainDataGridView.Rows.Count; i++)
+            {
+                DataGridViewRow dataRow = (DataGridViewRow)mainDataGridView.Rows[i].Clone();
+                int Index = 0;
+                foreach (DataGridViewCell cell in mainDataGridView.Rows[i].Cells)
+                {
+                    dataRow.Cells[Index].Value = cell.Value;
+                    Index++;
+                }
+                cloneDataGridView.Rows.Add(dataRow);
+            }
+            cloneDataGridView.AllowUserToAddRows = false;
+            cloneDataGridView.Refresh();
+
+
+            return cloneDataGridView;
+        }
+        private void fillNewDGRV()
+        {
+            newDGRV = CloneDataGrid(reportDataGridView);
+            newDGRV.RightToLeft = RightToLeft.Yes;
+            string[] row = new string[] { "__________", "__________", "________", "__________", "________", "________", "__________", "__________", "__________", "__________" };
+            newDGRV.Rows.Add(row);
+            newDGRV.Columns[0].Width *= 2;
+            //row = new string[] {
+            //         "اسم المستلم" //0
+            //        ,"رقم المستلم"   //1
+            //        ,"الإمضاء"   //2
+            //        ,null   //3
+            //        ,null   //4
+            //        ,"أمين المستودع"   //5
+            //        ,null   //6
+            //        ,"رقم أمين المستودع"   //7
+            //        ,null   //8
+            //        ,null   //9
+            //        ,"الإمضاء"   //10
+
+            //};
+
+
+
+            //newDGRV.Rows.Add(row);
+            string recieverNumber, recieverName, empNumber, empName;
+
+
+
+
+            int last = newDGRV.Rows.Count - 1;
+
+            newDGRV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            newDGRV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            newDGRV.Rows[last].Height = 30;
+            newDGRV.Columns[9].Visible = false;
+            newDGRV.Columns[8].Visible = false;
+            newDGRV.Columns[6].Visible = false;
+            newDGRV.Columns[3].Visible = false;
+
+        }
+
         private void printBtn_Click_1(object sender, EventArgs e)
         {
 
+            printerEmpty();
+            fillNewDGRV();
+            printer.PrintDataGridView(newDGRV);
         }
 
         private void expiryDateCheckBox_CheckedChanged(object sender, EventArgs e)
